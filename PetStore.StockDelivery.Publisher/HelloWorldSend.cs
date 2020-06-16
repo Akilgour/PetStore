@@ -6,6 +6,8 @@ using System;
 
 internal class Program
 {
+    private const string Queue = "StockDelivery_Que";
+
     private static void Main(string[] args)
     {
         var textMessage01 = new TextMessage { Id = 1, Text = "A1" };
@@ -15,14 +17,14 @@ internal class Program
         using (var connection = factory.CreateConnection())
         using (var channel = connection.CreateModel())
         {
-            channel.QueueDeclare(queue: "hello",
+            channel.QueueDeclare(queue: Queue,
                                  durable: false,
                                  exclusive: false,
                                  autoDelete: false,
                                  arguments: null);
 
-            channel.BasicPublish("", "hello", null, textMessage01.Serialize());
-            channel.BasicPublish("", "hello", null, textMessage02.Serialize());
+            channel.BasicPublish("", Queue, null, textMessage01.Serialize());
+            channel.BasicPublish("", Queue, null, textMessage02.Serialize());
         }
 
         Console.WriteLine(" Press [enter] to exit.");
@@ -37,7 +39,7 @@ internal class Program
         using (var connection = factory.CreateConnection())
         using (var channel = connection.CreateModel())
         {
-            channel.QueueDeclare(queue: "hello",
+            channel.QueueDeclare(queue: Queue,
                                  durable: false,
                                  exclusive: false,
                                  autoDelete: false,
@@ -48,9 +50,11 @@ internal class Program
             {
                 var body = ea.Body.ToArray();
                 var message1 = (TextMessage)body.DeSerialize(typeof(TextMessage));
+                Console.WriteLine($" OUTPUT ");
+
                 Console.WriteLine($" id {message1.Id}  Text {message1.Text}");
             };
-            channel.BasicConsume(queue: "hello",
+            channel.BasicConsume(queue: Queue,
                                  autoAck: true,
                                  consumer: consumer);
 

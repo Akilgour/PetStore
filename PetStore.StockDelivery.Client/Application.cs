@@ -1,36 +1,37 @@
-﻿using PetStore.StockDelivery.Client.Client.Interface;
-using System;
-using System.Diagnostics;
+﻿//using PetStore.StockDelivery.Client.Client.Interface;
+//using System;
+//using System.Diagnostics;
+//using System.Threading.Tasks;
 
-namespace PetStore.StockDelivery.Client
-{
-    public class Application
-    {
-        private readonly IStockDeliveryClient _stockDeliveryClient;
+//namespace PetStore.StockDelivery.Client
+//{
+//    public class Application
+//    {
+//        private readonly IStockDeliveryClient _stockDeliveryClient;
 
-        public Application(IStockDeliveryClient stockDeliveryClient)
-        {
-            _stockDeliveryClient = stockDeliveryClient;
-        }
+//        public Application(IStockDeliveryClient stockDeliveryClient)
+//        {
+//            _stockDeliveryClient = stockDeliveryClient;
+//        }
 
-        public void Run(string[] args)
-        {
-            var timer = new Stopwatch();
-            timer.Start();
-            try
-            {
-                _stockDeliveryClient.Receive();
-            }
-            catch (Exception ex)
-            {
-                Console.WriteLine(ex);
-            }
-            finally
-            {
-                timer.Stop();
-                Console.WriteLine($"Run time: {timer.Elapsed.ToString()}");
-            }
-        }
+//        public async Task Run(string[] args)
+//        {
+//            var timer = new Stopwatch();
+//            timer.Start();
+//            try
+//            {
+//                await _stockDeliveryClient.Receive();
+//            }
+//            catch (Exception ex)
+//            {
+//                Console.WriteLine(ex);
+//            }
+//            finally
+//            {
+//                timer.Stop();
+//                Console.WriteLine($"Run time: {timer.Elapsed.ToString()}");
+//            }
+//        }
 
-    }
-}
+//    }
+//}
