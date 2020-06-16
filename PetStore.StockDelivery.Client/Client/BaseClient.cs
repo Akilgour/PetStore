@@ -13,7 +13,8 @@ namespace PetStore.StockDelivery.Client.Client
             {
                 HostName = rabbitMQConfig.HostName,
                 UserName = rabbitMQConfig.UserName,
-                Password = rabbitMQConfig.Password
+                Password = rabbitMQConfig.Password,
+                DispatchConsumersAsync = true
             };
         }
     }
