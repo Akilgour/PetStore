@@ -11,19 +11,21 @@ using System.Threading.Tasks;
 
 namespace PetStore.StockDelivery.Client.Client
 {
-    public class StockDeliveryClient
+    public class StockDeliveryClient : BaseClient
     {
         public StockDeliveryClient(RabbitMQConfig rabbitMQConfig)
+            : base(rabbitMQConfig)
         {
         }
 
-        public  void Receive()
+        public void Receive( )
         {
-            var factory = new ConnectionFactory() { HostName = "localhost", UserName = "guest", Password = "guest" };
+            var queueName = "StockDelivery_Que";
+
             using (var connection = factory.CreateConnection())
             using (var channel = connection.CreateModel())
             {
-                channel.QueueDeclare(queue: "StockDelivery_Que",
+                channel.QueueDeclare(queue: queueName,
                                      durable: false,
                                      exclusive: false,
                                      autoDelete: false,
@@ -36,7 +38,7 @@ namespace PetStore.StockDelivery.Client.Client
                     var stockItem = (StockItem)body.DeSerialize(typeof(StockItem));
                     NewMethod(stockItem);
                 };
-                channel.BasicConsume(queue: "StockDelivery_Que",
+                channel.BasicConsume(queue: queueName,
                                      autoAck: true,
                                      consumer: consumer);
             }
