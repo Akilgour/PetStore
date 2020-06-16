@@ -9,6 +9,7 @@ namespace PetStore.StockDelivery.Manager.Managers
     {
         private readonly IStockItemRepository _stockItemRepository;
 
+  
         public StockDeliveryManager(IStockItemRepository stockItemRepository)
         {
             _stockItemRepository = stockItemRepository;

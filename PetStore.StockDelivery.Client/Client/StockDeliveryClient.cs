@@ -1,24 +1,27 @@
 ﻿using PetStore.Domain.Models;
 using PetStore.Shared;
 using PetStore.Shared.Helpers;
+using PetStore.StockDelivery.Client.Client.Interface;
+using PetStore.StockDelivery.Manager.Managers.Interface;
 using RabbitMQ.Client;
 using RabbitMQ.Client.Events;
 using System;
-using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using System.Threading.Tasks;
 
 namespace PetStore.StockDelivery.Client.Client
 {
-    public class StockDeliveryClient : BaseClient
+    public class StockDeliveryClient : BaseClient, IStockDeliveryClient
     {
-        public StockDeliveryClient(RabbitMQConfig rabbitMQConfig)
+        private readonly IStockDeliveryManager _stockDeliveryManager;
+
+        public StockDeliveryClient(RabbitMQConfig rabbitMQConfig, IStockDeliveryManager stockDeliveryManager)
             : base(rabbitMQConfig)
         {
+            _stockDeliveryManager = stockDeliveryManager;
         }
 
-        public void Receive( )
+        public void Receive()
         {
             var queueName = "StockDelivery_Que";
 
@@ -35,8 +38,12 @@ namespace PetStore.StockDelivery.Client.Client
                 consumer.Received += (model, ea) =>
                 {
                     var body = ea.Body.ToArray();
+                    var message = Encoding.UTF8.GetString(body.ToArray());
+
                     var stockItem = (StockItem)body.DeSerialize(typeof(StockItem));
-                    NewMethod(stockItem);
+                    //  NewMethod(stockItem);
+                    _stockDeliveryManager.Create(stockItem);
+
                 };
                 channel.BasicConsume(queue: queueName,
                                      autoAck: true,

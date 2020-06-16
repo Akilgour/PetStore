@@ -9,8 +9,11 @@ namespace PetStore.StockDelivery.Client.App.Stock
         static void Main(string[] args)
         {
             Console.WriteLine("StockDelivery Client");
-            var client = new StockDeliveryClient(new RabbitMQConfig("localhost", "guest", "guest"));
-            client.Receive();
+
+
+
+            //var client = new StockDeliveryClient(new RabbitMQConfig("localhost", "guest", "guest"), );
+            //client.Receive();
         }
     }
 }

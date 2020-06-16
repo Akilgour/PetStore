@@ -2,15 +2,20 @@
 
   <PropertyGroup>
     <TargetFramework>netcoreapp3.1</TargetFramework>
+    <ApplicationIcon />
+    <OutputType>Library</OutputType>
+    <StartupObject />
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="Autofac" Version="5.2.0" />
     <PackageReference Include="RabbitMQ.Client" Version="6.1.0" />
   </ItemGroup>
 
   <ItemGroup>
     <ProjectReference Include="..\PetStore.Domain\PetStore.Domain.csproj" />
     <ProjectReference Include="..\PetStore.Shared\PetStore.Shared.csproj" />
+    <ProjectReference Include="..\PetStore.StockDelivery.Manager\PetStore.StockDelivery.Manager.csproj" />
   </ItemGroup>
 
 </Project>
