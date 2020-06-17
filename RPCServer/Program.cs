@@ -40,19 +40,19 @@ namespace RPCServer
 
         private static void Consumer_Received(object sender, BasicDeliverEventArgs e)
         {
-            var requestMessage = Encoding.UTF8.GetString(e.Body.ToArray());
+            var orderItem = (OrderItem)e.Body.ToArray().DeSerialize(typeof(OrderItem));
             var correlationId = e.BasicProperties.CorrelationId;
             string responseQueueName = e.BasicProperties.ReplyTo;
 
-            Console.WriteLine($"Received: {requestMessage} with CorrelationId {correlationId}");
+            Console.WriteLine($"Received: {orderItem.Name} with CorrelationId {correlationId}");
 
-            var responseMessage = Reverse(requestMessage);
+            var responseMessage = Reverse(orderItem);
             Publish(responseMessage, correlationId, responseQueueName, responseMessage.Serialize());
         }
 
-        public static OrderResponse Reverse(string s) // ref: https://stackoverflow.com/a/228060/983064
+        public static OrderResponse Reverse(OrderItem orderItem) // ref: https://stackoverflow.com/a/228060/983064
         {
-            char[] charArray = s.ToCharArray();
+            char[] charArray = orderItem.Name.ToCharArray();
             Array.Reverse(charArray);
             var msg =  new string(charArray);
             var orderResponse = new OrderResponse()

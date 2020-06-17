@@ -1,4 +1,6 @@
-﻿using System;
+﻿using PetStore.Shared.Helpers;
+using RPCShared.Models;
+using System;
 using System.Threading.Tasks;
 
 namespace RpcClient
@@ -30,7 +32,8 @@ namespace RpcClient
                     }
                     else
                     {
-                        var response = await rpcClient.SendAsync(message);
+                        var orderItem = new OrderItem() { Name = message, Quantity = 1 };
+                        var response = await rpcClient.SendAsync(orderItem.Serialize());
 
                         Console.Write("Response was: ");
                         using (var colour = new ScopedConsoleColour(ConsoleColor.Green))

@@ -4,7 +4,6 @@ using RabbitMQ.Client.Events;
 using RPCShared.Models;
 using System;
 using System.Collections.Concurrent;
-using System.Text;
 using System.Threading.Tasks;
 
 namespace RpcClient
@@ -38,7 +37,7 @@ namespace RpcClient
             this.pendingMessages = new ConcurrentDictionary<string, TaskCompletionSource<OrderResponse>>();
         }
 
-        public Task<OrderResponse> SendAsync(string message)
+        public Task<OrderResponse> SendAsync(byte[] message)
         {
             var tcs = new TaskCompletionSource<OrderResponse>();
             var correlationId = Guid.NewGuid().ToString();
@@ -50,14 +49,13 @@ namespace RpcClient
             return tcs.Task;
         }
 
-        private void Publish(string message, string correlationId)
+        private void Publish(byte[] message, string correlationId)
         {
             var props = this.channel.CreateBasicProperties();
             props.CorrelationId = correlationId;
             props.ReplyTo = responseQueueName;
 
-            byte[] messageBytes = Encoding.UTF8.GetBytes(message);
-            this.channel.BasicPublish(exchangeName, requestQueueName, props, messageBytes);
+            this.channel.BasicPublish(exchangeName, requestQueueName, props, message);
 
             using (var colour = new ScopedConsoleColour(ConsoleColor.Yellow))
             {
