@@ -1,4 +1,5 @@
-﻿using PetStore.Data.Context;
+﻿using Microsoft.EntityFrameworkCore;
+using PetStore.Data.Context;
 using PetStore.Data.Repositorys.Interface;
 using PetStore.Domain.Models;
 using Polly;
@@ -18,6 +19,25 @@ namespace PetStore.Data.Repositorys
             await _retryPolicy.ExecuteAsync(async () =>
             {
                 var addedEntity = _context.Add(stockItem);
+                await _context.SaveChangesAsync();
+            });
+        }
+   
+        public async Task<StockItem> GetByName(string name)
+        {
+            var result = new StockItem();
+            await _retryPolicy.ExecuteAsync(async () =>
+            {
+                result = await _context.StockItems.FirstOrDefaultAsync(x => x.Name == name);
+            });
+            return result;
+        }
+
+        public async Task Update(StockItem stockItem)
+        {
+            await _retryPolicy.ExecuteAsync(async () =>
+            {
+                _context.StockItems.Update(stockItem);
                 await _context.SaveChangesAsync();
             });
         }
