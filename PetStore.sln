@@ -49,6 +49,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "RPCShared", "RPCShared\RPCS
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PetStore.OrderItem.Server", "PetStore.OrderItem.Server\PetStore.OrderItem.Server.csproj", "{05453351-E076-41E1-AEAA-890F5E50D3F3}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PetStore.OrderItem.Client", "PetStore.OrderItem.Client\PetStore.OrderItem.Client.csproj", "{ACAFF70A-EB46-4762-8CCA-B11152AA53EA}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -115,6 +117,10 @@ Global
 		{05453351-E076-41E1-AEAA-890F5E50D3F3}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{05453351-E076-41E1-AEAA-890F5E50D3F3}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{05453351-E076-41E1-AEAA-890F5E50D3F3}.Release|Any CPU.Build.0 = Release|Any CPU
+		{ACAFF70A-EB46-4762-8CCA-B11152AA53EA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{ACAFF70A-EB46-4762-8CCA-B11152AA53EA}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{ACAFF70A-EB46-4762-8CCA-B11152AA53EA}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{ACAFF70A-EB46-4762-8CCA-B11152AA53EA}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -141,6 +147,7 @@ Global
 		{6AB9CCF1-CA1B-477B-974B-1A2603CEDA85} = {260D6A81-A67D-4801-9B26-0DA3C7632199}
 		{76B7CB0A-0095-43CD-901D-FFB9D8850095} = {260D6A81-A67D-4801-9B26-0DA3C7632199}
 		{05453351-E076-41E1-AEAA-890F5E50D3F3} = {EFE6252F-785D-4F12-BD2E-D995DEAA5D3D}
+		{ACAFF70A-EB46-4762-8CCA-B11152AA53EA} = {EFE6252F-785D-4F12-BD2E-D995DEAA5D3D}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {A0B49AD8-A4C0-481B-8DC7-840A04B0C56D}

@@ -12,7 +12,7 @@ namespace PetStore.OrderItem.Server
     public class Application
     {
         private static IModel channel;
-        private static string RequestQueueName = "OrderItem_Queue";
+        private static string RequestQueueName = "OrderItem_RequestQueue";
 
         public void Run(string[] args)
         {
