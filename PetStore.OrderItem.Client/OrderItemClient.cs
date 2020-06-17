@@ -7,8 +7,7 @@ namespace PetStore.OrderItem.Client
 {
     public class OrderItemClient
     {
-
-        private static async Task<OrderResponse> Publish(StockItem stockItem)
+        public async Task<OrderResponse> Publish(StockItem stockItem)
         {
             using (var rpcClient = new RpcClient())
             {
