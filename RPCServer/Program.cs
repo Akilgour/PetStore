@@ -1,5 +1,7 @@
-﻿using RabbitMQ.Client;
+﻿using PetStore.Shared.Helpers;
+using RabbitMQ.Client;
 using RabbitMQ.Client.Events;
+using RPCShared.Models;
 using System;
 using System.Text;
 
@@ -45,26 +47,29 @@ namespace RPCServer
             Console.WriteLine($"Received: {requestMessage} with CorrelationId {correlationId}");
 
             var responseMessage = Reverse(requestMessage);
-            Publish(responseMessage, correlationId, responseQueueName);
+            Publish(responseMessage, correlationId, responseQueueName, responseMessage.Serialize());
         }
 
-        public static string Reverse(string s) // ref: https://stackoverflow.com/a/228060/983064
+        public static OrderResponse Reverse(string s) // ref: https://stackoverflow.com/a/228060/983064
         {
             char[] charArray = s.ToCharArray();
             Array.Reverse(charArray);
-            return new string(charArray);
+            var msg =  new string(charArray);
+            var orderResponse = new OrderResponse()
+            {
+                Success = true,
+                Message = msg
+            };
+            return orderResponse;
         }
 
-        private static void Publish(string responseMessage, string correlationId,
-            string responseQueueName)
+        private static void Publish(OrderResponse responseMessage, string correlationId, string responseQueueName, byte[] item)
         {
-            byte[] responseMessageBytes = Encoding.UTF8.GetBytes(responseMessage);
-
             const string exchangeName = ""; // default exchange
             var responseProps = channel.CreateBasicProperties();
             responseProps.CorrelationId = correlationId;
 
-            channel.BasicPublish(exchangeName, responseQueueName, responseProps, responseMessageBytes);
+            channel.BasicPublish(exchangeName, responseQueueName, responseProps, item);
 
             Console.WriteLine($"Sent: {responseMessage} with CorrelationId {correlationId}");
             Console.WriteLine();

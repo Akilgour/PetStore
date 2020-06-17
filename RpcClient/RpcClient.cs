@@ -1,5 +1,7 @@
-﻿using RabbitMQ.Client;
+﻿using PetStore.Shared.Helpers;
+using RabbitMQ.Client;
 using RabbitMQ.Client.Events;
+using RPCShared.Models;
 using System;
 using System.Collections.Concurrent;
 using System.Text;
@@ -13,7 +15,7 @@ namespace RpcClient
         private IConnection connection;
         private IModel channel;
         private EventingBasicConsumer consumer;
-        private ConcurrentDictionary<string, TaskCompletionSource<string>> pendingMessages;
+        private ConcurrentDictionary<string, TaskCompletionSource<OrderResponse>> pendingMessages;
 
         private const string requestQueueName = "requestqueue";
         private const string responseQueueName = "responsequeue";
@@ -33,13 +35,12 @@ namespace RpcClient
             this.consumer.Received += Consumer_Received;
             this.channel.BasicConsume(responseQueueName, true, consumer);
 
-            this.pendingMessages = new ConcurrentDictionary<string,
-                TaskCompletionSource<string>>();
+            this.pendingMessages = new ConcurrentDictionary<string, TaskCompletionSource<OrderResponse>>();
         }
 
-        public Task<string> SendAsync(string message)
+        public Task<OrderResponse> SendAsync(string message)
         {
-            var tcs = new TaskCompletionSource<string>();
+            var tcs = new TaskCompletionSource<OrderResponse>();
             var correlationId = Guid.NewGuid().ToString();
 
             this.pendingMessages[correlationId] = tcs;
@@ -67,17 +68,17 @@ namespace RpcClient
         private void Consumer_Received(object sender, BasicDeliverEventArgs e)
         {
             var correlationId = e.BasicProperties.CorrelationId;
-            var message = Encoding.UTF8.GetString(e.Body.ToArray());
+            var orderResponse = (OrderResponse)e.Body.ToArray().DeSerialize(typeof(OrderResponse));
 
             using (var colour = new ScopedConsoleColour(ConsoleColor.Yellow))
             {
-                Console.WriteLine($"Received: {message} with CorrelationId {correlationId}");
+                Console.WriteLine($"Received: {orderResponse.Message} with CorrelationId {correlationId}");
             }
 
             this.pendingMessages.TryRemove(correlationId, out var tcs);
             if (tcs != null)
             {
-                tcs.SetResult(message);
+                tcs.SetResult(orderResponse);
             }
         }
 

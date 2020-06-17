@@ -35,7 +35,8 @@ namespace RpcClient
                         Console.Write("Response was: ");
                         using (var colour = new ScopedConsoleColour(ConsoleColor.Green))
                         {
-                            Console.WriteLine(response);
+                            Console.WriteLine(response.Success);
+                            Console.WriteLine(response.Message);
                         }
                     }
                 }
