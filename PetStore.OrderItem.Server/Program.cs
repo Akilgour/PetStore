@@ -6,7 +6,10 @@ namespace PetStore.OrderItem.Server
     {
         static void Main(string[] args)
         {
-            Console.WriteLine("PetStore.OrderItem.Server");
+            var message = "PetStore OrderItem Server";
+            Console.Title = message;
+            Console.WriteLine(message);
+
             try
             {
                 var application = new Application();
