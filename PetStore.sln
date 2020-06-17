@@ -33,11 +33,17 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "App", "App", "{159DA757-357
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PetStore.StockDelivery.Publish.App.Stock", "PetStore.StockDelivery.Publish.App.Stock\PetStore.StockDelivery.Publish.App.Stock.csproj", "{FBC0401D-C7F3-47A1-BD73-8E4908815042}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PetStore.StockDelivery.Client.App.Stock", "PetStore.StockDelivery.Client.App.Stock\PetStore.StockDelivery.Client.App.Stock.csproj", "{321F86CE-5252-4A7B-AD8C-A58EDAA638E4}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PetStore.StockDelivery.Client.App.Stock", "PetStore.StockDelivery.Client.App.Stock\PetStore.StockDelivery.Client.App.Stock.csproj", "{321F86CE-5252-4A7B-AD8C-A58EDAA638E4}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PetStore.StockDelivery.Manager", "PetStore.StockDelivery.Manager\PetStore.StockDelivery.Manager.csproj", "{8E28DDE8-911D-403C-8B89-42DCDDDFD4A1}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PetStore.StockDelivery.Manager", "PetStore.StockDelivery.Manager\PetStore.StockDelivery.Manager.csproj", "{8E28DDE8-911D-403C-8B89-42DCDDDFD4A1}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PetStore.StockDelivery", "PetStore.StockDelivery\PetStore.StockDelivery.csproj", "{6C20056B-D2C4-4A45-B8B4-CBDD90B220EA}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PetStore.StockDelivery", "PetStore.StockDelivery\PetStore.StockDelivery.csproj", "{6C20056B-D2C4-4A45-B8B4-CBDD90B220EA}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "RPC", "RPC", "{260D6A81-A67D-4801-9B26-0DA3C7632199}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RPCServer", "RPCServer\RPCServer.csproj", "{9410CD39-3D53-46C0-9E69-5C715AAE21CF}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RpcClient", "RpcClient\RpcClient.csproj", "{6AB9CCF1-CA1B-477B-974B-1A2603CEDA85}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -89,6 +95,14 @@ Global
 		{6C20056B-D2C4-4A45-B8B4-CBDD90B220EA}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{6C20056B-D2C4-4A45-B8B4-CBDD90B220EA}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{6C20056B-D2C4-4A45-B8B4-CBDD90B220EA}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9410CD39-3D53-46C0-9E69-5C715AAE21CF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9410CD39-3D53-46C0-9E69-5C715AAE21CF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9410CD39-3D53-46C0-9E69-5C715AAE21CF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9410CD39-3D53-46C0-9E69-5C715AAE21CF}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6AB9CCF1-CA1B-477B-974B-1A2603CEDA85}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6AB9CCF1-CA1B-477B-974B-1A2603CEDA85}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6AB9CCF1-CA1B-477B-974B-1A2603CEDA85}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6AB9CCF1-CA1B-477B-974B-1A2603CEDA85}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -110,6 +124,9 @@ Global
 		{321F86CE-5252-4A7B-AD8C-A58EDAA638E4} = {159DA757-3572-423D-8EA3-542B600EEDD3}
 		{8E28DDE8-911D-403C-8B89-42DCDDDFD4A1} = {EFE6252F-785D-4F12-BD2E-D995DEAA5D3D}
 		{6C20056B-D2C4-4A45-B8B4-CBDD90B220EA} = {EFE6252F-785D-4F12-BD2E-D995DEAA5D3D}
+		{260D6A81-A67D-4801-9B26-0DA3C7632199} = {71C0B149-9CB5-4386-AB8F-A21735289DF5}
+		{9410CD39-3D53-46C0-9E69-5C715AAE21CF} = {260D6A81-A67D-4801-9B26-0DA3C7632199}
+		{6AB9CCF1-CA1B-477B-974B-1A2603CEDA85} = {260D6A81-A67D-4801-9B26-0DA3C7632199}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {A0B49AD8-A4C0-481B-8DC7-840A04B0C56D}
