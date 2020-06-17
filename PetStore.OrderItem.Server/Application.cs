@@ -1,17 +1,20 @@
-﻿using PetStore.Shared.Helpers;
+﻿using PetStore.Domain.Models;
+using PetStore.Shared.Helpers;
+using PetStore.Shared.QueMessages;
 using RabbitMQ.Client;
 using RabbitMQ.Client.Events;
-using RPCShared.Models;
-using System;
-using System.Text;
 
-namespace RPCServer
+using System;
+using System.Threading;
+
+namespace PetStore.OrderItem.Server
 {
-    internal class Program
+    public class Application
     {
         private static IModel channel;
+        private static string RequestQueueName = "OrderItem_Queue";
 
-        private static void Main(string[] args)
+        public void Run(string[] args)
         {
             Console.Title = "RabbitMQ RPC Server";
 
@@ -21,26 +24,24 @@ namespace RPCServer
             {
                 using (channel = connection.CreateModel())
                 {
-                    const string requestQueueName = "requestqueue";
-                    channel.QueueDeclare(requestQueueName, true, false, false, null);
 
-                    // consumer
-
+                    channel.QueueDeclare(RequestQueueName, true, false, false, null);
                     var consumer = new EventingBasicConsumer(channel);
                     consumer.Received += Consumer_Received;
-                    channel.BasicConsume(requestQueueName, true, consumer);
+                    channel.BasicConsume(RequestQueueName, true, consumer);
 
                     Console.WriteLine("Waiting for messages...");
-                    Console.WriteLine("Press ENTER to exit.");
-                    Console.WriteLine();
-                    Console.ReadLine();
+                    while (true)
+                    {
+                        Thread.Sleep(50);
+                    }
                 }
             }
         }
 
         private static void Consumer_Received(object sender, BasicDeliverEventArgs e)
         {
-            var orderItem = (OrderItem)e.Body.ToArray().DeSerialize(typeof(OrderItem));
+            var orderItem = (StockItem)e.Body.ToArray().DeSerialize(typeof(StockItem));
             var correlationId = e.BasicProperties.CorrelationId;
             string responseQueueName = e.BasicProperties.ReplyTo;
 
@@ -50,17 +51,13 @@ namespace RPCServer
             Publish(responseMessage, correlationId, responseQueueName, responseMessage.Serialize());
         }
 
-        public static OrderResponse Reverse(OrderItem orderItem) // ref: https://stackoverflow.com/a/228060/983064  
+        public static OrderResponse Reverse(StockItem orderItem)
         {
-            char[] charArray = orderItem.Name.ToCharArray();
-            Array.Reverse(charArray);
-            var msg =  new string(charArray);
-            var orderResponse = new OrderResponse()
+            return new OrderResponse()
             {
                 Success = true,
-                Message = msg
+                Message = $"Name : {orderItem.Name} Quantity : {orderItem.Quantity}"
             };
-            return orderResponse;
         }
 
         private static void Publish(OrderResponse responseMessage, string correlationId, string responseQueueName, byte[] item)
@@ -68,11 +65,7 @@ namespace RPCServer
             const string exchangeName = ""; // default exchange
             var responseProps = channel.CreateBasicProperties();
             responseProps.CorrelationId = correlationId;
-
             channel.BasicPublish(exchangeName, responseQueueName, responseProps, item);
-
-            Console.WriteLine($"Sent: {responseMessage} with CorrelationId {correlationId}");
-            Console.WriteLine();
         }
     }
 }

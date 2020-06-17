@@ -53,7 +53,7 @@ namespace RpcClient
         {
             var props = this.channel.CreateBasicProperties();
             props.CorrelationId = correlationId;
-            props.ReplyTo = responseQueueName;
+            props.ReplyTo = responseQueueName;       
 
             this.channel.BasicPublish(exchangeName, requestQueueName, props, message);
 
