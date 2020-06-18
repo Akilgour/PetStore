@@ -19,33 +19,29 @@ namespace PetStore.OrderItem.Manger.Manger
         public async Task<OrderResponse> Order(StockOrder stockOrder)
         {
             var orderResponse = new OrderResponse() { Success = true };
-       
             var itemsThatDontPass = new List<string>();
 
-            foreach (var item in stockOrder.OrderItems)
+            foreach (var orderItem in stockOrder.OrderItems)
             {
-                var foo = await _stockItemRepository.GetByName(item.Name);
-
-                if (item.Quantity <= foo.Quantity)
+                var stockItem = await _stockItemRepository.GetByName(orderItem.Name);
+                if (orderItem.Quantity <= stockItem.Quantity)
                 {
                   
                 }
                 else
                 {
-                    itemsThatDontPass.Add(item.Name);
+                    itemsThatDontPass.Add(orderItem.Name);
                     orderResponse.Success = false;
                 }
             }
 
             if (orderResponse.Success)
             {
-                foreach (var item in stockOrder.OrderItems)
+                foreach (var orderItem in stockOrder.OrderItems)
                 {
-                    var foo = await _stockItemRepository.GetByName(item.Name);
-
-                    foo.Quantity = foo.Quantity - item.Quantity;
-
-                    await _stockItemRepository.Update(foo);
+                    var stockItem = await _stockItemRepository.GetByName(orderItem.Name);
+                    stockItem.Quantity -= orderItem.Quantity;
+                    await _stockItemRepository.Update(stockItem);
                 }
                 orderResponse.Message = $"Success Ordered {stockOrder.OrderNumber}";
             }
@@ -53,7 +49,6 @@ namespace PetStore.OrderItem.Manger.Manger
             {
                 orderResponse.Message = $"Order {stockOrder.OrderNumber}, can not be placed not enought stock {string.Join(", ", itemsThatDontPass.ToArray())}.";
             }
-
             return orderResponse;
         }
     }
