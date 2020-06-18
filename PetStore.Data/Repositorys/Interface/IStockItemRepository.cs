@@ -6,7 +6,8 @@ namespace PetStore.Data.Repositorys.Interface
     public interface IStockItemRepository
     {
         Task Create(StockItem stockItem);
-        Task Update(StockItem stockItem);
+        void UpdateDontSave(StockItem stockItem);
         Task<StockItem> GetByName(string name);
+        Task SaveChangesAsync();
     }
 }

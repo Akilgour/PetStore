@@ -22,7 +22,7 @@ namespace PetStore.Data.Repositorys
                 await _context.SaveChangesAsync();
             });
         }
-   
+
         public async Task<StockItem> GetByName(string name)
         {
             var result = new StockItem();
@@ -33,11 +33,15 @@ namespace PetStore.Data.Repositorys
             return result;
         }
 
-        public async Task Update(StockItem stockItem)
+        public void UpdateDontSave(StockItem stockItem)
+        {
+            _context.StockItems.Update(stockItem);
+        }
+
+        public async Task SaveChangesAsync()
         {
             await _retryPolicy.ExecuteAsync(async () =>
             {
-                _context.StockItems.Update(stockItem);
                 await _context.SaveChangesAsync();
             });
         }

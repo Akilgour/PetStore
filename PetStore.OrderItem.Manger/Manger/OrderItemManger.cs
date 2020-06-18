@@ -26,7 +26,8 @@ namespace PetStore.OrderItem.Manger.Manger
                 var stockItem = await _stockItemRepository.GetByName(orderItem.Name);
                 if (orderItem.Quantity <= stockItem.Quantity)
                 {
-                  
+                    stockItem.Quantity -= orderItem.Quantity;
+                    _stockItemRepository.UpdateDontSave(stockItem);
                 }
                 else
                 {
@@ -37,13 +38,8 @@ namespace PetStore.OrderItem.Manger.Manger
 
             if (orderResponse.Success)
             {
-                foreach (var orderItem in stockOrder.OrderItems)
-                {
-                    var stockItem = await _stockItemRepository.GetByName(orderItem.Name);
-                    stockItem.Quantity -= orderItem.Quantity;
-                    await _stockItemRepository.Update(stockItem);
-                }
                 orderResponse.Message = $"Success Ordered {stockOrder.OrderNumber}";
+                await _stockItemRepository.SaveChangesAsync();
             }
             else
             {
