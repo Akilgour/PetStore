@@ -1,5 +1,6 @@
 ﻿using Autofac;
 using PetStore.Shared;
+using PetStore.Shared.RabbitMQ;
 using PetStore.StockDelivery.Manager.Autofac;
 
 namespace PetStore.StockDelivery.Client.Autofac

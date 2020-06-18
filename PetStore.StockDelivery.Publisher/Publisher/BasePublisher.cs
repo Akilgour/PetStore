@@ -1,4 +1,5 @@
 ﻿using PetStore.Shared;
+using PetStore.Shared.RabbitMQ;
 using RabbitMQ.Client;
 
 namespace PetStore.StockDelivery.Publish.Publisher

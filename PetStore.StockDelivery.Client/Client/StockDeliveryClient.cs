@@ -1,6 +1,7 @@
 ﻿using PetStore.Domain.Models;
 using PetStore.Shared;
 using PetStore.Shared.Helpers;
+using PetStore.Shared.RabbitMQ;
 using PetStore.StockDelivery.Client.Client.Interface;
 using PetStore.StockDelivery.Manager.Managers.Interface;
 using RabbitMQ.Client;

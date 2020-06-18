@@ -18,9 +18,9 @@ namespace PetStore.OrderItem.Client.App
                 OrderNumber = "ABC 123",
                 OrderItems = new List<StockItem>()            
                 {
-                    new StockItem() { Name = "Item A", Quantity = 12 },
-                    new StockItem() { Name = "Item B", Quantity = 13 },
-                    new StockItem() { Name = "Item C", Quantity = 14 }
+                    new StockItem() { Name = "Item A", Quantity =  1 },
+                    new StockItem() { Name = "Item B", Quantity =  1 },
+                    new StockItem() { Name = "Item C", Quantity =  1 }
                 }
             };
 

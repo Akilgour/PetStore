@@ -1,4 +1,4 @@
-﻿namespace PetStore.Shared
+﻿namespace PetStore.Shared.RabbitMQ
 {
     public class RabbitMQConfig
     {

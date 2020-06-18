@@ -1,5 +1,6 @@
 ﻿using PetStore.Domain.Models;
 using PetStore.Shared;
+using PetStore.Shared.RabbitMQ;
 using PetStore.StockDelivery.Publish.Publisher;
 using System;
 

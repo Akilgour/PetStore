@@ -15,7 +15,7 @@ namespace PetStore.OrderItem.Server
             try
             {
                 var container = AutofacConfiguration.Configure();
-                container.Resolve<Application>().Run(args);
+                container.Resolve<Application>().Run();
             }
             catch (Exception ex)
             {
