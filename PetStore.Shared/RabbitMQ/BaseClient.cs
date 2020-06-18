@@ -6,12 +6,10 @@ namespace PetStore.Shared.RabbitMQ
 {
     public abstract class BaseClient
     {
-        protected readonly ConnectionFactory _factory;
-
+        private readonly ConnectionFactory _factory;
         private readonly IConnection _connection;
         private readonly IModel _channel;
         private readonly EventingBasicConsumer _consumer;
-
         private readonly string _requestQueueName;
         private readonly string _responseQueueName;
         private readonly string _exchangeName;
