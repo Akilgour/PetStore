@@ -17,8 +17,6 @@ namespace PetStore.OrderItem.Server
 
         public void Run(string[] args)
         {
-            Console.Title = "RabbitMQ RPC Server";
-
             var factory = new ConnectionFactory() { HostName = "localhost" };
 
             using (var connection = factory.CreateConnection())
