@@ -13,6 +13,7 @@ namespace PetStore.OrderItem.Server
     {
         private const string RequestQueueName = "OrderItem_RequestQueue";
         private readonly IOrderItemManager _orderItemManager;
+        private const string _exchangeName = "";
 
         public Application(IOrderItemManager orderItemManager)
            : base(RabbitMQConfigFactory.Create(), RequestQueueName)
@@ -33,7 +34,7 @@ namespace PetStore.OrderItem.Server
 
             Console.WriteLine($"Received: {stockOrder.OrderNumber} with CorrelationId {correlationId}");
             var responseMessage = await _orderItemManager.Order(stockOrder);
-            Publish("", correlationId, responseQueueName, responseMessage.Serialize());
+            Publish(_exchangeName, correlationId, responseQueueName, responseMessage.Serialize());
         }
     }
 }
