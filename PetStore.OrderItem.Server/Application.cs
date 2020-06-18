@@ -4,10 +4,9 @@ using PetStore.Shared.Helpers;
 using PetStore.Shared.QueMessages;
 using RabbitMQ.Client;
 using RabbitMQ.Client.Events;
-
 using System;
-using System.Text;
 using System.Threading;
+using System.Threading.Tasks;
 
 namespace PetStore.OrderItem.Server
 {
@@ -16,7 +15,6 @@ namespace PetStore.OrderItem.Server
         private static IModel channel;
         private static string RequestQueueName = "OrderItem_RequestQueue";
         private readonly IOrderItemManager _orderItemManager;
- 
 
         public Application(IOrderItemManager orderItemManager)
         {
@@ -25,14 +23,14 @@ namespace PetStore.OrderItem.Server
 
         public void Run(string[] args)
         {
-            var factory = new ConnectionFactory() { HostName = "localhost" };
+            var factory = new ConnectionFactory() { HostName = "localhost", DispatchConsumersAsync = true };
 
             using (var connection = factory.CreateConnection())
             {
                 using (channel = connection.CreateModel())
                 {
                     channel.QueueDeclare(RequestQueueName, true, false, false, null);
-                    var consumer = new EventingBasicConsumer(channel);
+                    var consumer = new AsyncEventingBasicConsumer(channel);
                     consumer.Received += Consumer_Received;
                     channel.BasicConsume(RequestQueueName, true, consumer);
 
@@ -45,36 +43,17 @@ namespace PetStore.OrderItem.Server
             }
         }
 
-        private static void Consumer_Received(object sender, BasicDeliverEventArgs e)
+        private async Task Consumer_Received(object sender, BasicDeliverEventArgs e)
         {
             var stockOrder = (StockOrder)e.Body.ToArray().DeSerialize(typeof(StockOrder));
             var correlationId = e.BasicProperties.CorrelationId;
             string responseQueueName = e.BasicProperties.ReplyTo;
-
             Console.WriteLine($"Received: {stockOrder.OrderNumber} with CorrelationId {correlationId}");
-
-            var responseMessage = Reverse(stockOrder);
+            var responseMessage = await _orderItemManager.Order(stockOrder);
             Publish(responseMessage, correlationId, responseQueueName, responseMessage.Serialize());
         }
-
-        public static OrderResponse Reverse(StockOrder stockOrder)
-        {
-            var sb = new StringBuilder();
-            sb.Append($"OrderNumber {stockOrder.OrderNumber} ");
-
-            foreach (var item in stockOrder.OrderItems)
-            {
-                sb.Append($" Name : {item.Name} Quantity : {item.Quantity} ");
-            }
-
-            return new OrderResponse()
-            {
-                Success = true,
-                Message = sb.ToString()
-            };
-        }
-
-        private static void Publish(OrderResponse responseMessage, string correlationId, string responseQueueName, byte[] item)
+        
+        private void Publish(OrderResponse responseMessage, string correlationId, string responseQueueName, byte[] item)
         {
             const string exchangeName = ""; // default exchange
             var responseProps = channel.CreateBasicProperties();
