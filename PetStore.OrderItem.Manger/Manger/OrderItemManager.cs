@@ -1,17 +1,18 @@
 ﻿using PetStore.Data.Repositorys.Interface;
 using PetStore.Domain.Models;
+using PetStore.OrderItem.Manager.Manager.Interface;
 using PetStore.Shared.QueMessages;
 using System.Collections.Generic;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace PetStore.OrderItem.Manger.Manger
+namespace PetStore.OrderItem.Manager.Manager
 {
-    public class OrderItemManger
+    public class OrderItemManager : IOrderItemManager
     {
         private readonly IStockItemRepository _stockItemRepository;
 
-        public OrderItemManger(IStockItemRepository stockItemRepository)
+        public OrderItemManager(IStockItemRepository stockItemRepository)
         {
             _stockItemRepository = stockItemRepository;
         }

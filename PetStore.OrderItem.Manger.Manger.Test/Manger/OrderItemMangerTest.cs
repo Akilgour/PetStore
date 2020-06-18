@@ -1,13 +1,14 @@
 ﻿using Moq;
 using PetStore.Data.Repositorys.Interface;
 using PetStore.Domain.Models;
+using PetStore.OrderItem.Manager.Manager.Interface;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using Xunit;
 
-namespace PetStore.OrderItem.Manger.Manger.Test.Manger
+namespace PetStore.OrderItem.Manager.Manager.Test.Manager
 {
-    public class OrderItemMangerTest
+    public class OrderItemManagerTest
     {
         [Fact]
         public async Task OrderOkay()
@@ -18,7 +19,7 @@ namespace PetStore.OrderItem.Manger.Manger.Test.Manger
             repository.Setup(x => x.GetByName("BB")).Returns(Task.FromResult(new StockItem() { Name = "BB", Quantity = 10 }));
             repository.Setup(x => x.GetByName("CC")).Returns(Task.FromResult(new StockItem() { Name = "CC", Quantity = 10 }));
 
-            var orderItemManger = new OrderItemManger(repository.Object);
+            var orderItemManager = new OrderItemManager(repository.Object);
 
             var stockOrder = new StockOrder()
             {
@@ -32,7 +33,7 @@ namespace PetStore.OrderItem.Manger.Manger.Test.Manger
             };
 
             //act
-            var value = await orderItemManger.Order(stockOrder);
+            var value = await orderItemManager.Order(stockOrder);
 
             //assert
             Assert.Equal("Success Ordered ABC 123", value.Message);
@@ -54,7 +55,7 @@ namespace PetStore.OrderItem.Manger.Manger.Test.Manger
             repository.Setup(x => x.GetByName("BB")).Returns(Task.FromResult(new StockItem() { Name = "BB", Quantity = 10 }));
             repository.Setup(x => x.GetByName("CC")).Returns(Task.FromResult(new StockItem() { Name = "CC", Quantity = 10 }));
 
-            var orderItemManger = new OrderItemManger(repository.Object);
+            var orderItemManager = new OrderItemManager(repository.Object);
 
             var stockOrder = new StockOrder()
             {
@@ -68,7 +69,7 @@ namespace PetStore.OrderItem.Manger.Manger.Test.Manger
             };
 
             //act
-            var value = await orderItemManger.Order(stockOrder);
+            var value = await orderItemManager.Order(stockOrder);
 
             //assert
             Assert.Equal("Success Ordered ZXY 789", value.Message);
@@ -90,7 +91,7 @@ namespace PetStore.OrderItem.Manger.Manger.Test.Manger
             repository.Setup(x => x.GetByName("BB")).Returns(Task.FromResult(new StockItem() { Name = "BB", Quantity = 10 }));
             repository.Setup(x => x.GetByName("CC")).Returns(Task.FromResult(new StockItem() { Name = "CC", Quantity = 10 }));
 
-            var orderItemManger = new OrderItemManger(repository.Object);
+            var orderItemManager = new OrderItemManager(repository.Object);
 
             var stockOrder = new StockOrder()
             {
@@ -104,7 +105,7 @@ namespace PetStore.OrderItem.Manger.Manger.Test.Manger
             };
 
             //act
-            var value = await orderItemManger.Order(stockOrder);
+            var value = await orderItemManager.Order(stockOrder);
 
             //assert
             Assert.Equal("Order ABC 123, can not be placed not enought stock AA, BB, CC.", value.Message);
@@ -122,7 +123,7 @@ namespace PetStore.OrderItem.Manger.Manger.Test.Manger
             repository.Setup(x => x.GetByName("BB")).Returns(Task.FromResult(new StockItem() { Name = "BB", Quantity = 10 }));
             repository.Setup(x => x.GetByName("CC")).Returns(Task.FromResult(new StockItem() { Name = "CC", Quantity = 10 }));
 
-            var orderItemManger = new OrderItemManger(repository.Object);
+            var orderItemManager = new OrderItemManager(repository.Object);
 
             var stockOrder = new StockOrder()
             {
@@ -136,7 +137,7 @@ namespace PetStore.OrderItem.Manger.Manger.Test.Manger
             };
 
             //act
-            var value = await orderItemManger.Order(stockOrder);
+            var value = await orderItemManager.Order(stockOrder);
 
             //assert
             Assert.Equal("Order ABC 123, can not be placed not enought stock AA, CC.", value.Message);
@@ -154,7 +155,7 @@ namespace PetStore.OrderItem.Manger.Manger.Test.Manger
             repository.Setup(x => x.GetByName("BB")).Returns(Task.FromResult(new StockItem() { Name = "BB", Quantity = 10 }));
             repository.Setup(x => x.GetByName("CC")).Returns(Task.FromResult(new StockItem() { Name = "CC", Quantity = 10 }));
 
-            var orderItemManger = new OrderItemManger(repository.Object);
+            var orderItemManager = new OrderItemManager(repository.Object);
 
             var stockOrder = new StockOrder()
             {
@@ -168,7 +169,7 @@ namespace PetStore.OrderItem.Manger.Manger.Test.Manger
             };
 
             //act
-            var value = await orderItemManger.Order(stockOrder);
+            var value = await orderItemManager.Order(stockOrder);
 
             //assert
             Assert.Equal("Order ABC 345, can not be placed not enought stock BB.", value.Message);

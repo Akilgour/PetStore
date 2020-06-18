@@ -1,4 +1,6 @@
-﻿using System;
+﻿using Autofac;
+using PetStore.OrderItem.Server.Autofac;
+using System;
 
 namespace PetStore.OrderItem.Server
 {
@@ -12,8 +14,8 @@ namespace PetStore.OrderItem.Server
 
             try
             {
-                var application = new Application();
-                application.Run(args);
+                var container = AutofacConfiguration.Configure();
+                container.Resolve<Application>().Run(args);
             }
             catch (Exception ex)
             {

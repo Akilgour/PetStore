@@ -2,7 +2,7 @@
 using PetStore.Data.Autofac;
 using System.Linq;
 
-namespace PetStore.OrderItem.Manger.Autofac
+namespace PetStore.OrderItem.Manager.Autofac
 {
     public class OrderItemManagerModule : Module
     {

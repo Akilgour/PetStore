@@ -1,4 +1,5 @@
 ﻿using PetStore.Domain.Models;
+using PetStore.OrderItem.Manager.Manager.Interface;
 using PetStore.Shared.Helpers;
 using PetStore.Shared.QueMessages;
 using RabbitMQ.Client;
@@ -14,6 +15,13 @@ namespace PetStore.OrderItem.Server
     {
         private static IModel channel;
         private static string RequestQueueName = "OrderItem_RequestQueue";
+        private readonly IOrderItemManager _orderItemManager;
+ 
+
+        public Application(IOrderItemManager orderItemManager)
+        {
+            _orderItemManager = orderItemManager;
+        }
 
         public void Run(string[] args)
         {
@@ -23,7 +31,6 @@ namespace PetStore.OrderItem.Server
             {
                 using (channel = connection.CreateModel())
                 {
-
                     channel.QueueDeclare(RequestQueueName, true, false, false, null);
                     var consumer = new EventingBasicConsumer(channel);
                     consumer.Received += Consumer_Received;

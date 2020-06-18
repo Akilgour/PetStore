@@ -45,17 +45,17 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "RpcClient", "RpcClient\RpcC
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "RPCShared", "RPCShared\RPCShared.csproj", "{76B7CB0A-0095-43CD-901D-FFB9D8850095}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PetStore.OrderItem.Server", "PetStore.OrderItem.Server\PetStore.OrderItem.Server.csproj", "{05453351-E076-41E1-AEAA-890F5E50D3F3}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PetStore.OrderItem.Server", "PetStore.OrderItem.Server\PetStore.OrderItem.Server.csproj", "{05453351-E076-41E1-AEAA-890F5E50D3F3}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PetStore.OrderItem.Client", "PetStore.OrderItem.Client\PetStore.OrderItem.Client.csproj", "{ACAFF70A-EB46-4762-8CCA-B11152AA53EA}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PetStore.OrderItem.Client", "PetStore.OrderItem.Client\PetStore.OrderItem.Client.csproj", "{ACAFF70A-EB46-4762-8CCA-B11152AA53EA}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PetStore.OrderItem.Client.App", "PetStore.OrderItem.Client.App\PetStore.OrderItem.Client.App.csproj", "{82A9CAFE-2570-4576-9F54-B42C29E2693D}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PetStore.OrderItem.Client.App", "PetStore.OrderItem.Client.App\PetStore.OrderItem.Client.App.csproj", "{82A9CAFE-2570-4576-9F54-B42C29E2693D}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PetStore.OrderItem.Manger", "PetStore.OrderItem.Manger\PetStore.OrderItem.Manger.csproj", "{9DCBAF5D-EF5B-4477-BEF7-F55965F5DF8C}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PetStore.OrderItem.Manager", "PetStore.OrderItem.Manger\PetStore.OrderItem.Manager.csproj", "{9DCBAF5D-EF5B-4477-BEF7-F55965F5DF8C}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Blazor", "Blazor", "{21B96915-C047-48EC-B9B4-3486B5DE2C16}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PetStore.OrderItem.Manger.Manger.Test", "PetStore.OrderItem.Manger.Manger.Test\PetStore.OrderItem.Manger.Manger.Test.csproj", "{EE42740B-21FF-4C8A-917A-B10CB38BF9C6}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PetStore.OrderItem.Manger.Manger.Test", "PetStore.OrderItem.Manger.Manger.Test\PetStore.OrderItem.Manger.Manger.Test.csproj", "{EE42740B-21FF-4C8A-917A-B10CB38BF9C6}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

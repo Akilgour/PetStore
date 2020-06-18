@@ -1,5 +1,5 @@
 ﻿using Autofac;
-using PetStore.OrderItem.Manger.Autofac;
+using PetStore.OrderItem.Manager.Autofac;
 using System;
 using System.Collections.Generic;
 using System.Linq;
