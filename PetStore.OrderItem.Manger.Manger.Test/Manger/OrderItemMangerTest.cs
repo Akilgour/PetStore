@@ -35,7 +35,7 @@ namespace PetStore.OrderItem.Manger.Manger.Test.Manger
             var value = await orderItemManger.Order(stockOrder);
 
             //assert
-            Assert.Equal("asdf", value.Message);
+            Assert.Equal("Success Ordered ABC 123", value.Message);
             Assert.True(value.Success);
 
             repository.Verify(a => a.Update(It.Is<StockItem>(s => s.Name == "AA" && s.Quantity == 8)), Times.Once);
@@ -57,7 +57,7 @@ namespace PetStore.OrderItem.Manger.Manger.Test.Manger
 
             var stockOrder = new StockOrder()
             {
-                OrderNumber = "ABC 123",
+                OrderNumber = "ZXY 789",
                 OrderItems = new List<StockItem>()
                 {
                     new StockItem() { Name = "AA", Quantity = 10 },
@@ -70,7 +70,7 @@ namespace PetStore.OrderItem.Manger.Manger.Test.Manger
             var value = await orderItemManger.Order(stockOrder);
 
             //assert
-            Assert.Equal("asdf", value.Message);
+            Assert.Equal("Success Ordered ZXY 789", value.Message);
             Assert.True(value.Success);
 
             repository.Verify(a => a.Update(It.Is<StockItem>(s => s.Name == "AA" && s.Quantity == 0)), Times.Once);

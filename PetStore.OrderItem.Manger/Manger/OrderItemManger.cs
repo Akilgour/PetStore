@@ -1,6 +1,8 @@
 ﻿using PetStore.Data.Repositorys.Interface;
 using PetStore.Domain.Models;
 using PetStore.Shared.QueMessages;
+using System.Collections.Generic;
+using System.Text;
 using System.Threading.Tasks;
 
 namespace PetStore.OrderItem.Manger.Manger
@@ -16,7 +18,9 @@ namespace PetStore.OrderItem.Manger.Manger
 
         public async Task<OrderResponse> Order(StockOrder stockOrder)
         {
-            var OrderResponse = new OrderResponse() { Success = true };
+            var orderResponse = new OrderResponse() { Success = true };
+       
+            var itemsThatDontPass = new List<string>();
 
             foreach (var item in stockOrder.OrderItems)
             {
@@ -28,11 +32,12 @@ namespace PetStore.OrderItem.Manger.Manger
                 }
                 else
                 {
-                    OrderResponse.Success = false;
+                    itemsThatDontPass.Add(item.Name);
+                    orderResponse.Success = false;
                 }
             }
 
-            if (OrderResponse.Success)
+            if (orderResponse.Success)
             {
                 foreach (var item in stockOrder.OrderItems)
                 {
@@ -42,14 +47,14 @@ namespace PetStore.OrderItem.Manger.Manger
 
                     await _stockItemRepository.Update(foo);
                 }
-                OrderResponse.Message = "asdf";
+                orderResponse.Message = $"Success Ordered {stockOrder.OrderNumber}";
             }
             else
             {
-                OrderResponse.Message = $"Order {stockOrder.OrderNumber}, can not be placed not enought stock";
+                orderResponse.Message = $"Order {stockOrder.OrderNumber}, can not be placed not enought stock {string.Join(", ", itemsThatDontPass.ToArray())}.";
             }
 
-            return OrderResponse;
+            return orderResponse;
         }
     }
 }
