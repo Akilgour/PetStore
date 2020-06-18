@@ -9,11 +9,9 @@ namespace PetStore.OrderItem.Client
     {
         public async Task<OrderResponse> Publish(StockOrder stockOrder)
         {
-            using (var rpcClient = new RpcClient())
-            {
-                var response = await rpcClient.SendAsync(stockOrder.Serialize());
-                return response;
-            }
+            var rpcClient = new RpcClient();
+            var response = await rpcClient.SendAsync(stockOrder.Serialize());
+            return response;
         }
     }
 }
