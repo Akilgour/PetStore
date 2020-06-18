@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace PetStore.OrderItem.Server
 {
-    public class Application : BaseClient
+    public class Application : ServerClient
     {
         private const string RequestQueueName = "OrderItem_RequestQueue";
         private readonly IOrderItemManager _orderItemManager;

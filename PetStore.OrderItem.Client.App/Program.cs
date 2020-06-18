@@ -20,7 +20,7 @@ namespace PetStore.OrderItem.Client.App
                 {
                     new StockItem() { Name = "Item A", Quantity =  1 },
                     new StockItem() { Name = "Item B", Quantity =  1 },
-                    new StockItem() { Name = "Item C", Quantity =  1 }
+                    new StockItem() { Name = "Item C", Quantity =  100 }
                 }
             };
 

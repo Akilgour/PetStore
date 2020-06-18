@@ -6,13 +6,13 @@ using System.Threading.Tasks;
 
 namespace PetStore.Shared.RabbitMQ
 {
-    public abstract class BaseClient
+    public abstract class ServerClient
     {
         private readonly string _requestQueueName;
         private readonly ConnectionFactory _factory;
         protected static IModel _channel;
 
-        public BaseClient(RabbitMQConfig rabbitMQConfig, string requestQueueName)
+        public ServerClient(RabbitMQConfig rabbitMQConfig, string requestQueueName)
         {
             _factory = new ConnectionFactory()
             {
