@@ -24,7 +24,7 @@ namespace PetStore.OrderItem.Client.App
                 }
             };
 
-            var orderItemClient = new RpcClient();
+            var orderItemClient = new OrderItemClient();
             var responce = await orderItemClient.Send(stockOrder);
 
             Console.WriteLine(responce.Success);

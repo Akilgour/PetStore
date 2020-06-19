@@ -10,14 +10,14 @@ using System.Threading.Tasks;
 
 namespace PetStore.OrderItem.Client
 {
-    public class RpcClient : BaseSendReceiveClient
+    public class OrderItemClient : BaseSendReceiveClient
     {
         private readonly ConcurrentDictionary<string, TaskCompletionSource<OrderResponse>> _pendingMessages;
         private const string _requestQueueName = "OrderItem_RequestQueue";
         private const string _responseQueueName = "OrderItem_ResponseQueue";
         private const string _exchangeName = ""; // default exchange
 
-        public RpcClient()
+        public OrderItemClient()
             : base(RabbitMQConfigFactory.Create(), _requestQueueName, _responseQueueName, _exchangeName)
         {
             _pendingMessages = new ConcurrentDictionary<string, TaskCompletionSource<OrderResponse>>();
