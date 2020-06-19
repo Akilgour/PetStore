@@ -6,12 +6,16 @@ using System.Threading.Tasks;
 
 namespace PetStore.Shared.RabbitMQ
 {
-    public abstract class BaseSendClient
+    /// <summary></summary>
+    public abstract class BaseReceivedServer
     {
         protected ConnectionFactory factory;
         private readonly string _requestQueueName;
 
-        public BaseSendClient(RabbitMQConfig rabbitMQConfig, string requestQueueName)
+        /// <summary>Initializes a new instance of the <see cref="BaseReceivedServer" /> class.</summary>
+        /// <param name="rabbitMQConfig">The rabbit mq configuration.</param>
+        /// <param name="requestQueueName">Name of the request queue.</param>
+        public BaseReceivedServer(RabbitMQConfig rabbitMQConfig, string requestQueueName)
         {
             factory = new ConnectionFactory()
             {
@@ -23,7 +27,8 @@ namespace PetStore.Shared.RabbitMQ
             _requestQueueName = requestQueueName;
         }
 
-        protected void WaitForResponse(AsyncEventHandler<BasicDeliverEventArgs> received)
+        /// <summary>Waits for response, that has been sent through on the que sent in constructor param requestQueueName</summary>
+        protected void WaitForResponse( )
         {
             using (var connection = factory.CreateConnection())
             {
@@ -37,7 +42,7 @@ namespace PetStore.Shared.RabbitMQ
 
                     //   https://gigi.nullneuron.net/gigilabs/asynchronous-rabbitmq-consumers-in-net/
                     var consumer = new AsyncEventingBasicConsumer(channel);
-                    consumer.Received += received;
+                    consumer.Received += Received;
                     channel.BasicConsume(_requestQueueName, true, consumer);
 
                     Console.WriteLine("Waiting for messages...");
@@ -49,6 +54,10 @@ namespace PetStore.Shared.RabbitMQ
             }
         }
 
+        /// <summary>The method that is called when something apear on the que</summary>
+        /// <param name="sender">The sender.</param>
+        /// <param name="e">The <see cref="BasicDeliverEventArgs" /> instance containing the event data.</param>
+        /// <returns></returns>
         protected abstract Task Received(object sender, BasicDeliverEventArgs e);
     }
 }

@@ -33,7 +33,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PetStore.StockDelivery.Publ
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PetStore.StockDelivery.Manager", "PetStore.StockDelivery.Manager\PetStore.StockDelivery.Manager.csproj", "{8E28DDE8-911D-403C-8B89-42DCDDDFD4A1}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PetStore.StockDelivery", "PetStore.StockDelivery\PetStore.StockDelivery.csproj", "{6C20056B-D2C4-4A45-B8B4-CBDD90B220EA}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PetStore.StockDelivery.Server", "PetStore.StockDelivery\PetStore.StockDelivery.Server.csproj", "{6C20056B-D2C4-4A45-B8B4-CBDD90B220EA}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "RPC", "RPC", "{260D6A81-A67D-4801-9B26-0DA3C7632199}"
 EndProject

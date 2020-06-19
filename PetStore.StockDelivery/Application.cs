@@ -8,11 +8,10 @@ using System.Threading.Tasks;
 
 namespace PetStore.StockDelivery
 {
-    public class Application : BaseSendClient
+    public class Application : BaseReceivedServer
     {
         private readonly IStockDeliveryManager _stockDeliveryManager;
         private const string _requestQueueName = "StockDelivery_Que";
-
         public Application(IStockDeliveryManager stockDeliveryManager)
             : base(RabbitMQConfigFactory.Create(), _requestQueueName)
         {
@@ -21,7 +20,7 @@ namespace PetStore.StockDelivery
 
         public void Run()
         {
-            WaitForResponse(Received);
+            WaitForResponse();
         }
 
         protected override async Task Received(object sender, BasicDeliverEventArgs @event)
