@@ -1,4 +1,5 @@
-﻿using RabbitMQ.Client;
+﻿using PetStore.Shared.Helpers;
+using RabbitMQ.Client;
 using RabbitMQ.Client.Events;
 using System;
 using System.Threading;
@@ -56,7 +57,10 @@ namespace PetStore.Shared.RabbitMQ
                     consumer.Received += Receive;
                     _channel.BasicConsume(_requestQueueName, true, consumer);
 
-                    Console.WriteLine("Waiting for messages...");
+                    using (var colour = new ScopedConsoleColourHelper(ConsoleColor.Green))
+                    {
+                        Console.WriteLine("Waiting for messages...");
+                    }
                     while (true)
                     {
                         Thread.Sleep(50);
