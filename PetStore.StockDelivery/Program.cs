@@ -8,13 +8,14 @@ namespace PetStore.StockDelivery
     {
         static void Main(string[] args)
         {
-            Console.WriteLine("Hello World!");
+            var message = "PetStore StockDelivery Server";
+            Console.Title = message;
+            Console.WriteLine(message);
 
             try
             {
                 var container = AutofacConfiguration.Configure();
-                container.Resolve<Application>().Run(args);
-
+                container.Resolve<Application>().Receive( );
             }
             catch (Exception ex)
             {

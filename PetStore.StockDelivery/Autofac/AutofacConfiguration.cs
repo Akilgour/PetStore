@@ -1,18 +1,15 @@
 ﻿using Autofac;
-using PetStore.StockDelivery.Client.Autofac;
+using PetStore.StockDelivery.Manager.Autofac;
 using System.Reflection;
 
 namespace PetStore.StockDelivery.Autofac
 {
-    public class AutofacConfiguration 
+    public class AutofacConfiguration
     {
         public static IContainer Configure()
         {
             var builder = new ContainerBuilder();
-
-           
-
-            builder.RegisterModule(new StockDeliveryClientModule( ));
+            builder.RegisterModule(new StockDeliveryManagerModule());
 
             // Register the application class
             builder.RegisterType<Application>();
@@ -22,8 +19,6 @@ namespace PetStore.StockDelivery.Autofac
 
             // Set the dependency resolver to be Autofac.
             return builder.Build();
-
-
         }
     }
 }

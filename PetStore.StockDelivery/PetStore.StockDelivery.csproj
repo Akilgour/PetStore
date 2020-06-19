@@ -12,7 +12,8 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\PetStore.StockDelivery.Client\PetStore.StockDelivery.Client.csproj" />
+    <ProjectReference Include="..\PetStore.Shared\PetStore.Shared.csproj" />
+    <ProjectReference Include="..\PetStore.StockDelivery.Manager\PetStore.StockDelivery.Manager.csproj" />
   </ItemGroup>
 
 </Project>

@@ -1,37 +1,57 @@
-﻿
-using PetStore.StockDelivery.Client.Client.Interface;
-using System;
-using System.Diagnostics;
+﻿using PetStore.Domain.Models;
+using PetStore.Shared.Helpers;
+using PetStore.Shared.RabbitMQ;
+using PetStore.Shared.RabbitMQ.Factorys;
+using PetStore.StockDelivery.Manager.Managers.Interface;
+using RabbitMQ.Client;
+using RabbitMQ.Client.Events;
+using System.Threading;
+using System.Threading.Tasks;
 
 namespace PetStore.StockDelivery
 {
-    public class Application
+    public class Application : BaseSendClient
     {
-        private readonly IStockDeliveryClient _stockDeliveryClient;
+        private readonly IStockDeliveryManager _stockDeliveryManager;
 
-
-        public Application(IStockDeliveryClient stockDeliveryClient)
+        public Application(IStockDeliveryManager stockDeliveryManager)
+            : base(RabbitMQConfigFactory.Create())
         {
-            _stockDeliveryClient = stockDeliveryClient;
+            _stockDeliveryManager = stockDeliveryManager;
         }
 
-        public void Run(string[] args)
+        public void Receive()
         {
-            var timer = new Stopwatch();
-            timer.Start();
-            try
+            var queueName = "StockDelivery_Que";
+
+            using (var connection = factory.CreateConnection())
             {
-                _stockDeliveryClient.Receive();
+                using (var channel = connection.CreateModel())
+                {
+                    channel.QueueDeclare(queue: queueName,
+                                         durable: false,
+                                         exclusive: false,
+                                         autoDelete: false,
+                                         arguments: null);
+
+                    //   https://gigi.nullneuron.net/gigilabs/asynchronous-rabbitmq-consumers-in-net/
+
+                    var consumer = new AsyncEventingBasicConsumer(channel);
+                    consumer.Received += Consumer_Received;
+                    channel.BasicConsume(queueName, true, consumer);
+
+                    while (true)
+                    {
+                        Thread.Sleep(50);
+                    }
+                }
             }
-            catch (Exception ex)
-            {
-                Console.WriteLine(ex);
-            }
-            finally
-            {
-                timer.Stop();
-                Console.WriteLine($"Run time: {timer.Elapsed.ToString()}");
-            }
+        }
+
+        private async Task Consumer_Received(object sender, BasicDeliverEventArgs @event)
+        {
+            var stockItem = (StockItem)@event.Body.ToArray().DeSerialize(typeof(StockItem));
+            await _stockDeliveryManager.Create(stockItem);
         }
 
     }
