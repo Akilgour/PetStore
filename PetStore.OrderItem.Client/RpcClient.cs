@@ -9,17 +9,17 @@ using System.Threading.Tasks;
 
 namespace PetStore.OrderItem.Client
 {
-    public class RpcClient : BaseClient
+    public class RpcClient : BaseSendReceiveClient
     {
-        private ConcurrentDictionary<string, TaskCompletionSource<OrderResponse>> _pendingMessages;
-        private const string requestQueueName = "OrderItem_RequestQueue";
-        private const string responseQueueName = "OrderItem_ResponseQueue";
-        private const string exchangeName = ""; // default exchange
+        private readonly ConcurrentDictionary<string, TaskCompletionSource<OrderResponse>> _pendingMessages;
+        private const string _requestQueueName = "OrderItem_RequestQueue";
+        private const string _responseQueueName = "OrderItem_ResponseQueue";
+        private const string _exchangeName = ""; // default exchange
 
         public RpcClient()
-            : base(RabbitMQConfigFactory.Create(), requestQueueName, responseQueueName, exchangeName)
+            : base(RabbitMQConfigFactory.Create(), _requestQueueName, _responseQueueName, _exchangeName)
         {
-            Send(Received);
+            Send();
             _pendingMessages = new ConcurrentDictionary<string, TaskCompletionSource<OrderResponse>>();
         }
 
@@ -32,7 +32,7 @@ namespace PetStore.OrderItem.Client
             return tcs.Task;
         }
 
-        private void Received(object sender, BasicDeliverEventArgs e)
+        protected override void Receive(object sender, BasicDeliverEventArgs e)
         {
             var correlationId = e.BasicProperties.CorrelationId;
             var orderResponse = (OrderResponse)e.Body.ToArray().DeSerialize(typeof(OrderResponse));

@@ -4,7 +4,7 @@ using System;
 
 namespace PetStore.Shared.RabbitMQ
 {
-    public abstract class BaseClient
+    public abstract class BaseSendReceiveClient
     {
         private readonly ConnectionFactory _factory;
         private readonly IConnection _connection;
@@ -14,7 +14,7 @@ namespace PetStore.Shared.RabbitMQ
         private readonly string _responseQueueName;
         private readonly string _exchangeName;
 
-        public BaseClient(RabbitMQConfig rabbitMQConfig, string requestQueueName, string responseQueueName, string exchangeName)
+        public BaseSendReceiveClient(RabbitMQConfig rabbitMQConfig, string requestQueueName, string responseQueueName, string exchangeName)
         {
             if (rabbitMQConfig is null)
             {
@@ -30,7 +30,6 @@ namespace PetStore.Shared.RabbitMQ
             {
                 throw new ArgumentException("message", nameof(responseQueueName));
             }
-                     
 
             _factory = new ConnectionFactory()
             {
@@ -47,13 +46,15 @@ namespace PetStore.Shared.RabbitMQ
             _channel.QueueDeclare(requestQueueName, true, false, false, null);
             _channel.QueueDeclare(responseQueueName, true, false, false, null);
             _consumer = new EventingBasicConsumer(this._channel);
+            _consumer.Received += Receive;
         }
 
-        public void Send(EventHandler<BasicDeliverEventArgs> received)
+        public void Send()
         {
-            _consumer.Received += received;
             _channel.BasicConsume(_responseQueueName, true, _consumer);
         }
+
+        protected abstract void Receive(object sender, BasicDeliverEventArgs e);
 
         protected void Publish(byte[] message, string correlationId)
         {
