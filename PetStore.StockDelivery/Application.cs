@@ -3,9 +3,7 @@ using PetStore.Shared.Helpers;
 using PetStore.Shared.RabbitMQ;
 using PetStore.Shared.RabbitMQ.Factorys;
 using PetStore.StockDelivery.Manager.Managers.Interface;
-using RabbitMQ.Client;
 using RabbitMQ.Client.Events;
-using System.Threading;
 using System.Threading.Tasks;
 
 namespace PetStore.StockDelivery
@@ -13,46 +11,23 @@ namespace PetStore.StockDelivery
     public class Application : BaseSendClient
     {
         private readonly IStockDeliveryManager _stockDeliveryManager;
+        private const string _requestQueueName = "StockDelivery_Que";
 
         public Application(IStockDeliveryManager stockDeliveryManager)
-            : base(RabbitMQConfigFactory.Create())
+            : base(RabbitMQConfigFactory.Create(), _requestQueueName)
         {
             _stockDeliveryManager = stockDeliveryManager;
         }
 
-        public void Receive()
+        public void Run()
         {
-            var queueName = "StockDelivery_Que";
-
-            using (var connection = factory.CreateConnection())
-            {
-                using (var channel = connection.CreateModel())
-                {
-                    channel.QueueDeclare(queue: queueName,
-                                         durable: false,
-                                         exclusive: false,
-                                         autoDelete: false,
-                                         arguments: null);
-
-                    //   https://gigi.nullneuron.net/gigilabs/asynchronous-rabbitmq-consumers-in-net/
-
-                    var consumer = new AsyncEventingBasicConsumer(channel);
-                    consumer.Received += Consumer_Received;
-                    channel.BasicConsume(queueName, true, consumer);
-
-                    while (true)
-                    {
-                        Thread.Sleep(50);
-                    }
-                }
-            }
+            WaitForResponse(Received);
         }
 
-        private async Task Consumer_Received(object sender, BasicDeliverEventArgs @event)
+        protected override async Task Received(object sender, BasicDeliverEventArgs @event)
         {
             var stockItem = (StockItem)@event.Body.ToArray().DeSerialize(typeof(StockItem));
             await _stockDeliveryManager.Create(stockItem);
         }
-
     }
 }

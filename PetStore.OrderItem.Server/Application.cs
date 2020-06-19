@@ -11,12 +11,12 @@ namespace PetStore.OrderItem.Server
 {
     public class Application : ServerClient
     {
-        private const string RequestQueueName = "OrderItem_RequestQueue";
+        private const string _requestQueueName = "OrderItem_RequestQueue";
         private readonly IOrderItemManager _orderItemManager;
         private const string _exchangeName = "";
 
         public Application(IOrderItemManager orderItemManager)
-           : base(RabbitMQConfigFactory.Create(), RequestQueueName)
+           : base(RabbitMQConfigFactory.Create(), _requestQueueName)
         {
             _orderItemManager = orderItemManager;
         }

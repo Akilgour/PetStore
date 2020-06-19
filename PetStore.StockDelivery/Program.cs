@@ -15,7 +15,7 @@ namespace PetStore.StockDelivery
             try
             {
                 var container = AutofacConfiguration.Configure();
-                container.Resolve<Application>().Receive( );
+                container.Resolve<Application>().Run( );
             }
             catch (Exception ex)
             {
