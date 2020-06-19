@@ -47,10 +47,6 @@ namespace PetStore.Shared.RabbitMQ
             _channel.QueueDeclare(responseQueueName, true, false, false, null);
             _consumer = new EventingBasicConsumer(this._channel);
             _consumer.Received += Receive;
-        }
-
-        public void Send()
-        {
             _channel.BasicConsume(_responseQueueName, true, _consumer);
         }
 

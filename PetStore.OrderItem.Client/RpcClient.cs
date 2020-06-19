@@ -1,4 +1,5 @@
-﻿using PetStore.Shared.Helpers;
+﻿using PetStore.Domain.Models;
+using PetStore.Shared.Helpers;
 using PetStore.Shared.QueMessages;
 using PetStore.Shared.RabbitMQ;
 using PetStore.Shared.RabbitMQ.Factorys;
@@ -19,12 +20,12 @@ namespace PetStore.OrderItem.Client
         public RpcClient()
             : base(RabbitMQConfigFactory.Create(), _requestQueueName, _responseQueueName, _exchangeName)
         {
-            Send();
             _pendingMessages = new ConcurrentDictionary<string, TaskCompletionSource<OrderResponse>>();
         }
 
-        public Task<OrderResponse> SendAsync(byte[] message)
+        public Task<OrderResponse> Send(StockOrder stockOrder)
         {
+            var message = stockOrder.Serialize();
             var tcs = new TaskCompletionSource<OrderResponse>();
             var correlationId = Guid.NewGuid().ToString();
             _pendingMessages[correlationId] = tcs;

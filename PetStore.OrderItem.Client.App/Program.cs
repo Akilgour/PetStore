@@ -20,12 +20,12 @@ namespace PetStore.OrderItem.Client.App
                 {
                     new StockItem() { Name = "Item A", Quantity =  1 },
                     new StockItem() { Name = "Item B", Quantity =  1 },
-                    new StockItem() { Name = "Item C", Quantity =  100 }
+                    new StockItem() { Name = "Item C", Quantity =  1 }
                 }
             };
 
-            var orderItemClient = new OrderItemClient();
-            var responce = await orderItemClient.Publish(stockOrder);
+            var orderItemClient = new RpcClient();
+            var responce = await orderItemClient.Send(stockOrder);
 
             Console.WriteLine(responce.Success);
             Console.WriteLine(responce.Message);
