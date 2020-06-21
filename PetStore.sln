@@ -68,6 +68,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 		.editorconfig = .editorconfig
 	EndProjectSection
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PetStore.API.Service", "PetStore.API.Service\PetStore.API.Service.csproj", "{1B56160E-8E00-4054-8750-1F98DF004EF9}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -146,6 +148,10 @@ Global
 		{A56BA4D7-523C-4088-96B0-D29891FA6C32}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{A56BA4D7-523C-4088-96B0-D29891FA6C32}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{A56BA4D7-523C-4088-96B0-D29891FA6C32}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1B56160E-8E00-4054-8750-1F98DF004EF9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1B56160E-8E00-4054-8750-1F98DF004EF9}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1B56160E-8E00-4054-8750-1F98DF004EF9}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1B56160E-8E00-4054-8750-1F98DF004EF9}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -179,6 +185,7 @@ Global
 		{FEB1970F-FA36-43F9-9C32-A404DC5103CA} = {C483C7B1-EDE2-4C84-8515-45BB118624F8}
 		{F60A501E-2A45-4186-8BCF-56AAB7FA6763} = {C483C7B1-EDE2-4C84-8515-45BB118624F8}
 		{A56BA4D7-523C-4088-96B0-D29891FA6C32} = {C483C7B1-EDE2-4C84-8515-45BB118624F8}
+		{1B56160E-8E00-4054-8750-1F98DF004EF9} = {C483C7B1-EDE2-4C84-8515-45BB118624F8}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {A0B49AD8-A4C0-481B-8DC7-840A04B0C56D}
