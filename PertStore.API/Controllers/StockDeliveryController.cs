@@ -17,7 +17,6 @@ namespace PetStore.API.Controllers
             _stockDeliveryManager = stockDeliveryManager ?? throw new System.ArgumentNullException(nameof(stockDeliveryManager));
         }
 
-
         [HttpPost]
         public async Task<ActionResult> Post(StockDeliveryCreate stockDeliveryCreate)
         {

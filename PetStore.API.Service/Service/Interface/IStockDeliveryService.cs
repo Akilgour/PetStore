@@ -1,9 +1,10 @@
-﻿using System.Threading.Tasks;
+﻿using PetStore.Domain.Models;
+using System.Threading.Tasks;
 
 namespace PetStore.API.Service.Service.Interface
 {
     public interface IStockDeliveryService
     {
-        Task AddStock();
+        Task AddStock(StockItem stockItem);
     }
 }
