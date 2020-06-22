@@ -9,17 +9,17 @@ namespace PetStore.API.Manager
 {
     public class OrderItemManager : BaseManager, IOrderItemManager
     {
-        private readonly IOrderItemService _stockDeliveryService;
+        private readonly IOrderItemService _orderItemService;
 
         public OrderItemManager(IOrderItemService stockDeliveryService, IMapper mapper)
             : base(mapper)
         {
-            _stockDeliveryService = stockDeliveryService;
+            _orderItemService = stockDeliveryService;
         }
 
-        public async Task OrderCreate(StockOrderCreate stockOrderCreate)
+        public async Task<StockOrderOrderResponse> OrderCreate(StockOrderCreate stockOrderCreate)
         {
-            await _stockDeliveryService.OrderCreate(_mapper.Map<StockOrder>(stockOrderCreate));
+            return _mapper.Map<StockOrderOrderResponse>(await _orderItemService.OrderCreate(_mapper.Map<StockOrder>(stockOrderCreate)));
         }
     }
 }

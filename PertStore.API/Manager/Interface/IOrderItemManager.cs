@@ -5,6 +5,6 @@ namespace PetStore.API.Manager.Interface
 {
     public interface IOrderItemManager
     {
-        Task OrderCreate(StockOrderCreate stockOrderCreate);
+        Task<StockOrderOrderResponse> OrderCreate(StockOrderCreate stockOrderCreate);
     }
 }

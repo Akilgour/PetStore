@@ -21,8 +21,18 @@ namespace PetStore.API.Controllers
         [HttpPost]
         public async Task<ActionResult> Post(StockOrderCreate stockOrderCreate)
         {
-            await _orderItemManager.OrderCreate(stockOrderCreate);
-            return Ok();
+            stockOrderCreate.OrderItems.Add(new OrderItemsCreate() { Name = "a1", Quantity = 100 });
+
+            var result = await _orderItemManager.OrderCreate(stockOrderCreate);
+            if (result.Success)
+            {
+                return Ok();
+            }
+            else
+            {
+                return BadRequest(result.Message);
+
+            }
         }
     }
 }

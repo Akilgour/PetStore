@@ -1,7 +1,9 @@
 ﻿using PetStore.API.Service.Service.Interface;
 using PetStore.Domain.Models;
 using PetStore.OrderItem.Client.Client.Interface;
+using PetStore.Shared.QueMessages;
 using System.Threading.Tasks;
+ 
 
 namespace PetStore.API.Service.Service
 {
@@ -14,9 +16,9 @@ namespace PetStore.API.Service.Service
             _orderItemClient = orderItemClient;
         }
 
-        public async Task OrderCreate(StockOrder stockOrder)
+        public async Task<OrderResponse> OrderCreate(StockOrder stockOrder)
         {
-            var result = await _orderItemClient.Send(stockOrder);
+            return await _orderItemClient.Send(stockOrder);
         }
     }
 }
