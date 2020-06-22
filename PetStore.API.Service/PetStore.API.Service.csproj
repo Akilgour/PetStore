@@ -10,6 +10,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\PetStore.Domain\PetStore.Domain.csproj" />
+    <ProjectReference Include="..\PetStore.OrderItem.Client\PetStore.OrderItem.Client.csproj" />
     <ProjectReference Include="..\PetStore.StockDelivery.Publisher\PetStore.StockDelivery.Client.csproj" />
   </ItemGroup>
 
