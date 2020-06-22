@@ -1,10 +1,12 @@
 ﻿using PetStore.Domain.Models;
 using PetStore.Shared.Helpers;
 using PetStore.Shared.RabbitMQ;
+using PetStore.StockDelivery.Client.Client.Interface;
+using System.Threading.Tasks;
 
 namespace PetStore.StockDelivery.Client.Client
 {
-    public class StockDeliveryClient : BaseSendClient
+    public class StockDeliveryClient : BaseSendClient, IStockDeliveryClient
     {
         private const string _requestQueueName = "StockDelivery_Que";
         private const string _exchangeName = ""; // default exchange
@@ -14,9 +16,9 @@ namespace PetStore.StockDelivery.Client.Client
         {
         }
 
-        public void Send(StockItem stockItem)
+        public async Task Send(StockItem stockItem)
         {
-            Send(stockItem.Serialize());
+            await SendAsync(stockItem.Serialize());
         }
     }
 }

@@ -1,18 +1,17 @@
 ﻿using Autofac;
-using PetStore.StockDelivery.Client.Autofac;
+using PetStore.Shared.RabbitMQ;
 using System.Linq;
 
-namespace PetStore.API.Service.Autofac
+namespace PetStore.StockDelivery.Client.Autofac
 {
-    public class ServiceModule : Module
+    public class StockDeliveryClientModule : Module
     {
         protected override void Load(ContainerBuilder builder)
         {
-            builder.RegisterModule(new StockDeliveryClientModule());
-
             //"ThisAssembly" means "any types in the same assembly as the module"
             builder.RegisterAssemblyTypes(ThisAssembly)
-                 .Where(t => t.Name.EndsWith("Service"))
+                 .WithParameter("rabbitMQConfig", new RabbitMQConfig("localhost", "guest", "guest"))
+                 .Where(t => t.Name.EndsWith("Client"))
                  .AsImplementedInterfaces();
         }
     }

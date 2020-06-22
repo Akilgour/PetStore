@@ -1,19 +1,22 @@
 ﻿using PetStore.API.Service.Service.Interface;
 using PetStore.Domain.Models;
-using System;
+using PetStore.StockDelivery.Client.Client.Interface;
 using System.Threading.Tasks;
 
 namespace PetStore.API.Service.Service
 {
     public class StockDeliveryService : IStockDeliveryService
     {
-        public StockDeliveryService()
+        private readonly IStockDeliveryClient _stockDeliveryClient;
+
+        public StockDeliveryService(IStockDeliveryClient stockDeliveryClient)
         {
+            _stockDeliveryClient = stockDeliveryClient;
         }
 
-        public Task AddStock(StockItem stockItem)
+        public async Task AddStock(StockItem stockItem)
         {
-            throw new NotImplementedException();
+            await _stockDeliveryClient.Send(stockItem);
         }
     }
 }

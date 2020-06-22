@@ -1,4 +1,5 @@
 ﻿using RabbitMQ.Client;
+using System.Threading.Tasks;
 
 namespace PetStore.Shared.RabbitMQ
 {
@@ -36,6 +37,11 @@ namespace PetStore.Shared.RabbitMQ
             using var channel = connection.CreateModel();
             channel.QueueDeclare(queue: _requestQueueName, durable: false, exclusive: false, autoDelete: false, arguments: null);
             channel.BasicPublish(_exchangeName, _requestQueueName, null, item);
+        }
+
+        protected async Task SendAsync(byte[] item)
+        {
+            await Task.Run(() => Send(item));
         }
     }
 }
