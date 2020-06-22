@@ -1,4 +1,5 @@
 ﻿using PetStore.Domain.Models;
+using PetStore.OrderItem.Client.Client.Interface;
 using PetStore.Shared.Helpers;
 using PetStore.Shared.QueMessages;
 using PetStore.Shared.RabbitMQ;
@@ -10,7 +11,7 @@ using System.Threading.Tasks;
 
 namespace PetStore.OrderItem.Client
 {
-    public class OrderItemClient : BaseSendReceiveClient
+    public class OrderItemClient : BaseSendReceiveClient, IOrderItemClient
     {
         private readonly ConcurrentDictionary<string, TaskCompletionSource<OrderResponse>> _pendingMessages;
         private const string _requestQueueName = "OrderItem_RequestQueue";

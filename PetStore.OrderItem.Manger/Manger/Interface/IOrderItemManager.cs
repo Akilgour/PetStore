@@ -1,4 +1,5 @@
 ﻿using PetStore.Domain.Models;
+using PetStore.Shared.DTO;
 using PetStore.Shared.QueMessages;
 using System.Threading.Tasks;
 
