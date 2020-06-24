@@ -26,9 +26,8 @@ namespace PetStore.Blazor.WASM.Client.Pages
         protected string StatusClass = string.Empty;
         protected bool Saved;
 
-        protected override async Task OnInitializedAsync()
+        protected override void OnInitialized()
         {
-            await Task.Delay(2000);
             StockItem = new StockItemsNew();
         }
 
