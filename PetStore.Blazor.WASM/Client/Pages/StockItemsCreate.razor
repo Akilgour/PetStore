@@ -1,10 +1,11 @@
 ﻿<h3>StockItemsCreate</h3>
 @page "/StockItemsCreate"
 @inherits StockItemsCreateBase
-
+@using PetStore.Blazor.WASM.Client.Components;
+ 
 @if (StockItem == null)
 {
-    <p><em>Loading <i class="fas fa-spinner fa-pulse"></i></em></p>
+<WaitLoading />
 }
 else
 {
