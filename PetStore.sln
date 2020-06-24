@@ -70,11 +70,11 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PetStore.API.Service", "Pet
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "RabbitMQ", "RabbitMQ", "{2D8F7B14-F057-45F3-BD9A-CC617922EAB7}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PetStore.Blazor.WASM.Server", "PetStore.Blazor.WASM\Server\PetStore.Blazor.WASM.Server.csproj", "{546AD7E0-E5C5-4E5A-8609-E4F35AB13328}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PetStore.Blazor.WASM.Server", "PetStore.Blazor.WASM\Server\PetStore.Blazor.WASM.Server.csproj", "{546AD7E0-E5C5-4E5A-8609-E4F35AB13328}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PetStore.Blazor.WASM.Client", "PetStore.Blazor.WASM\Client\PetStore.Blazor.WASM.Client.csproj", "{6C527D75-0A4D-4212-AB7D-4B055B21FF6F}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PetStore.Blazor.WASM.Client", "PetStore.Blazor.WASM\Client\PetStore.Blazor.WASM.Client.csproj", "{6C527D75-0A4D-4212-AB7D-4B055B21FF6F}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PetStore.Blazor.WASM.Shared", "PetStore.Blazor.WASM\Shared\PetStore.Blazor.WASM.Shared.csproj", "{99A95A38-E0F8-4C0F-8987-D38299E660BA}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PetStore.Blazor.WASM.Shared", "PetStore.Blazor.WASM\Shared\PetStore.Blazor.WASM.Shared.csproj", "{99A95A38-E0F8-4C0F-8987-D38299E660BA}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
