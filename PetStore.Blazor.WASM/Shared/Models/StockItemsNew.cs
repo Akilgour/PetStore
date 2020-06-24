@@ -5,10 +5,11 @@ namespace PetStore.Blazor.WASM.Server.Models
 {
     public class StockItemsNew
     {
-        [Required]
+        [Required( ErrorMessage = "Name is required.")]
         public string Name { get; set; }
 
-        [Range(0, 100, ErrorMessage = "Quantity must be between 0 and 100.")]
-        public int Quantity { get; set; }
+        [Required(ErrorMessage = "Quantity is required.")]
+        [Range(1, 100, ErrorMessage = "Quantity must be between 1 and 100.")]
+        public int? Quantity { get; set; }
     }
 }
