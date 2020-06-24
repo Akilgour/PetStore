@@ -1,5 +1,9 @@
-﻿using Microsoft.AspNetCore.Components;
+﻿using AutoMapper;
+using Microsoft.AspNetCore.Components;
 using PetStore.Blazor.WASM.Server.Models;
+using PetStore.Shared.DTO;
+using System.Net.Http;
+using System.Net.Http.Json;
 using System.Threading.Tasks;
 
 namespace PetStore.Blazor.WASM.Client.Pages
@@ -8,6 +12,12 @@ namespace PetStore.Blazor.WASM.Client.Pages
     {
         [Inject]
         public NavigationManager NavigationManager { get; set; }
+
+        [Inject]
+        public IMapper Mapper { get; set; }  
+        
+        [Inject]
+        public HttpClient Http { get; set; }
 
         public StockItemsNew StockItem { get; set; }
 
@@ -24,7 +34,8 @@ namespace PetStore.Blazor.WASM.Client.Pages
 
         protected async Task HandleValidSubmit()
         {
-            await Task.Delay(2000);
+            await Http.PostAsJsonAsync($"api/StockDelivery", Mapper.Map<StockDeliveryCreate>(StockItem));
+
             StatusClass = "alert-success";
             Message = "Comment successfully.";
             Saved = true;
