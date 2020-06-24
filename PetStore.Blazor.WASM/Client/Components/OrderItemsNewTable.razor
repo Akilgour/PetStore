@@ -1,6 +1,17 @@
-﻿<h3>OrderItemsNewTable</h3>
-@inherits OrderItemsNewTableBase
+﻿@inherits OrderItemsNewTableBase
 
-@code {
-
-}
+<table class="table">
+    <thead>
+        <tr>
+            <th>Name</th>
+            <th>Quantity</th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in OrderItems)
+        {
+            <OrderItemsNewTableRow @key="item" OrderItem="item" />
+        }
+    </tbody>
+</table>
