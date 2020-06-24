@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Components;
+using PetStore.Blazor.WASM.Server.Models;
 using System.Threading.Tasks;
 
 namespace PetStore.Blazor.WASM.Client.Pages
@@ -8,6 +9,8 @@ namespace PetStore.Blazor.WASM.Client.Pages
         [Inject]
         public NavigationManager NavigationManager { get; set; }
 
+        public StockItemsNew StockItem { get; set; }
+
         //used to store state of screen
         protected string Message = string.Empty;
         protected string StatusClass = string.Empty;
@@ -16,6 +19,7 @@ namespace PetStore.Blazor.WASM.Client.Pages
         protected override async Task OnInitializedAsync()
         {
             await Task.Delay(2000);
+            StockItem = new StockItemsNew();
         }
 
         protected async Task HandleValidSubmit()

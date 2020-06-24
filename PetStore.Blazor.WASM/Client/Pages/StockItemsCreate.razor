@@ -2,4 +2,43 @@
 @page "/StockItemsCreate"
 @inherits StockItemsCreateBase
 
- 
+@if (StockItem == null)
+{
+    <p><em>Loading <i class="fas fa-spinner fa-pulse"></i></em></p>
+}
+else
+{
+    <div class="alert @StatusClass">@Message</div>
+    @if (!Saved)
+    {
+        <EditForm Model="@StockItem" OnValidSubmit="@HandleValidSubmit" OnInvalidSubmit="@HandleInvalidSubmit">
+
+            <DataAnnotationsValidator />
+            <ValidationSummary />
+
+            <div class="form-group row">
+                <label for="comment" class="col-sm-3">Name: </label>
+                <InputText id="comment" class="form-control col-sm-8" @bind-Value="@StockItem.Name" placeholder="Enter Name" />
+                <ValidationMessage class="offset-sm-3 col-sm-8" For="@(() => StockItem.Name)" />
+            </div>
+
+            <div class="form-group row">
+                <label for="comment" class="col-sm-3">Quantity: </label>
+                <InputNumber id="comment" class="form-control col-sm-8" @bind-Value="@StockItem.Quantity" placeholder="Enter Quantity" />
+                <ValidationMessage class="offset-sm-3 col-sm-8" For="@(() => StockItem.Quantity)" />
+            </div>
+
+            <div class="float-right">
+                <button type="submit" class="btn btn-primary edit-btn">
+                    Save
+                    <i class="fas fa-save"></i>
+                </button>
+                <a class="btn btn-outline-primary" @onclick="@NavigateBack">Cancel</a>
+            </div>
+        </EditForm>
+    }
+    @if (Saved)
+    {
+        <a class="btn btn-outline-primary" @onclick="@NavigateBack">Back to error</a>
+    }
+}
