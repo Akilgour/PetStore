@@ -20,8 +20,6 @@ namespace PetStore.Blazor.WASM.Server.Controllers
         [HttpPost]
         public async Task<ActionResult> Post(StockOrderCreate stockOrderCreate)
         {
-            stockOrderCreate.OrderItems.Add(new OrderItemsCreate() { Name = "a1", Quantity = 100 });
-
             var result = await _orderItemManager.OrderCreate(stockOrderCreate);
             if (result.Success)
             {
