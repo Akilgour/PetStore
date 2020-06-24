@@ -8,7 +8,7 @@ namespace PetStore.Blazor.WASM.Client.Profiles
     {
         public StockDeliveryCreateProfile()
         {
-            CreateMap<StockItemsNew, StockDeliveryCreate>();
+            CreateMap<StockDeliveryNew, StockDeliveryCreate>();
         }
     }
 }

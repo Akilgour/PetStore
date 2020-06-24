@@ -3,7 +3,7 @@ using System.ComponentModel.DataAnnotations;
 
 namespace PetStore.Blazor.WASM.Server.Models
 {
-    public class StockItemsNew
+    public class StockDeliveryNew
     {
         [Required( ErrorMessage = "Name is required.")]
         public string Name { get; set; }

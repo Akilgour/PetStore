@@ -1,9 +1,9 @@
 ﻿<h3>StockItemsCreate</h3>
-@page "/StockItemsCreate"
-@inherits StockItemsCreateBase
+@page "/StockDeliveryCreate"
+@inherits StockDeliveryCreateBase
 @using PetStore.Blazor.WASM.Client.Components;
  
-@if (StockItem == null)
+@if (StockDelivery == null)
 {
 <WaitLoading />
 }
@@ -12,21 +12,21 @@ else
     <div class="alert @StatusClass">@Message</div>
     @if (!Saved)
     {
-        <EditForm Model="@StockItem" OnValidSubmit="@HandleValidSubmit" OnInvalidSubmit="@HandleInvalidSubmit">
+        <EditForm Model="@StockDelivery" OnValidSubmit="@HandleValidSubmit" OnInvalidSubmit="@HandleInvalidSubmit">
 
             <DataAnnotationsValidator />
             <ValidationSummary />
 
             <div class="form-group row">
                 <label for="comment" class="col-sm-3">Name: </label>
-                <InputText id="comment" class="form-control col-sm-8" @bind-Value="@StockItem.Name" placeholder="Enter Name" />
-                <ValidationMessage class="offset-sm-3 col-sm-8" For="@(() => StockItem.Name)" />
+                <InputText id="comment" class="form-control col-sm-8" @bind-Value="@StockDelivery.Name" placeholder="Enter Name" />
+                <ValidationMessage class="offset-sm-3 col-sm-8" For="@(() => StockDelivery.Name)" />
             </div>
 
             <div class="form-group row">
                 <label for="comment" class="col-sm-3">Quantity: </label>
-                <InputNumber id="comment" class="form-control col-sm-8" @bind-Value="@StockItem.Quantity" placeholder="Enter Quantity" />
-                <ValidationMessage class="offset-sm-3 col-sm-8" For="@(() => StockItem.Quantity)" />
+                <InputNumber id="comment" class="form-control col-sm-8" @bind-Value="@StockDelivery.Quantity" placeholder="Enter Quantity" />
+                <ValidationMessage class="offset-sm-3 col-sm-8" For="@(() => StockDelivery.Quantity)" />
             </div>
 
             <div class="float-right">

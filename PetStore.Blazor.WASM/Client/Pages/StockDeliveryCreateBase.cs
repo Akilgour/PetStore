@@ -8,18 +8,18 @@ using System.Threading.Tasks;
 
 namespace PetStore.Blazor.WASM.Client.Pages
 {
-    public class StockItemsCreateBase : ComponentBase
+    public class StockDeliveryCreateBase : ComponentBase
     {
         [Inject]
         public NavigationManager NavigationManager { get; set; }
 
         [Inject]
-        public IMapper Mapper { get; set; }  
-        
+        public IMapper Mapper { get; set; }
+
         [Inject]
         public HttpClient Http { get; set; }
 
-        public StockItemsNew StockItem { get; set; }
+        public StockDeliveryNew StockDelivery { get; set; }
 
         //used to store state of screen
         protected string Message = string.Empty;
@@ -28,12 +28,12 @@ namespace PetStore.Blazor.WASM.Client.Pages
 
         protected override void OnInitialized()
         {
-            StockItem = new StockItemsNew();
+            StockDelivery = new StockDeliveryNew();
         }
 
         protected async Task HandleValidSubmit()
         {
-            await Http.PostAsJsonAsync($"api/StockDelivery", Mapper.Map<StockDeliveryCreate>(StockItem));
+            await Http.PostAsJsonAsync($"api/StockDelivery", Mapper.Map<StockDeliveryCreate>(StockDelivery));
 
             StatusClass = "alert-success";
             Message = "Comment successfully.";
