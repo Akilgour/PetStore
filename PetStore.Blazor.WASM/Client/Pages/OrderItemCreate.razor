@@ -25,6 +25,7 @@ else
                 <ValidationMessage class="offset-sm-3 col-sm-8" For="@(() => StockOrder.OrderNumber)" />
             </div>
 
+            <OrderItemsNewTable OrderItems ="StockOrder.OrderItems"/>
 
             <div class="float-right">
                 <button type="submit" class="btn btn-primary edit-btn">
