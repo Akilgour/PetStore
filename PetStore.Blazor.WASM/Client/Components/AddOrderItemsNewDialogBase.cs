@@ -33,6 +33,7 @@ namespace PetStore.Blazor.WASM.Client.Components
 
         protected void HandleValidAdd()
         {
+            Close();
             StateHasChanged();
         }
     }
