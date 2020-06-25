@@ -25,6 +25,7 @@ namespace PetStore.Blazor.WASM.Client
             var configuration = new MapperConfiguration(cfg =>
             {
                 cfg.AddProfile<StockDeliveryCreateProfile>();
+                cfg.AddProfile<StockOrderCreateProfile>();
             });
             builder.Services.AddSingleton(configuration.CreateMapper());
 
