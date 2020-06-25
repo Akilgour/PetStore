@@ -1,4 +1,6 @@
 ﻿using Microsoft.AspNetCore.Components;
+using Microsoft.AspNetCore.Components.Web;
+using PetStore.Blazor.WASM.Client.Components;
 using PetStore.Blazor.WASM.Shared.Models;
 using System;
 using System.Collections.Generic;
@@ -42,6 +44,13 @@ namespace PetStore.Blazor.WASM.Client.Pages
         protected void NavigateBack()
         {
             NavigationManager.NavigateTo("");
+        }
+
+        protected AddOrderItemsNewDialog OrderItemsNewDialog { get; set; }
+
+        public void AddOrderItem(MouseEventArgs e)
+        {
+            OrderItemsNewDialog.Show();
         }
     }
 }
