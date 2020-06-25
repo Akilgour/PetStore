@@ -52,5 +52,10 @@ namespace PetStore.Blazor.WASM.Client.Pages
         {
             OrderItemsNewDialog.Show();
         }
+
+        public async Task AddOrderItemsNewDialog_OnDialogClose()
+        {
+            StockOrder.OrderItems.Add(OrderItemsNewDialog.OrderItem);
+        }
     }
 }

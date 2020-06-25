@@ -1,20 +1,22 @@
 ﻿using Microsoft.AspNetCore.Components;
 using PetStore.Blazor.WASM.Shared.Models;
-using System;
+using System.Threading.Tasks;
 
 namespace PetStore.Blazor.WASM.Client.Components
 {
     public class AddOrderItemsNewDialogBase : ComponentBase
     {
-        public Guid Guid = Guid.NewGuid();
-        public string ModalDisplay = "none;";
-        public string ModalClass = "";
-        public bool ShowBackdrop = false;
+        protected string ModalDisplay = "none;";
+        protected string ModalClass = "";
+        protected bool ShowBackdrop = false;
+        public OrderItemsNew OrderItem { get; set; } = new OrderItemsNew();
 
-
+        [Parameter]
+        public EventCallback<bool> AddEventCallback { get; set; }
 
         public void Show()
         {
+            OrderItem = new OrderItemsNew();
             ModalDisplay = "block;";
             ModalClass = "Show";
             ShowBackdrop = true;
@@ -29,10 +31,9 @@ namespace PetStore.Blazor.WASM.Client.Components
             StateHasChanged();
         }
 
-        protected OrderItemsNew OrderItem { get; set; } = new OrderItemsNew() { Name = "asdf", Quantity = 2 };
-
-        protected void HandleValidAdd()
+        protected async Task HandleValidAdd()
         {
+            await AddEventCallback.InvokeAsync(true);
             Close();
             StateHasChanged();
         }
