@@ -14,23 +14,23 @@
                 <EditForm Model="@OrderItem" OnValidSubmit="@HandleValidAdd">
                     <DataAnnotationsValidator />
                     <ValidationSummary />
-                    <p>Add item</p>
+                    <p>Enter the details of the item that you want to order.</p>
                     <div class="form-group">
-                        <label for="userValue">Item to be deleted: </label>
+                        <label for="userValue">Name: </label>
                         <InputText id="userValue"
                                    class="form-control"
                                    @bind-Value="@OrderItem.Name"
-                                   placeholder="Item to be deleted">
+                                   placeholder="Name of item">
                         </InputText>
                         <ValidationMessage For="@(() => OrderItem.Name)" />
                     </div>
 
                     <div class="form-group">
-                        <label for="userValue">Item to be deleted: </label>
+                        <label for="userValue">Quantity: </label>
                         <InputNumber id="userValue"
                                      class="form-control"
                                      @bind-Value="@OrderItem.Quantity"
-                                     placeholder="Item to be deleted">
+                                     placeholder="Quantity">
                         </InputNumber>
                         <ValidationMessage For="@(() => OrderItem.Quantity)" />
                     </div>
