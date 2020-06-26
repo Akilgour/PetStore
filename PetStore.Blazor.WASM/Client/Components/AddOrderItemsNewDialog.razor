@@ -1,0 +1,51 @@
+﻿@inherits AddOrderItemsNewDialogBase
+
+<div class="modal @ModalClass" tabindex="-1" role="dialog" style="display:@ModalDisplay">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Add Item</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+
+                <EditForm Model="@OrderItem" OnValidSubmit="@HandleValidAdd">
+                    <DataAnnotationsValidator />
+                    <ValidationSummary />
+                    <p>Enter the details of the item that you want to order.</p>
+                    <div class="form-group">
+                        <label for="userValue">Name: </label>
+                        <InputText id="userValue"
+                                   class="form-control"
+                                   @bind-Value="@OrderItem.Name"
+                                   placeholder="Name of item">
+                        </InputText>
+                        <ValidationMessage For="@(() => OrderItem.Name)" />
+                    </div>
+
+                    <div class="form-group">
+                        <label for="userValue">Quantity: </label>
+                        <InputNumber id="userValue"
+                                     class="form-control"
+                                     @bind-Value="@OrderItem.Quantity"
+                                     placeholder="Quantity">
+                        </InputNumber>
+                        <ValidationMessage For="@(() => OrderItem.Quantity)" />
+                    </div>
+                    <div class="modal-footer">
+                        <button type="submit" class="btn btn-primary">Add</button>
+                        <a class="btn btn-outline-primary" @onclick="@Close">Close</a>
+                    </div>
+                </EditForm>
+            </div>
+        </div>
+    </div>
+</div>
+
+@if (ShowBackdrop)
+{
+    <div class="modal-backdrop fade show"></div>
+}
+

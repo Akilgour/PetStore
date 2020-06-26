@@ -1,0 +1,55 @@
+﻿@page "/OrderItemCreate"
+@inherits OrderItemCreateBase
+
+<h3>Order Item</h3>
+
+@using PetStore.Blazor.WASM.Client.Components;
+
+@if (StockOrder == null)
+{
+    <WaitLoading />
+}
+else
+{
+    <div class="alert @StatusClass">@Message</div>
+    @if (!Saved)
+    {
+
+        <button class="btn btn-outline-primary" @onclick="@(e => AddOrderItem(e))">
+            Add
+            <i class="far fa-plus-square"></i>
+        </button>
+
+
+        <EditForm Model="@StockOrder" OnValidSubmit="@HandleValidSubmit" OnInvalidSubmit="@HandleInvalidSubmit">
+
+            <DataAnnotationsValidator />
+            <ValidationSummary />
+
+            <div class="form-group row">
+                <label for="comment" class="col-sm-3">Order Number</label>
+                <InputText id="comment" class="form-control col-sm-8" @bind-Value="@StockOrder.OrderNumber" placeholder="Enter Order Number" />
+                <ValidationMessage class="offset-sm-3 col-sm-8" For="@(() => StockOrder.OrderNumber)" />
+            </div>
+
+            <OrderItemsNewTable OrderItems="StockOrder.OrderItems" />
+
+            <div class="float-right">
+                <button type="submit" class="btn btn-primary edit-btn">
+                    Save
+                    <i class="fas fa-save"></i>
+                </button>
+                <a class="btn btn-outline-primary" @onclick="@NavigateBack">Cancel</a>
+            </div>
+        </EditForm>
+    }
+    @if (Saved)
+    {
+        <a class="btn btn-outline-primary" @onclick="@NavigateBack">Back</a>
+    }
+}
+
+<AddOrderItemsNewDialog @ref="OrderItemsNewDialog"
+                        AddEventCallback="@AddOrderItemsNewDialog_OnDialogClose">
+</AddOrderItemsNewDialog>
+
