@@ -4,12 +4,8 @@ using Microsoft.AspNetCore.Components.Web;
 using PetStore.Blazor.WASM.Client.Components;
 using PetStore.Blazor.WASM.Shared.Models;
 using PetStore.Shared.DTO;
-using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Net.Http;
 using System.Net.Http.Json;
-using System.Text;
 using System.Threading.Tasks;
 
 namespace PetStore.Blazor.WASM.Client.Pages
@@ -29,20 +25,31 @@ namespace PetStore.Blazor.WASM.Client.Pages
 
         //used to store state of screen
         protected string Message = string.Empty;
+
         protected string StatusClass = string.Empty;
         protected bool Saved;
 
         protected override void OnInitialized()
         {
-            StockOrder  = new StockOrderNew();
+            StockOrder = new StockOrderNew();
         }
 
         protected async Task HandleValidSubmit()
         {
-            await Http.PostAsJsonAsync($"api/OrderItem", Mapper.Map<StockOrderCreate>(StockOrder));
-            StatusClass = "alert-success";
-            Message = "Comment successfully.";
-            Saved = true;
+            var response = await Http.PostAsJsonAsync($"api/OrderItem", Mapper.Map<StockOrderCreate>(StockOrder));
+            var returnValue = await response.Content.ReadAsAsync<StockOrderOrderResponse>();
+
+            if (returnValue.Success)
+            {
+                StatusClass = "alert-success";
+                Message = returnValue.Message;
+                Saved = true;
+            }
+            else
+            {
+                StatusClass = "alert-danger";
+                Message = returnValue.Message;
+            }
         }
 
         protected void HandleInvalidSubmit()

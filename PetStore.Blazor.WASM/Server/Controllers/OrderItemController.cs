@@ -27,7 +27,7 @@ namespace PetStore.Blazor.WASM.Server.Controllers
             }
             else
             {
-                return BadRequest(result.Message);
+                return BadRequest(result);
             }
         }
     }
