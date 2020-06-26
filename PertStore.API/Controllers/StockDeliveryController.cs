@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using PetStore.API.Manager.Interface;
-using PetStore.Shared.DTO;
+using PetStore.Blazor.WASM.Client.Pages;
+using PetStore.Blazor.WASM.Shared.Models;
 using System.Threading.Tasks;
 
 // For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860

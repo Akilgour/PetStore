@@ -1,5 +1,5 @@
 ﻿using AutoMapper;
-using PetStore.Shared.DTO;
+using PetStore.Blazor.WASM.Shared.Models;
 using PetStore.Shared.QueMessages;
 
 namespace PetStore.Blazor.WASM.Server.Profiles

@@ -1,27 +1,22 @@
-﻿using AutoMapper;
-using Microsoft.AspNetCore.Components;
+﻿using Microsoft.AspNetCore.Components;
 using Microsoft.AspNetCore.Components.Web;
 using PetStore.Blazor.WASM.Client.Components;
 using PetStore.Blazor.WASM.Shared.Models;
-using PetStore.Shared.DTO;
 using System.Net.Http;
 using System.Net.Http.Json;
 using System.Threading.Tasks;
 
 namespace PetStore.Blazor.WASM.Client.Pages
 {
-    public class OrderItemCreateBase : ComponentBase
+    public class OrderItemNewBase : ComponentBase
     {
         [Inject]
         public NavigationManager NavigationManager { get; set; }
 
         [Inject]
-        public IMapper Mapper { get; set; }
-
-        [Inject]
         public HttpClient Http { get; set; }
 
-        public StockOrderNew StockOrder { get; set; }
+        public StockOrderCreate StockOrder { get; set; }
 
         //used to store state of screen
         protected string Message = string.Empty;
@@ -31,12 +26,12 @@ namespace PetStore.Blazor.WASM.Client.Pages
 
         protected override void OnInitialized()
         {
-            StockOrder = new StockOrderNew();
+            StockOrder = new StockOrderCreate();
         }
 
         protected async Task HandleValidSubmit()
         {
-            var response = await Http.PostAsJsonAsync($"api/OrderItem", Mapper.Map<StockOrderCreate>(StockOrder));
+            var response = await Http.PostAsJsonAsync($"api/OrderItem", StockOrder);
             var returnValue = await response.Content.ReadAsAsync<StockOrderOrderResponse>();
 
             if (returnValue.Success)

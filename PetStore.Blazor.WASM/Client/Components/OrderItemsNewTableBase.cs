@@ -7,6 +7,6 @@ namespace PetStore.Blazor.WASM.Client.Components
     public class OrderItemsNewTableBase : ComponentBase
     {
         [Parameter]
-        public List<OrderItemsNew> OrderItems { get; set; }
+        public List<OrderItemsCreate> OrderItems { get; set; }
     }
 }

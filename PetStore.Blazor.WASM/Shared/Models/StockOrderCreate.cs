@@ -2,9 +2,9 @@
 
 namespace PetStore.Blazor.WASM.Shared.Models
 {
-    public class StockOrderNew
+    public class StockOrderCreate
     {
         public string OrderNumber { get; set; }
-        public List<OrderItemsNew> OrderItems { get; set; } = new List<OrderItemsNew>();
+        public List<OrderItemsCreate> OrderItems { get; set; } = new List<OrderItemsCreate>();
     }
 }

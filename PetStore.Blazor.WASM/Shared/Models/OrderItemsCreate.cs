@@ -1,17 +1,15 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
-namespace PetStore.Shared.DTO
+namespace PetStore.Blazor.WASM.Shared.Models
 {
     public class OrderItemsCreate
     {
         [Required]
         public string Name { get; set; }
+
         [Required]
-        public int Quantity { get; set; }
+        [Range(1, 50, ErrorMessage = "Quantity must be between 1 and 50.")]
+        public int? Quantity { get; set; }
     }
 }

@@ -1,6 +1,6 @@
 ﻿using AutoMapper;
+using PetStore.Blazor.WASM.Shared.Models;
 using PetStore.Domain.Models;
-using PetStore.Shared.DTO;
 
 namespace PetStore.Blazor.WASM.Server.Profiles
 {

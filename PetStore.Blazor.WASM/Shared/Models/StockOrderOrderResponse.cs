@@ -1,4 +1,4 @@
-﻿namespace PetStore.Shared.DTO
+﻿namespace PetStore.Blazor.WASM.Shared.Models
 {
     public class StockOrderOrderResponse
     {
