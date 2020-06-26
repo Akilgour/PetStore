@@ -23,7 +23,7 @@ namespace PetStore.Blazor.WASM.Server.Controllers
             var result = await _orderItemManager.OrderCreate(stockOrderCreate);
             if (result.Success)
             {
-                return Ok();
+                return Ok(result);
             }
             else
             {
