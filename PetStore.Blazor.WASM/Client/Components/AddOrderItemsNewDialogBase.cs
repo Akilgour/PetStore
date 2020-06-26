@@ -9,14 +9,14 @@ namespace PetStore.Blazor.WASM.Client.Components
         protected string ModalDisplay = "none;";
         protected string ModalClass = "";
         protected bool ShowBackdrop = false;
-        public OrderItemsNew OrderItem { get; set; } = new OrderItemsNew();
+        public OrderItemsCreate OrderItem { get; set; } = new OrderItemsCreate();
 
         [Parameter]
         public EventCallback<bool> AddEventCallback { get; set; }
 
         public void Show()
         {
-            OrderItem = new OrderItemsNew();
+            OrderItem = new OrderItemsCreate();
             ModalDisplay = "block;";
             ModalClass = "Show";
             ShowBackdrop = true;

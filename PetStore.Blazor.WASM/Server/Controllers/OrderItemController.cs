@@ -1,6 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using PetStore.Blazor.WASM.Server.Manager.Interface;
-using PetStore.Shared.DTO;
+using PetStore.Blazor.WASM.Shared.Models;
 using System.Threading.Tasks;
 
 namespace PetStore.Blazor.WASM.Server.Controllers
@@ -23,7 +23,7 @@ namespace PetStore.Blazor.WASM.Server.Controllers
             var result = await _orderItemManager.OrderCreate(stockOrderCreate);
             if (result.Success)
             {
-                return Ok();
+                return Ok(result);
             }
             else
             {

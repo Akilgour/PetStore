@@ -1,8 +1,9 @@
 ﻿using AutoMapper;
 using PetStore.API.Service.Service.Interface;
 using PetStore.Blazor.WASM.Server.Manager.Interface;
+using PetStore.Blazor.WASM.Shared.Models;
 using PetStore.Domain.Models;
-using PetStore.Shared.DTO;
+
 using System.Threading.Tasks;
 
 namespace PetStore.Blazor.WASM.Server.Manager
