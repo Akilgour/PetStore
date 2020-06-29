@@ -4,7 +4,7 @@ using System;
 
 namespace PetStore.Shared.RabbitMQ
 {
-    public abstract class BaseSendReceiveClient
+    public abstract class BaseSendReceiveClient : IDisposable
     {
         private readonly ConnectionFactory _factory;
         private readonly IConnection _connection;
@@ -13,6 +13,7 @@ namespace PetStore.Shared.RabbitMQ
         private readonly string _requestQueueName;
         private readonly string _responseQueueName;
         private readonly string _exchangeName;
+        private bool _disposed = false;
 
         public BaseSendReceiveClient(RabbitMQConfig rabbitMQConfig, string requestQueueName, string responseQueueName, string exchangeName)
         {
@@ -58,6 +59,23 @@ namespace PetStore.Shared.RabbitMQ
             props.CorrelationId = correlationId;
             props.ReplyTo = _responseQueueName;
             _channel.BasicPublish(_exchangeName, _requestQueueName, props, message);
+        }
+
+        public void Dispose()
+        {
+            Dispose(true);
+            GC.SuppressFinalize(this);
+        }
+
+        protected virtual void Dispose(bool disposing)
+        {
+            if (!_disposed && disposing)
+            {
+                _channel?.Dispose();
+                _connection?.Dispose();
+            }
+
+            _disposed = true;
         }
     }
 }
