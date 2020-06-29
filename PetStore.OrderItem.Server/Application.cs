@@ -17,7 +17,7 @@ namespace PetStore.OrderItem.Server
         private readonly IOrderItemManager _orderItemManager;
         private const string _exchangeName = "";
         private static IModel channel;
-
+        private   ConnectionFactory _factory;
         public Application(IOrderItemManager orderItemManager)
            //: base(RabbitMQConfigFactory.Create(), _requestQueueName, _exchangeName)
         {
@@ -27,9 +27,16 @@ namespace PetStore.OrderItem.Server
 
         public void Run()
         {
-            var factory = new ConnectionFactory() { HostName = "localhost" };
+            var rabbitMQConfig = RabbitMQConfigFactory.Create();
+            _factory = new ConnectionFactory()
+            {
+                HostName = rabbitMQConfig.HostName,
+                UserName = rabbitMQConfig.UserName,
+                Password = rabbitMQConfig.Password,
+                DispatchConsumersAsync = true
+            };
 
-            using (var connection = factory.CreateConnection())
+            using (var connection = _factory.CreateConnection())
             {
                 using (channel = connection.CreateModel())
                 {
@@ -37,7 +44,7 @@ namespace PetStore.OrderItem.Server
                     channel.QueueDeclare(requestQueueName,  true, false, false, null);
  
 
-                    var consumer = new EventingBasicConsumer(channel);
+                    var consumer = new AsyncEventingBasicConsumer(channel);
                     consumer.Received += Receive;
                     channel.BasicConsume(requestQueueName, true, consumer);
 
@@ -49,7 +56,7 @@ namespace PetStore.OrderItem.Server
             }
         }
 
-        protected void Receive(object sender, BasicDeliverEventArgs e)
+        protected async Task Receive(object sender, BasicDeliverEventArgs e)
         {
             var stockOrder = (StockOrder)e.Body.ToArray().DeSerialize(typeof(StockOrder));
             var correlationId = e.BasicProperties.CorrelationId;
@@ -57,15 +64,12 @@ namespace PetStore.OrderItem.Server
 
             Console.WriteLine($"Received: {stockOrder.OrderNumber} with CorrelationId {correlationId}");
             // var responseMessage = foo(stockOrder);
-            var responseMessage = foo(stockOrder);
+         
+                 var responseMessage = await _orderItemManager.Order(stockOrder);
             Publish( correlationId, responseQueueName, responseMessage.Serialize());
         }
 
-        private OrderResponse foo(StockOrder stockOrder)
-        {
-            return new OrderResponse() { Success = true, Message = "bar" };
-        }
-     
+        
 
         private static void Publish(  string correlationId, string responseQueueName, byte[] item)
         {
