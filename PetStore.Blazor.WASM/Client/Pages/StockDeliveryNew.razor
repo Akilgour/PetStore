@@ -12,6 +12,9 @@ else
     <div class="alert @StatusClass">@Message</div>
     @if (!Saved)
     {
+
+        <StockDeliveryNewTable StockDeliveryList="StockDeliveryList" />
+
         <EditForm Model="@StockDelivery" OnValidSubmit="@HandleValidSubmit" OnInvalidSubmit="@HandleInvalidSubmit">
 
             <DataAnnotationsValidator />
