@@ -1,6 +1,7 @@
 ﻿using PetStore.API.Service.Service.Interface;
 using PetStore.Domain.Models;
 using PetStore.StockDelivery.Client.Client.Interface;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 
 namespace PetStore.API.Service.Service
@@ -14,9 +15,12 @@ namespace PetStore.API.Service.Service
             _stockDeliveryClient = stockDeliveryClient;
         }
 
-        public async Task AddStock(StockItem stockItem)
+        public async Task AddStock(List<StockItem> stockItems)
         {
-            await _stockDeliveryClient.Send(stockItem);
+            foreach (var item in stockItems)
+            {
+                await _stockDeliveryClient.Send(item);
+            }
         }
     }
 }

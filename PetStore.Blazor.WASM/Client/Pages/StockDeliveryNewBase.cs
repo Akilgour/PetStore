@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Components;
 using PetStore.Blazor.WASM.Shared.Models;
+using System.Collections.Generic;
 using System.Net.Http;
 using System.Net.Http.Json;
 using System.Threading.Tasks;
@@ -14,7 +15,7 @@ namespace PetStore.Blazor.WASM.Client.Pages
         [Inject]
         public HttpClient Http { get; set; }
 
-        public PetStore.Blazor.WASM.Shared.Models.StockDeliveryCreate StockDelivery { get; set; }
+        public StockDeliveryCreate StockDelivery { get; set; }
 
         //used to store state of screen
         protected string Message = string.Empty;
@@ -23,12 +24,16 @@ namespace PetStore.Blazor.WASM.Client.Pages
 
         protected override void OnInitialized()
         {
-            StockDelivery = new PetStore.Blazor.WASM.Shared.Models.StockDeliveryCreate();
+            StockDelivery = new StockDeliveryCreate();
         }
 
         protected async Task HandleValidSubmit()
         {
-            await Http.PostAsJsonAsync($"api/StockDelivery",StockDelivery);
+            var stockDeliveryList = new List<StockDeliveryCreate>()
+            {
+                StockDelivery
+            };
+            await Http.PostAsJsonAsync($"api/StockDelivery", stockDeliveryList);
 
             StatusClass = "alert-success";
             Message = "Comment successfully.";
