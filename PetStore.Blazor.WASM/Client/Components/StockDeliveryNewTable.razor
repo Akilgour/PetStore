@@ -1,6 +1,11 @@
 ﻿@inherits StockDeliveryNewTableBase
 <h3>StockDeliveryNewTable</h3>
 
+<button class="btn btn-outline-primary" @onclick="@(e => ShowAddItem(e))">
+    Add
+    <i class="far fa-plus-square"></i>
+</button>
+
 <table class="table">
     <thead>
         <tr>
@@ -13,6 +18,25 @@
         @foreach (var item in StockDeliveryList)
         {
             <StockDeliveryTableRow @key="item" StockDelivery="item" />
+        }
+
+        @if (ShowAdd)
+        {
+            <tr>
+                <td>Name</td>
+                <td>Quantity</td>
+                <td>
+
+                    <div class="float-right">
+                        <button type="submit" class="btn btn-primary edit-btn">
+                            Save
+                            <i class="fas fa-save"></i>
+                        </button>
+                        <a class="btn btn-outline-primary" @onclick="@(e => HideAddItem(e))">Cancel</a>
+                    </div>
+
+                </td>
+            </tr>
         }
     </tbody>
 </table>
