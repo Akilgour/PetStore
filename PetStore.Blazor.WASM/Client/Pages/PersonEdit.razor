@@ -1,0 +1,54 @@
+﻿@page "/PersonEdit"
+<h3>Person Edit</h3>
+
+@if (Employee == null)
+{
+    <p>Loading</p>
+}
+else
+{
+    <div> Name: @Employee.Name Age: @Employee.Age  </div>
+    <button @onclick="(() => HideShowEdit())">Hide Show</button>
+    <div style="display:@ModalDisplay">
+        <div>Hide Show Div</div>
+        <EditForm Model="@Employee">
+            <div>Hide Show EditForm</div>
+            <div>Edit Person</div>
+            <InputText id="employeeName"
+                       class="form-control"
+                       @bind-Value="@Employee.Name"
+                       placeholder="Name of item">
+            </InputText>
+            <ValidationMessage For="@(() => Employee.Name)" />
+        </EditForm>
+    </div>
+}
+
+@code {
+
+    protected override void OnInitialized()
+    {
+        Employee = new Person() { Name = "Mr A", Age = 100 };
+    }
+
+    public Person Employee { get; set; }
+    public string ModalDisplay = "none";
+
+    public class Person
+    {
+        public string Name { get; set; }
+        public int Age { get; set; }
+    }
+
+    public void HideShowEdit()
+    {
+        if (ModalDisplay == "none")
+        {
+            ModalDisplay = "block";
+        }
+        else
+        {
+            ModalDisplay = "none";
+        }
+    }
+}
