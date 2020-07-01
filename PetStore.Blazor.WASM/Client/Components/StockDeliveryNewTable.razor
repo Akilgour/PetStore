@@ -1,12 +1,14 @@
 ﻿@inherits StockDeliveryNewTableBase
 <h3>StockDeliveryNewTable</h3>
 
+<div class="alert @StatusClass">@Message</div>
 <button class="btn btn-outline-primary" @onclick="@(() => ShowAddItem())">
     Add
     <i class="far fa-plus-square"></i>
 </button>
 
-<EditForm Model="@StockDelivery">
+
+<EditForm Model="@StockDelivery" OnValidSubmit="@HandleValidSubmit" OnInvalidSubmit="@HandleInvalidSubmit">
 
     <DataAnnotationsValidator />
     <ValidationSummary />
@@ -50,7 +52,13 @@
                         </InputNumber>
                         <ValidationMessage For="@(() => StockDelivery.Quantity)" />
                     </td>
-                    <td></td>
+                    <td>
+                            <button type="submit" class="btn btn-primary edit-btn">
+                                Save
+                                <i class="fas fa-save"></i>
+                            </button>
+                            <a class="btn btn-outline-primary" @onclick="@ShowAddItem">Cancel</a>
+                    </td>
                 }
             </tr>
 

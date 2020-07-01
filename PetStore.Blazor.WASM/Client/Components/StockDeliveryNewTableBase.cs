@@ -14,6 +14,9 @@ namespace PetStore.Blazor.WASM.Client.Components
 
         public string ModalDisplay = "none";
 
+        protected string Message = string.Empty;
+        protected string StatusClass = string.Empty;
+
         protected override void OnInitialized()
         {
             StockDelivery = new StockDeliveryCreate();
@@ -31,6 +34,20 @@ namespace PetStore.Blazor.WASM.Client.Components
             {
                 ModalDisplay = "none";
             }
+        }
+
+        protected void HandleValidSubmit()
+        {
+            StatusClass = "alert-success";
+            Message = "Comment successfully.";
+            StockDeliveryList.Add(StockDelivery);
+            ShowAddItem();
+        }
+
+        protected void HandleInvalidSubmit()
+        {
+            StatusClass = "alert-danger";
+            Message = "There are some validation errors. Please try again.";
         }
     }
 }
