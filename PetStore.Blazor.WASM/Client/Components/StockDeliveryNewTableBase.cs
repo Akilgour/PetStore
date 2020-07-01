@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Components.Web;
 using PetStore.Blazor.WASM.Shared.Models;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace PetStore.Blazor.WASM.Client.Components
 {
@@ -50,11 +51,9 @@ namespace PetStore.Blazor.WASM.Client.Components
             Message = "There are some validation errors. Please try again.";
         }
 
-
-
         public void DeleteEvent(string stockDeliveryName)
         {
-
+            StockDeliveryList.Remove(StockDeliveryList.First(x => x.Name == stockDeliveryName));
         }
     }
 }
