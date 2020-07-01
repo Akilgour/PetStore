@@ -14,19 +14,14 @@ namespace PetStore.Blazor.WASM.Client.Components
 
         public string ModalDisplay = "none";
 
-        //public bool ShowAdd { get;  set; }
-
         protected override void OnInitialized()
         {
-            StockDelivery = new StockDeliveryCreate();       
+            StockDelivery = new StockDeliveryCreate();
         }
-
-        //protected StockDeliveryTableRowAdd StockDeliveryTableRow { get; set; }
 
         public void ShowAddItem()
         {
             StockDelivery = new StockDeliveryCreate();
-
 
             if (ModalDisplay == "none")
             {
