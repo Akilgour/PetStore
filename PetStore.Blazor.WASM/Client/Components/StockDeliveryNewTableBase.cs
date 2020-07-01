@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Components;
 using Microsoft.AspNetCore.Components.Web;
 using PetStore.Blazor.WASM.Shared.Models;
+using System;
 using System.Collections.Generic;
 
 namespace PetStore.Blazor.WASM.Client.Components
@@ -9,21 +10,29 @@ namespace PetStore.Blazor.WASM.Client.Components
     {
         [Parameter]
         public List<StockDeliveryCreate> StockDeliveryList { get; set; }
-        protected bool ShowAdd { get; private set; }
+        public StockDeliveryCreate StockDelivery { get; set; }
+        public string ModalDisplay = "none";
 
         protected override void OnInitialized()
         {
-            ShowAdd = false;
+
         }
 
-        public void ShowAddItem(MouseEventArgs e)
-        {
-            ShowAdd = true;
-        }
+        protected StockDeliveryTableRowAdd StockDeliveryTableRow { get; set; }
 
-        public void HideAddItem(MouseEventArgs e)
+        public void ShowAddItem()
         {
-            ShowAdd = false;
+            StockDelivery = new StockDeliveryCreate() { Name = Guid.NewGuid().ToString() };
+
+            if (ModalDisplay == "none")
+            {
+                ModalDisplay = "block";
+            }
+            else
+            {
+                ModalDisplay = "none";
+            }
+
         }
     }
 }
