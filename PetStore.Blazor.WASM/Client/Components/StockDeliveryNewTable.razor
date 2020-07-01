@@ -7,6 +7,10 @@
 </button>
 
 <EditForm Model="@StockDelivery">
+
+    <DataAnnotationsValidator />
+    <ValidationSummary />
+
     <table class="table">
         <thead>
             <tr>
@@ -23,50 +27,36 @@
 
             <tr style="display:@ModalDisplay">
 
-
                 @if (StockDelivery == null)
                 {
                     <WaitLoading />
                 }
                 else
                 {
-
                     <td>
                         <InputText id="employeeName"
                                    class="form-control"
                                    @bind-Value="@StockDelivery.Name"
                                    placeholder="Name of item">
                         </InputText>
-
+                        <ValidationMessage For="@(() => StockDelivery.Name)" />
                     </td>
 
                     <td>
-                        <InputNumber id="employeeName"
+                        <InputNumber id="employeeAge"
                                      class="form-control"
                                      @bind-Value="@StockDelivery.Quantity"
-                                     placeholder="Name of item">
+                                     placeholder="Quantity of item">
                         </InputNumber>
-
+                        <ValidationMessage For="@(() => StockDelivery.Quantity)" />
                     </td>
-                    <td>C</td>
+                    <td></td>
                 }
             </tr>
 
-            <tr style="display:@ModalDisplay">
-                <td>
-                    <ValidationMessage For="@(() => StockDelivery.Name)" />
-                </td>
-                <td>
-                    <ValidationMessage For="@(() => StockDelivery.Quantity)" />
-                </td>
-                <td>C</td>
-            </tr>
 
         </tbody>
     </table>
 </EditForm>
-
-<button @onclick="(() => ShowAdd = true)">Show</button>
-<button @onclick="(() => ShowAdd = false)">Hide</button>
 
 

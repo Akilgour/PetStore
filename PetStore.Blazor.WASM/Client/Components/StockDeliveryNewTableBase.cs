@@ -11,18 +11,22 @@ namespace PetStore.Blazor.WASM.Client.Components
         [Parameter]
         public List<StockDeliveryCreate> StockDeliveryList { get; set; }
         public StockDeliveryCreate StockDelivery { get; set; }
+
         public string ModalDisplay = "none";
+
+        //public bool ShowAdd { get;  set; }
 
         protected override void OnInitialized()
         {
-
+            StockDelivery = new StockDeliveryCreate();       
         }
 
-        protected StockDeliveryTableRowAdd StockDeliveryTableRow { get; set; }
+        //protected StockDeliveryTableRowAdd StockDeliveryTableRow { get; set; }
 
         public void ShowAddItem()
         {
-            StockDelivery = new StockDeliveryCreate() { Name = Guid.NewGuid().ToString() };
+            StockDelivery = new StockDeliveryCreate();
+
 
             if (ModalDisplay == "none")
             {
@@ -32,7 +36,6 @@ namespace PetStore.Blazor.WASM.Client.Components
             {
                 ModalDisplay = "none";
             }
-
         }
     }
 }
