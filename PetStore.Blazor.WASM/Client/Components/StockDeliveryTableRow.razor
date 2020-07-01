@@ -3,5 +3,9 @@
 <tr>
     <td>@StockDelivery.Name</td>
     <td>@StockDelivery.Quantity</td>
-    <td> </td>
+    <td>
+        <button class="btn btn-primary" @onclick="@(e => Delete_Click(e, @StockDelivery.Name))">
+            <i class="far fa-times-circle"></i>
+        </button>
+    </td>
 </tr>

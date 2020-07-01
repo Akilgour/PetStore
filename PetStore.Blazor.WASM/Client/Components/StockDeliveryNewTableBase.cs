@@ -49,5 +49,12 @@ namespace PetStore.Blazor.WASM.Client.Components
             StatusClass = "alert-danger";
             Message = "There are some validation errors. Please try again.";
         }
+
+
+
+        public void DeleteEvent(string stockDeliveryName)
+        {
+
+        }
     }
 }

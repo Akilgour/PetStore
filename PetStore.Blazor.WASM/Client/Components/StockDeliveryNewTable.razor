@@ -24,7 +24,8 @@
         <tbody>
             @foreach (var item in StockDeliveryList)
             {
-                <StockDeliveryTableRow @key="item" StockDelivery="item" />
+                <StockDeliveryTableRow @key="item" 
+                                       StockDelivery="item"  Delete_Callback="DeleteEvent" />
             }
 
             <tr style="display:@ModalDisplay">
