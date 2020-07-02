@@ -27,7 +27,9 @@
                                        StockDelivery="item"  Delete_Callback="DeleteEvent" />
             }
 
-            <tr style="display:@ModalDisplay">
+            @if (AddNew)
+            {
+            <tr>
 
                 @if (StockDelivery == null)
                 {
@@ -57,10 +59,11 @@
                                 Save
                                 <i class="fas fa-save"></i>
                             </button>
-                            <a class="btn btn-outline-primary" @onclick="@ShowAddItem">Cancel</a>
+                            <a class="btn btn-outline-primary" @onclick="@Cancel_Click">Cancel</a>
                     </td>
                 }
             </tr>
+            }
         </tbody>
     </table>
 </EditForm>
