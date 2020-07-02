@@ -7,6 +7,8 @@ namespace PetStore.Blazor.WASM.Client.Components
 {
     public class StockDeliveryTableRowBase : ComponentBase
     {
+        public bool Display = true;
+
         [Parameter]
         public StockDeliveryCreate StockDelivery { get; set; }
 
@@ -16,6 +18,11 @@ namespace PetStore.Blazor.WASM.Client.Components
         public async Task Delete_Click(MouseEventArgs e, string stockDeliveryItemName)
         {
             await Delete_Callback.InvokeAsync(stockDeliveryItemName);
+        }
+
+        public void Edit_Click()
+        {
+            Display = !Display;
         }
     }
 }

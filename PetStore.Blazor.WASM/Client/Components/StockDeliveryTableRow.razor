@@ -1,11 +1,31 @@
 ﻿@inherits StockDeliveryTableRowBase
 
+@if (Display)
+{
 <tr>
-    <td>@StockDelivery.Name</td>
-    <td>@StockDelivery.Quantity</td>
-    <td>
+    <td >@StockDelivery.Name</td>
+    <td >@StockDelivery.Quantity</td>
+    <td >
+      
+        <button class="btn btn-primary" @onclick="@Edit_Click">
+            <i class="fas fa-pencil-alt"></i>
+        </button>
+
         <button class="btn btn-primary" @onclick="@(e => Delete_Click(e, @StockDelivery.Name))">
             <i class="far fa-times-circle"></i>
         </button>
     </td>
 </tr>
+}
+else
+{
+<tr >
+    <td> Editing A</td>
+    <td> Editing B</td>
+    <td>
+        <button class="btn btn-primary" @onclick="@Edit_Click">
+            <i class="fas fa-pencil-alt"></i>
+        </button>
+    </td>
+</tr>
+}
