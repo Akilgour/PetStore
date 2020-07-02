@@ -20,8 +20,24 @@
 else
 {
 <tr >
-    <td> Editing A</td>
-    <td> Editing B</td>
+    <td>
+        <InputText id="employeeName"
+                   class="form-control"
+                   @bind-Value="@StockDelivery.Name"
+                   placeholder="Name of item">
+        </InputText>
+        <ValidationMessage For="@(() => StockDelivery.Name)" />
+    </td>
+    <td>
+        <InputNumber id="employeeAge"
+                     class="form-control"
+                     @bind-Value="@StockDelivery.Quantity"
+                     placeholder="Quantity of item">
+        </InputNumber>
+        <ValidationMessage For="@(() => StockDelivery.Quantity)" />
+
+    </td>
+
     <td>
         <button class="btn btn-primary" @onclick="@Edit_Click">
             <i class="fas fa-pencil-alt"></i>
