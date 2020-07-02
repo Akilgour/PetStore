@@ -3,7 +3,7 @@ using PetStore.Domain.Models;
 
 namespace PetStore.Data.Context
 {
-    public class PetStoreContext : DbContext
+    public class PetStoreContext : BaseContext
     {
         public PetStoreContext(DbContextOptions<PetStoreContext> options)
             : base(options)
@@ -12,6 +12,7 @@ namespace PetStore.Data.Context
         }
 
         public PetStoreContext()
+            :base()
         {
 
         }
