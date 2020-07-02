@@ -1,6 +1,9 @@
 ﻿using Microsoft.AspNetCore.Components;
 using Microsoft.AspNetCore.Components.Web;
 using PetStore.Blazor.WASM.Shared.Models;
+using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
+using System.Linq;
 using System.Threading.Tasks;
 
 namespace PetStore.Blazor.WASM.Client.Components
@@ -28,8 +31,11 @@ namespace PetStore.Blazor.WASM.Client.Components
 
         public void Save_Click()
         {
-            StockDelivery.EndEdit();
-            Display = !Display;
+            if (StockDelivery.IsValid())
+            {
+                StockDelivery.EndEdit();
+                Display = !Display;
+            }
         }
 
         public void Cancel_Click()

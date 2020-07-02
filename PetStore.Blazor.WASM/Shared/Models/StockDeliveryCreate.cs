@@ -1,13 +1,15 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
+using System.Linq;
 
 namespace PetStore.Blazor.WASM.Shared.Models
 {
     //For more information on IEditableObject see
     //https://docs.microsoft.com/en-us/dotnet/api/system.componentmodel.ieditableobject?redirectedfrom=MSDN&view=netcore-3.1
 
-    public class StockDeliveryCreate : IEditableObject
+    public class StockDeliveryCreate : IEditableObject 
     {
         private struct StockDeliveryCreateData
         {
@@ -45,6 +47,39 @@ namespace PetStore.Blazor.WASM.Shared.Models
                 _inTransaction = false;
             }
         }
+
+
+        public bool IsValid()
+        {
+            return !Validate().Any();
+        }
+
+        public IEnumerable<ValidationResult> Validate()
+        {
+            var vResults = new List<ValidationResult>();
+
+            var vc = new ValidationContext(
+                instance: this,
+                serviceProvider: null,
+                items: null);
+
+            var isValid = Validator.TryValidateObject(
+                instance: vc.ObjectInstance,
+                validationContext: vc,
+                validationResults: vResults,
+                validateAllProperties: true);
+
+            if (!isValid)
+            {
+                foreach (var validationResult in vResults)
+                {
+                    yield return validationResult;
+                }
+            }
+
+            yield break;
+        }
+
 
         public StockDeliveryCreate()
         {
