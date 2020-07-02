@@ -33,6 +33,15 @@ namespace PetStore.Data.Repositorys
             return result;
         }
 
+        public async Task Update(StockItem stockItem)
+        {
+            await _retryPolicy.ExecuteAsync(async () =>
+            {
+                _context.StockItems.Update(stockItem);
+                await _context.SaveChangesAsync();
+            });
+        }
+
         public void UpdateDontSave(StockItem stockItem)
         {
             _context.StockItems.Update(stockItem);

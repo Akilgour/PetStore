@@ -33,7 +33,7 @@ namespace PetStore.StockDelivery
                 Console.WriteLine($"Name: {stockItem.Name} Quantity: {stockItem.Quantity}");
             }
 
-            await _stockDeliveryManager.Create(stockItem);
+            await _stockDeliveryManager.CreateOrUpdate(stockItem);
         }
     }
 }

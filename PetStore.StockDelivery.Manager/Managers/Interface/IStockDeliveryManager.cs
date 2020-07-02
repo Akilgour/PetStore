@@ -5,6 +5,6 @@ namespace PetStore.StockDelivery.Manager.Managers.Interface
 {
     public interface IStockDeliveryManager
     {
-        Task Create(StockItem stockItem);
+        Task CreateOrUpdate(StockItem stockItem);
     }
 }

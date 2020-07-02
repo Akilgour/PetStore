@@ -9,5 +9,6 @@ namespace PetStore.Data.Repositorys.Interface
         void UpdateDontSave(StockItem stockItem);
         Task<StockItem> GetByName(string name);
         Task SaveChangesAsync();
+        Task Update(StockItem stockItem);
     }
 }
