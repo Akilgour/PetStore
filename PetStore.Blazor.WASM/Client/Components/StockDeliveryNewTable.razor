@@ -1,0 +1,38 @@
+﻿@inherits StockDeliveryNewTableBase
+<h3>StockDeliveryNewTable</h3>
+
+<button class="btn btn-outline-primary" @onclick="@(() => ShowAddItem())">
+    Add
+    <i class="far fa-plus-square"></i>
+</button>
+
+
+<EditForm Model="@StockDeliveryList">
+
+    <DataAnnotationsValidator />
+    <ValidationSummary />
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Name</th>
+                <th>Quantity</th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in StockDeliveryList)
+            {
+                <StockDeliveryTableRow @key="item" 
+                                       StockDelivery="item"  
+                                       Delete_Callback="DeleteEvent" />
+            }
+
+            @if (AddNew)
+            {
+                <StockDeliveryTableRowAdd Save_Callback = "SaveEvent"
+                                          Cancel_Callback = "CancelEvent" />
+            }
+        </tbody>
+    </table>
+</EditForm>

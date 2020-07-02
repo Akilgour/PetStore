@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using PetStore.Blazor.WASM.Server.Manager.Interface;
 using PetStore.Blazor.WASM.Shared.Models;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 
 namespace PetStore.Blazor.WASM.Server.Controllers
@@ -17,7 +18,7 @@ namespace PetStore.Blazor.WASM.Server.Controllers
         }
 
         [HttpPost]
-        public async Task<ActionResult> Post(StockDeliveryCreate stockDeliveryCreate)
+        public async Task<ActionResult> Post(List<StockDeliveryCreate> stockDeliveryCreate)
         {
             await _stockDeliveryManager.AddStock(stockDeliveryCreate);
             return Ok();

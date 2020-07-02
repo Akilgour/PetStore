@@ -2,32 +2,23 @@
 @page "/StockDeliveryNew"
 @inherits StockDeliveryNewBase
 @using PetStore.Blazor.WASM.Client.Components;
- 
-@if (StockDelivery == null)
+
+@if (StockDeliveryList == null)
 {
-<WaitLoading />
+    <WaitLoading />
 }
 else
 {
     <div class="alert @StatusClass">@Message</div>
     @if (!Saved)
     {
-        <EditForm Model="@StockDelivery" OnValidSubmit="@HandleValidSubmit" OnInvalidSubmit="@HandleInvalidSubmit">
+        <StockDeliveryNewTable StockDeliveryList="StockDeliveryList" />
+
+        <EditForm Model="@StockDeliveryList" OnValidSubmit="@HandleValidSubmit" OnInvalidSubmit="@HandleInvalidSubmit">
 
             <DataAnnotationsValidator />
             <ValidationSummary />
 
-            <div class="form-group row">
-                <label for="comment" class="col-sm-3">Name: </label>
-                <InputText id="comment" class="form-control col-sm-8" @bind-Value="@StockDelivery.Name" placeholder="Enter Name" />
-                <ValidationMessage class="offset-sm-3 col-sm-8" For="@(() => StockDelivery.Name)" />
-            </div>
-
-            <div class="form-group row">
-                <label for="comment" class="col-sm-3">Quantity: </label>
-                <InputNumber id="comment" class="form-control col-sm-8" @bind-Value="@StockDelivery.Quantity" placeholder="Enter Quantity" />
-                <ValidationMessage class="offset-sm-3 col-sm-8" For="@(() => StockDelivery.Quantity)" />
-            </div>
 
             <div class="float-right">
                 <button type="submit" class="btn btn-primary edit-btn">

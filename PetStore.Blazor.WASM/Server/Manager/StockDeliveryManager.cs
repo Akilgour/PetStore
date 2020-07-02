@@ -3,6 +3,7 @@ using PetStore.API.Service.Service.Interface;
 using PetStore.Blazor.WASM.Server.Manager.Interface;
 using PetStore.Blazor.WASM.Shared.Models;
 using PetStore.Domain.Models;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 
 namespace PetStore.Blazor.WASM.Server.Manager
@@ -17,9 +18,9 @@ namespace PetStore.Blazor.WASM.Server.Manager
             _stockDeliveryService = stockDeliveryService ?? throw new System.ArgumentNullException(nameof(stockDeliveryService));
         }
 
-        public async Task AddStock(StockDeliveryCreate stockDeliveryCreate)
+        public async Task AddStock(List<StockDeliveryCreate> stockDeliveryCreate)
         {
-            await _stockDeliveryService.AddStock(_mapper.Map<StockItem>(stockDeliveryCreate));
+            await _stockDeliveryService.AddStock(_mapper.Map<List<StockItem>>(stockDeliveryCreate));
         }
     }
 }

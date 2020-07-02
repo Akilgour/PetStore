@@ -1,0 +1,51 @@
+﻿@inherits StockDeliveryTableRowBase
+
+@if (Display)
+{
+<tr>
+    <td >@StockDelivery.Name</td>
+    <td >@StockDelivery.Quantity</td>
+    <td >
+      
+        <button class="btn btn-primary" @onclick="@Edit_Click">
+            <i class="fas fa-pencil-alt"></i>
+        </button>
+
+        <button class="btn btn-primary" @onclick="@(e => Delete_Click(e, @StockDelivery.Name))">
+            <i class="far fa-times-circle"></i>
+        </button>
+    </td>
+</tr>
+}
+else
+{
+<tr >
+    <td>
+        <InputText id="employeeName"
+                   class="form-control"
+                   @bind-Value="@StockDelivery.Name"
+                   placeholder="Name of item">
+        </InputText>
+        <ValidationMessage For="@(() => StockDelivery.Name)" />
+    </td>
+    <td>
+        <InputNumber id="employeeAge"
+                     class="form-control"
+                     @bind-Value="@StockDelivery.Quantity"
+                     placeholder="Quantity of item">
+        </InputNumber>
+        <ValidationMessage For="@(() => StockDelivery.Quantity)" />
+    </td>
+
+    <td>
+        <button type="button" class="btn btn-primary" @onclick="@Save_Click">
+            <i class="fas fa-save"></i>
+        </button>
+
+        <button type="button" class="btn btn-outline-primary"  @onclick="@Cancel_Click">
+            Cancel
+        </button>
+
+    </td>
+</tr>
+}

@@ -2,6 +2,7 @@
 using PetStore.API.Manager.Interface;
 using PetStore.Blazor.WASM.Client.Pages;
 using PetStore.Blazor.WASM.Shared.Models;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 
 // For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
@@ -19,7 +20,7 @@ namespace PetStore.API.Controllers
         }
 
         [HttpPost]
-        public async Task<ActionResult> Post(StockDeliveryCreate stockDeliveryCreate)
+        public async Task<ActionResult> Post(List<StockDeliveryCreate> stockDeliveryCreate)
         {
             await _stockDeliveryManager.AddStock(stockDeliveryCreate);
             return Ok();
