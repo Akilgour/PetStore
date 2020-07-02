@@ -22,6 +22,19 @@ namespace PetStore.Blazor.WASM.Client.Components
 
         public void Edit_Click()
         {
+            StockDelivery.BeginEdit();
+            Display = !Display;
+        }
+
+        public void Save_Click()
+        {
+            StockDelivery.EndEdit();
+            Display = !Display;
+        }
+
+        public void Cancel_Click()
+        {
+            StockDelivery.CancelEdit();
             Display = !Display;
         }
     }
