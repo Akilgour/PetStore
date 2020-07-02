@@ -3,7 +3,7 @@
 @inherits StockDeliveryNewBase
 @using PetStore.Blazor.WASM.Client.Components;
 
-@if (StockDelivery == null)
+@if (StockDeliveryList == null)
 {
     <WaitLoading />
 }
@@ -12,7 +12,6 @@ else
     <div class="alert @StatusClass">@Message</div>
     @if (!Saved)
     {
-
         <StockDeliveryNewTable StockDeliveryList="StockDeliveryList" />
 
         <EditForm Model="@StockDeliveryList" OnValidSubmit="@HandleValidSubmit" OnInvalidSubmit="@HandleInvalidSubmit">
