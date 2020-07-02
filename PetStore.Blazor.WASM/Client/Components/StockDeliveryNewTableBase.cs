@@ -10,30 +10,26 @@ namespace PetStore.Blazor.WASM.Client.Components
         [Parameter]
         public List<StockDeliveryCreate> StockDeliveryList { get; set; }
 
-        public StockDeliveryCreate StockDelivery { get; set; }
         public bool AddNew { get; set; }
 
         protected override void OnInitialized()
         {
-            StockDelivery = new StockDeliveryCreate();
             AddNew = false;
         }
 
         public void ShowAddItem()
         {
-            StockDelivery = new StockDeliveryCreate();
             AddNew = true;
         }
 
-        public void Cancel_Click()
+        public void CancelEvent()
         {
-            StockDelivery = new StockDeliveryCreate();
             AddNew = false;
         }
 
-        protected void HandleValidAdd()
+        protected void SaveEvent(StockDeliveryCreate stockDelivery)
         {
-            StockDeliveryList.Add(StockDelivery);
+             StockDeliveryList.Add(stockDelivery);
             AddNew = false;
         }
 
