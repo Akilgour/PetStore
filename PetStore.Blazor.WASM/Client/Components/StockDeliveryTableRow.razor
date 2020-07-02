@@ -35,13 +35,17 @@ else
                      placeholder="Quantity of item">
         </InputNumber>
         <ValidationMessage For="@(() => StockDelivery.Quantity)" />
-
     </td>
 
     <td>
-        <button class="btn btn-primary" @onclick="@Edit_Click">
-            <i class="fas fa-pencil-alt"></i>
+        <button type="button" class="btn btn-primary" @onclick="@Save_Click">
+            <i class="fas fa-save"></i>
         </button>
+
+        <button type="button" class="btn btn-outline-primary"  @onclick="@Cancel_Click">
+            Cancel
+        </button>
+
     </td>
 </tr>
 }
