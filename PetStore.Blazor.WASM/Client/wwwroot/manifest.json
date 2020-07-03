@@ -1,6 +1,6 @@
 {
-  "name": "PetStore.Blazor.WASM",
-  "short_name": "PetStore.Blazor.WASM",
+  "name": "Fox's pet store",
+  "short_name": "Fox's",
   "start_url": "./",
   "display": "standalone",
   "background_color": "#ffffff",
