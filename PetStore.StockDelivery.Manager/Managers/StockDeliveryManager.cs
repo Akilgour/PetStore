@@ -15,9 +15,19 @@ namespace PetStore.StockDelivery.Manager.Managers
             _stockItemRepository = stockItemRepository;
         }
 
-        public async Task Create(StockItem stockItem)
+        public async Task CreateOrUpdate(StockItem stockItem)
         {
-            await _stockItemRepository.Create(stockItem);
+            var stockItemFromRepository = await _stockItemRepository.GetByName(stockItem.Name);
+
+            if (stockItemFromRepository == null)
+            {
+                await _stockItemRepository.Create(stockItem);
+            }
+            else
+            {
+                stockItemFromRepository.Quantity += stockItem.Quantity;
+                await _stockItemRepository.Update(stockItemFromRepository);
+            }
         }
     }
 }
