@@ -31,7 +31,14 @@ namespace PetStore.OrderItem.Server
             var stockOrder = (StockOrder)e.Body.ToArray().DeSerialize(typeof(StockOrder));
             var correlationId = e.BasicProperties.CorrelationId;
             string responseQueueName = e.BasicProperties.ReplyTo;
-            Console.WriteLine($"Received: {stockOrder.OrderNumber} with CorrelationId {correlationId}");
+            using (var colour = new ScopedConsoleColourHelper())
+            {
+                Console.WriteLine($"Received: {stockOrder.OrderNumber}  with CorrelationId {correlationId}");
+                foreach (var item in stockOrder.OrderItems)
+                {
+                    Console.WriteLine($"Name: {item.Name} Quantity: {item.Quantity}");
+                }
+            }
             var responseMessage = await _orderItemManager.Order(stockOrder);
             Reply(correlationId, responseQueueName, responseMessage.Serialize());
         }
