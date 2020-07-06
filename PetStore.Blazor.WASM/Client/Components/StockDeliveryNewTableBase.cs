@@ -22,6 +22,14 @@ namespace PetStore.Blazor.WASM.Client.Components
             AddNew = true;
         }
 
+        public void AddTestData()
+        {
+            StockDeliveryList.Add(new StockDeliveryCreate() { Name = "Cat food", Quantity = 1 });
+            StockDeliveryList.Add(new StockDeliveryCreate() { Name = "Dog food", Quantity = 2 });
+            StockDeliveryList.Add(new StockDeliveryCreate() { Name = "Rat food", Quantity = 3 });
+            StockDeliveryList.Add(new StockDeliveryCreate() { Name = "Rabbit food", Quantity = 4 });
+        }
+
         public void CancelEvent()
         {
             AddNew = false;
@@ -29,7 +37,7 @@ namespace PetStore.Blazor.WASM.Client.Components
 
         protected void SaveEvent(StockDeliveryCreate stockDelivery)
         {
-             StockDeliveryList.Add(stockDelivery);
+            StockDeliveryList.Add(stockDelivery);
             AddNew = false;
         }
 

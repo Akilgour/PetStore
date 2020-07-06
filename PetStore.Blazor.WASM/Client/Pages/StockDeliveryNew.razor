@@ -1,4 +1,4 @@
-﻿<h3>StockItemsCreate</h3>
+﻿<h3>Enter New Delivery</h3>
 @page "/StockDeliveryNew"
 @inherits StockDeliveryNewBase
 @using PetStore.Blazor.WASM.Client.Components;
@@ -31,6 +31,6 @@ else
     }
     @if (Saved)
     {
-        <a class="btn btn-outline-primary" @onclick="@NavigateBack">Back to error</a>
+        <a class="btn btn-outline-primary" @onclick="@NavigateBack">Back</a>
     }
 }

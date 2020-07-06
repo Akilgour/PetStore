@@ -8,12 +8,6 @@ a, .btn-link {
     color: #0366d6;
 }
 
-.btn-primary {
-    color: #fff;
-    background-color: #1b6ec2;
-    border-color: #1861ac;
-}
-
 app {
     position: relative;
     display: flex;
@@ -180,4 +174,11 @@ app {
         /* Never collapse the sidebar for wide screens */
         display: block;
     }
+}
+
+
+/* Set every odd column to be light blue*/
+/* Colour picked with canva.com*/
+tr:nth-child(even) {
+    background-color: #cbf7f8;
 }
