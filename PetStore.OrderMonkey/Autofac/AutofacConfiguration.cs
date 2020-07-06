@@ -1,5 +1,6 @@
 ﻿using Autofac;
 using PetStore.OrderItem.Manager.Autofac;
+using PetStore.StockDelivery.Manager.Autofac;
 using System.Reflection;
 
 namespace PetStore.OrderMonkey.Autofac
@@ -11,6 +12,7 @@ namespace PetStore.OrderMonkey.Autofac
             var builder = new ContainerBuilder();
 
             builder.RegisterModule(new OrderItemManagerModule());
+            builder.RegisterModule(new StockDeliveryManagerModule());
 
             // Register the application class
             builder.RegisterType<Application>();

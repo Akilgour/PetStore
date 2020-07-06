@@ -15,7 +15,8 @@ namespace PetStore.OrderMonkey
             try
             {
                 var container = AutofacConfiguration.Configure();
-                container.Resolve<Application>().Run();
+                var task = container.Resolve<Application>().Run( );
+                task.Wait();
             }
             catch (Exception ex)
             {
