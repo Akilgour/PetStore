@@ -76,6 +76,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PetStore.Blazor.WASM.Client
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PetStore.Blazor.WASM.Shared", "PetStore.Blazor.WASM\Shared\PetStore.Blazor.WASM.Shared.csproj", "{99A95A38-E0F8-4C0F-8987-D38299E660BA}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PetStore.OrderMonkey", "PetStore.OrderMonkey\PetStore.OrderMonkey.csproj", "{AFDAA589-5635-40E4-9FD4-ADCBBD83F4F7}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -166,6 +168,10 @@ Global
 		{99A95A38-E0F8-4C0F-8987-D38299E660BA}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{99A95A38-E0F8-4C0F-8987-D38299E660BA}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{99A95A38-E0F8-4C0F-8987-D38299E660BA}.Release|Any CPU.Build.0 = Release|Any CPU
+		{AFDAA589-5635-40E4-9FD4-ADCBBD83F4F7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{AFDAA589-5635-40E4-9FD4-ADCBBD83F4F7}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{AFDAA589-5635-40E4-9FD4-ADCBBD83F4F7}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{AFDAA589-5635-40E4-9FD4-ADCBBD83F4F7}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -203,6 +209,7 @@ Global
 		{546AD7E0-E5C5-4E5A-8609-E4F35AB13328} = {EFE6252F-785D-4F12-BD2E-D995DEAA5D3D}
 		{6C527D75-0A4D-4212-AB7D-4B055B21FF6F} = {EFE6252F-785D-4F12-BD2E-D995DEAA5D3D}
 		{99A95A38-E0F8-4C0F-8987-D38299E660BA} = {EFE6252F-785D-4F12-BD2E-D995DEAA5D3D}
+		{AFDAA589-5635-40E4-9FD4-ADCBBD83F4F7} = {159DA757-3572-423D-8EA3-542B600EEDD3}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {A0B49AD8-A4C0-481B-8DC7-840A04B0C56D}
