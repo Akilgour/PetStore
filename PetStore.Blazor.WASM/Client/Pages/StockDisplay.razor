@@ -1,5 +1,32 @@
-﻿@page "/stockDisplay"
+﻿@page "/stockdisplay"
 @inherits StockDisplayBase
+@using PetStore.Blazor.WASM.Client.Components;
 
 <h3>StockDisplay</h3>
 
+@if (StockItems == null)
+{
+    <WaitLoading />
+}
+else
+{
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Name</th>
+                <th>Quantity</th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in StockItems)
+            {
+                <tr>
+                    <td>@item.Name</td>
+                    <td>@item.Quantity</td>
+                    <td> </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}

@@ -15,8 +15,8 @@ namespace PetStore.Blazor.WASM.Server.Controllers
             _stockManager = stockManager ?? throw new System.ArgumentNullException(nameof(stockManager));
         }
 
-        [HttpPost]
-        public async Task<ActionResult> GetAll()
+        [HttpGet]
+        public async Task<ActionResult> Get()
         {
             var result = await _stockManager.GetAll();
             return Ok(result);
