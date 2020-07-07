@@ -2,7 +2,6 @@
 using PetStore.Blazor.WASM.Shared.Models;
 using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Net.Http;
 using System.Threading;
 using System.Threading.Tasks;
@@ -15,7 +14,7 @@ namespace PetStore.Blazor.WASM.Client.Pages
         public HttpClient Http { get; set; }
 
         public List<StockItemDisplay> StockItems { get; set; }
- 
+
         private CancellationTokenSource _pollingCancellationToken;
 
         protected override void OnParametersSet()
