@@ -62,7 +62,7 @@ namespace PetStore.Data.Repositorys
             var result = new List<StockItem>();
             await _retryPolicy.ExecuteAsync(async () =>
             {
-                result = await _context.StockItems.ToListAsync();
+                result = await _context.StockItems.OrderBy(x => x.Name).ToListAsync();
             });
             return result;
         }
