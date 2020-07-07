@@ -14,7 +14,7 @@ namespace PetStore.Data.Context
         public PetStoreContext()
             :base()
         {
-
+            ChangeTracker.QueryTrackingBehavior = QueryTrackingBehavior.NoTracking;
         }
 
         public DbSet<StockItem> StockItems { get; set; }
