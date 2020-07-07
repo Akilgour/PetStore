@@ -12,42 +12,34 @@ namespace PetStore.Blazor.WASM.Client.Pages
     public class StockDisplayBase : ComponentBase, IDisposable
     {
         [Inject]
-        public NavigationManager NavigationManager { get; set; }
-
-        [Inject]
         public HttpClient Http { get; set; }
 
         public List<StockItemDisplay> StockItems { get; set; }
-
-        private bool _invalidOrder;
-        private CancellationTokenSource pollingCancellationToken;
+ 
+        private CancellationTokenSource _pollingCancellationToken;
 
         protected override void OnParametersSet()
         {
             // If we were already polling for a different order, stop doing so
-            pollingCancellationToken?.Cancel();
-
+            _pollingCancellationToken?.Cancel();
             // Start a new poll loop
             PollForUpdates();
         }
 
         private async void PollForUpdates()
         {
-            _invalidOrder = false;
-            pollingCancellationToken = new CancellationTokenSource();
-            while (!pollingCancellationToken.IsCancellationRequested)
+            _pollingCancellationToken = new CancellationTokenSource();
+            while (!_pollingCancellationToken.IsCancellationRequested)
             {
-                var result = await Http.GetJsonAsync<IEnumerable<StockItemDisplay>>("api/Stock");
-                StockItems = result.ToList();
+                StockItems = await Http.GetJsonAsync<List<StockItemDisplay>>("api/Stock");
                 StateHasChanged();
-
                 await Task.Delay(4000);
             }
         }
 
         void IDisposable.Dispose()
         {
-            pollingCancellationToken?.Cancel();
+            _pollingCancellationToken?.Cancel();
         }
     }
 }
