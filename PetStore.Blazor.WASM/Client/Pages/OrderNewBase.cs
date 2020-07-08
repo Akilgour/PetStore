@@ -16,6 +16,7 @@ namespace PetStore.Blazor.WASM.Client.Pages
         public List<StockItemDisplay> StockItems { get; set; }
         public List<StockItemDisplay> SelectedStockItems { get; set; }
 
+        public string SearchText { get; set; }
 
         protected override async Task OnInitializedAsync()
         {
@@ -30,6 +31,9 @@ namespace PetStore.Blazor.WASM.Client.Pages
             return SelectedStockItems;
         }
 
-
+        protected async Task Search_Click()
+        {
+            SelectedStockItems = string.IsNullOrWhiteSpace(SearchText) ? StockItems : await Task.FromResult(StockItems.Where(x => x.Name.ToLower().Contains(SearchText.ToLower())).ToList());
+        }
     }
 }

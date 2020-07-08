@@ -16,6 +16,17 @@
                 <p><i>Quantity</i> @context.Quantity</p>
             </ResultTemplate>
         </BlazoredTypeahead>
+
+        <div class="form-inline">
+            <input id="searchText"
+                   class="form-control"
+                   @bind="SearchText"
+                   placeholder="Search...">
+
+            <button class="btn btn-primary" @onclick="@Search_Click">
+                <i class="fas fa-search"></i>
+            </button>
+        </div>
     </div>
 
     <div>
@@ -35,5 +46,4 @@
             }
         </ul>
     </div>
-
 </div>
