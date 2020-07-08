@@ -1,22 +1,39 @@
 ﻿@page "/OrderNew"
 @inherits OrderNewBase
-    
+
 <h3>OrderNew</h3>
 
 <div class="main">
-    <ul class="stock-cards">
-        @if (StockItems != null)
-        {
-            @foreach (var item in StockItems)
+
+    <div>
+        <BlazoredTypeahead SearchMethod="SearchStock"
+                           @bind-Value="SelectedStock">
+            <SelectedTemplate>
+                @context.Name
+            </SelectedTemplate>
+            <ResultTemplate>
+                <b>Name </b> @context.Name
+                <p><i>Quantity</i> @context.Quantity</p>
+            </ResultTemplate>
+        </BlazoredTypeahead>
+    </div>
+
+    <div>
+        <ul class="stock-cards">
+            @if (StockItems != null)
             {
-                <li>
-                    <div class="stock-info">
-                        <span class="title">@item.Name</span>
-                        Some description text can go here
-                        <span class="quantity">@item.Quantity</span>
-                    </div>
-                </li>
+                @foreach (var item in StockItems)
+                {
+                    <li>
+                        <div class="stock-info">
+                            <span class="title">@item.Name</span>
+                            Some description text can go here
+                            <span class="quantity">@item.Quantity</span>
+                        </div>
+                    </li>
+                }
             }
-        }
-    </ul>
+        </ul>
+    </div>
+
 </div>
