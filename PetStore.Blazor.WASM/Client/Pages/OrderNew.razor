@@ -9,7 +9,7 @@
         <BlazoredTypeahead SearchMethod="SearchStock"
                            @bind-Value="SelectedStock">
             <SelectedTemplate>
-                @context.Name
+                @context.Name <i> Quantity: </i> @context.Quantity
             </SelectedTemplate>
             <ResultTemplate>
                 <b>Name </b> @context.Name
@@ -20,9 +20,9 @@
 
     <div>
         <ul class="stock-cards">
-            @if (StockItems != null)
+            @if (SelectedStockItems != null)
             {
-                @foreach (var item in StockItems)
+                @foreach (var item in SelectedStockItems)
                 {
                     <li>
                         <div class="stock-info">

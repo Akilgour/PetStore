@@ -14,15 +14,22 @@ namespace PetStore.Blazor.WASM.Client.Pages
         protected StockItemDisplay SelectedStock;
 
         public List<StockItemDisplay> StockItems { get; set; }
+        public List<StockItemDisplay> SelectedStockItems { get; set; }
+
 
         protected override async Task OnInitializedAsync()
         {
             StockItems = await Http.GetJsonAsync<List<StockItemDisplay>>("api/Stock");
+            SelectedStockItems = StockItems;
         }
 
         protected async Task<IEnumerable<StockItemDisplay>> SearchStock(string searchText)
         {
-            return await Task.FromResult(StockItems.Where(x => x.Name.ToLower().Contains(searchText.ToLower())).ToList());
+            SelectedStockItems = await Task.FromResult(StockItems.Where(x => x.Name.ToLower().Contains(searchText.ToLower())).ToList());
+       
+            return SelectedStockItems;
         }
+
+
     }
 }
