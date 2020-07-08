@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Components;
+using PetStore.Blazor.WASM.Client.Components;
 using PetStore.Blazor.WASM.Shared.Models;
 using System.Collections.Generic;
 using System.Linq;
@@ -18,22 +19,54 @@ namespace PetStore.Blazor.WASM.Client.Pages
 
         public string SearchText { get; set; }
 
+        public OrderItemsCreate OrderItemsCreate { get; set; }
+        public bool ShowingDialog { get; set; } = false;
+        public StockOrderCreate StockOrder { get; set; }
+
+        protected OrderNewDialog OrderNewDialog { get; set; }
+
         protected override async Task OnInitializedAsync()
         {
             StockItems = await Http.GetJsonAsync<List<StockItemDisplay>>("api/Stock");
             SelectedStockItems = StockItems;
+            OrderNewDialog = new OrderNewDialog();
         }
 
         protected async Task<IEnumerable<StockItemDisplay>> SearchStock(string searchText)
         {
             SelectedStockItems = await Task.FromResult(StockItems.Where(x => x.Name.ToLower().Contains(searchText.ToLower())).ToList());
-       
             return SelectedStockItems;
         }
 
         protected async Task Search_Click()
         {
             SelectedStockItems = string.IsNullOrWhiteSpace(SearchText) ? StockItems : await Task.FromResult(StockItems.Where(x => x.Name.ToLower().Contains(SearchText.ToLower())).ToList());
+        }
+
+        public void ShowDialog(StockItemDisplay stockItem)
+        {
+            OrderItemsCreate = new OrderItemsCreate()
+            {
+                Name = stockItem.Name,
+                Quantity = 1
+            };
+
+            ShowingDialog = true;
+            StateHasChanged();
+            //   OrderNewDialog.Show();
+        }
+
+        public void CancelOrderItemDialog()
+        {
+            OrderItemsCreate = null;
+            ShowingDialog = false;
+        }
+
+        public void ConfirmOrderItemDialog()
+        {
+            StockOrder.OrderItems.Add(OrderItemsCreate);
+            OrderItemsCreate = null;
+            ShowingDialog = false;
         }
     }
 }

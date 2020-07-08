@@ -1,5 +1,6 @@
 ﻿@page "/OrderNew"
 @inherits OrderNewBase
+@using PetStore.Blazor.WASM.Client.Components;
 
 <h3>OrderNew</h3>
 
@@ -35,7 +36,7 @@
             {
                 @foreach (var item in SelectedStockItems)
                 {
-                    <li>
+                    <li @onclick="@(() =>  ShowDialog(item))">
                         <div class="stock-info">
                             <span class="title">@item.Name</span>
                             Some description text can go here
@@ -47,3 +48,20 @@
         </ul>
     </div>
 </div>
+
+@if (ShowingDialog)
+{
+    <h1> hi </h1>
+    @*<div class="dialog-container">
+        <div class="dialog">*@
+            <OrderNewDialog OrderItem="OrderItemsCreate"
+                            OnCancel="CancelOrderItemDialog"
+                            OnConfirm="ConfirmOrderItemDialog" />
+        @*</div>
+    </div>*@
+
+   
+
+}
+
+
