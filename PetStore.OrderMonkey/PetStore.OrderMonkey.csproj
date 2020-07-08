@@ -1,0 +1,17 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <OutputType>Exe</OutputType>
+    <TargetFramework>netcoreapp3.1</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Autofac" Version="5.2.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\PetStore.OrderItem.Manger\PetStore.OrderItem.Manager.csproj" />
+    <ProjectReference Include="..\PetStore.StockDelivery.Manager\PetStore.StockDelivery.Manager.csproj" />
+  </ItemGroup>
+
+</Project>

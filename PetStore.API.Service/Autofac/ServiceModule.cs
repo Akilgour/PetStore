@@ -1,4 +1,5 @@
 ﻿using Autofac;
+using PetStore.Data.Autofac;
 using PetStore.OrderItem.Client.Autoface;
 using PetStore.StockDelivery.Client.Autofac;
 using System.Linq;
@@ -11,6 +12,7 @@ namespace PetStore.API.Service.Autofac
         {
             builder.RegisterModule(new StockDeliveryClientModule());
             builder.RegisterModule(new OrderItemClientModule());
+            builder.RegisterModule(new PetStoreDataModule());
 
             //"ThisAssembly" means "any types in the same assembly as the module"
             builder.RegisterAssemblyTypes(ThisAssembly)
