@@ -14,9 +14,12 @@ namespace PetStore.Blazor.WASM.Client.Components
         [Parameter] public EventCallback OnCancel { get; set; }
         [Parameter] public EventCallback OnConfirm { get; set; }
 
-        protected string ModalDisplay = "none;";
-        protected string ModalClass = "";
-        protected bool ShowBackdrop = false;
+        //protected string ModalDisplay = "none;";
+        //protected string ModalClass = "";
+        //protected bool ShowBackdrop = false;
+
+        protected readonly int MinimumQuantity = 1;
+        protected readonly int MaximumQuantity = 50;
 
         //public void Show()
         //{

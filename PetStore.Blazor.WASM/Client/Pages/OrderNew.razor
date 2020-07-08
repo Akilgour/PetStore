@@ -51,17 +51,7 @@
 
 @if (ShowingDialog)
 {
-    <h1> hi </h1>
-    @*<div class="dialog-container">
-        <div class="dialog">*@
-            <OrderNewDialog OrderItem="OrderItemsCreate"
-                            OnCancel="CancelOrderItemDialog"
-                            OnConfirm="ConfirmOrderItemDialog" />
-        @*</div>
-    </div>*@
-
-   
-
+    <OrderNewDialog OrderItem="OrderItemsCreate"
+                    OnCancel="CancelOrderItemDialog"
+                    OnConfirm="ConfirmOrderItemDialog" />
 }
-
-

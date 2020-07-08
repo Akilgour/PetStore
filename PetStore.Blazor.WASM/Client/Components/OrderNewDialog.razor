@@ -1,18 +1,23 @@
 ﻿@inherits OrderNewDialogBase
-
-@*<div class="dialog-container">
-    <div class="dialog">*@
-        <div class="dialog-container">
-            <div class="dialog">
-                <div class="dialog-title">
-                    <h2>@OrderItem.Name</h2>
-                </div>
-                <form class="dialog-body">
-                    <div>
-                        <h3>OrderNewDialog</h3>
-                    </div>
-                </form>
-            </div>
-        </div>
-    @*</div>
-</div>*@
+ 
+ <div class="dialog-container">
+     <div class="dialog">
+         <div class="dialog-title">
+             <h2>@OrderItem.Name</h2>
+         </div>
+         <form class="dialog-body">
+             <div>
+                 <label>Select Desired Quality :</label>
+                 <input type="range" min="@MinimumQuantity" max="@MaximumQuantity" step="1" @bind="OrderItem.Quantity" @bind:event="oninput" />
+                 <span class="quantity-label">
+                     Quantity @OrderItem.Quantity
+                 </span>
+             </div>
+         </form>
+         <div class="modal-footer">
+             <button class="btn btn-primary" @onclick="OnConfirm">Order</button>
+             <button class="btn btn-outline-primary"  @onclick="OnCancel">Close</button>
+         </div>
+     </div>
+ </div>
+ 

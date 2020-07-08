@@ -1,5 +1,4 @@
 ﻿using Microsoft.AspNetCore.Components;
-using PetStore.Blazor.WASM.Client.Components;
 using PetStore.Blazor.WASM.Shared.Models;
 using System.Collections.Generic;
 using System.Linq;
@@ -12,24 +11,20 @@ namespace PetStore.Blazor.WASM.Client.Pages
     {
         [Inject]
         public HttpClient Http { get; set; }
-        protected StockItemDisplay SelectedStock;
 
+        protected StockItemDisplay SelectedStock;
         public List<StockItemDisplay> StockItems { get; set; }
         public List<StockItemDisplay> SelectedStockItems { get; set; }
-
         public string SearchText { get; set; }
-
         public OrderItemsCreate OrderItemsCreate { get; set; }
         public bool ShowingDialog { get; set; } = false;
         public StockOrderCreate StockOrder { get; set; }
-
-        protected OrderNewDialog OrderNewDialog { get; set; }
 
         protected override async Task OnInitializedAsync()
         {
             StockItems = await Http.GetJsonAsync<List<StockItemDisplay>>("api/Stock");
             SelectedStockItems = StockItems;
-            OrderNewDialog = new OrderNewDialog();
+            StockOrder = new StockOrderCreate();
         }
 
         protected async Task<IEnumerable<StockItemDisplay>> SearchStock(string searchText)
@@ -50,10 +45,7 @@ namespace PetStore.Blazor.WASM.Client.Pages
                 Name = stockItem.Name,
                 Quantity = 1
             };
-
             ShowingDialog = true;
-            StateHasChanged();
-            //   OrderNewDialog.Show();
         }
 
         public void CancelOrderItemDialog()
