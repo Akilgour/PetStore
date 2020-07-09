@@ -13,5 +13,6 @@ namespace PetStore.Blazor.WASM.Shared.Models
         public int? Quantity { get; set; }
 
         public decimal CostInPounds { get; set; }
+        public decimal TotalCostInPounds { get; set; }
     }
 }

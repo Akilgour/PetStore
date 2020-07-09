@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Components;
+using PetStore.Blazor.WASM.Client.Helpers;
 using PetStore.Blazor.WASM.Shared.Models;
 using System.Collections.Generic;
 using System.Linq;
@@ -42,6 +43,7 @@ namespace PetStore.Blazor.WASM.Client.Pages
             OrderItemsCreate = new OrderItemsCreate()
             {
                 Name = stockItem.Name,
+                CostInPounds = stockItem.CostInPounds,
                 Quantity = 1
             };
             ShowingDialog = true;
@@ -55,6 +57,7 @@ namespace PetStore.Blazor.WASM.Client.Pages
 
         public void ConfirmOrderItemDialog()
         {
+            CalculateTotalCostInPounds.Resolve(OrderItemsCreate);
             StockOrder.OrderItems.Add(OrderItemsCreate);
             OrderItemsCreate = null;
             ShowingDialog = false;
