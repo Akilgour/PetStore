@@ -12,6 +12,6 @@ namespace PetStore.Blazor.WASM.Shared.Models
         [Range(1, 50, ErrorMessage = "Quantity must be between 1 and 50.")]
         public int? Quantity { get; set; }
 
-        public int Price { get { return 5; } }
+        public decimal CostInPounds { get; set; }
     }
 }
