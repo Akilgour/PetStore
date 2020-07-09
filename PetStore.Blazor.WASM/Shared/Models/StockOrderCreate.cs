@@ -6,5 +6,7 @@ namespace PetStore.Blazor.WASM.Shared.Models
     {
         public string OrderNumber { get; set; }
         public List<OrderItemsCreate> OrderItems { get; set; } = new List<OrderItemsCreate>();
+
+        public int TotalPrice { get { return 5; } }
     }
 }

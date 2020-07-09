@@ -4,51 +4,88 @@
 
 <h3>OrderNew</h3>
 
-<div class="main">
+<div class="page-layout">
 
-    <div>
-        <BlazoredTypeahead SearchMethod="SearchStock"
-                           @bind-Value="SelectedStock">
-            <SelectedTemplate>
-                @context.Name <i> Quantity: </i> @context.Quantity
-            </SelectedTemplate>
-            <ResultTemplate>
-                <b>Name </b> @context.Name
-                <p><i>Quantity</i> @context.Quantity</p>
-            </ResultTemplate>
-        </BlazoredTypeahead>
+    <div class="main">
 
-        <div class="form-inline">
-            <input id="searchText"
-                   class="form-control"
-                   @bind="SearchText"
-                   placeholder="Search...">
+        <div>
+            <BlazoredTypeahead SearchMethod="SearchStock"
+                               @bind-Value="SelectedStock">
+                <SelectedTemplate>
+                    @context.Name <i> Quantity: </i> @context.Quantity
+                </SelectedTemplate>
+                <ResultTemplate>
+                    <b>Name </b> @context.Name
+                    <p><i>Quantity</i> @context.Quantity</p>
+                </ResultTemplate>
+            </BlazoredTypeahead>
 
-            <button class="btn btn-primary" @onclick="@Search_Click">
-                <i class="fas fa-search"></i>
-            </button>
+            <div class="form-inline">
+                <input id="searchText"
+                       class="form-control"
+                       @bind="SearchText"
+                       placeholder="Search...">
+
+                <button class="btn btn-primary" @onclick="@Search_Click">
+                    <i class="fas fa-search"></i>
+                </button>
+            </div>
+        </div>
+
+        <div>
+            <ul class="stock-cards">
+                @if (SelectedStockItems != null)
+                {
+                    @foreach (var item in SelectedStockItems)
+                    {
+                        <li @onclick="@(() =>  ShowDialog(item))">
+                            <div class="stock-info">
+                                <span class="title">@item.Name</span>
+                                Some description text can go here
+                                <span class="quantity">@item.Quantity</span>
+                            </div>
+                        </li>
+                    }
+                }
+            </ul>
         </div>
     </div>
 
-    <div>
-        <ul class="stock-cards">
-            @if (SelectedStockItems != null)
-            {
-                @foreach (var item in SelectedStockItems)
-                {
-                    <li @onclick="@(() =>  ShowDialog(item))">
-                        <div class="stock-info">
-                            <span class="title">@item.Name</span>
-                            Some description text can go here
-                            <span class="quantity">@item.Quantity</span>
-                        </div>
-                    </li>
-                }
-            }
-        </ul>
-    </div>
-</div>
+    <div class="sidebar">
+        @if (StockOrder.OrderItems.Any())
+        {
+            <div class="order-contents">
+                <h2>Your order</h2>
 
+                @foreach (var item in StockOrder.OrderItems)
+                {
+                    <div class="cart-item">
+                        <a @onclick="@(() => OnRemoved(item))" class="delete-item">x</a>
+                        <div class="title">@item.Name</div>
+                        <div class="title">Quantity : @item.Quantity</div>
+                        <div class="item-price">
+                            @item.Price
+                        </div>
+                    </div>
+
+                }
+            </div>
+        }
+        else
+        {
+            <div class="empty-cart">Choose item<br>to get started</div>
+        }
+
+        <div class="order-total @(StockOrder.OrderItems.Any() ? "" : "hidden")">
+            Total:
+            <span class="total-price">@StockOrder.TotalPrice</span>
+            <a href="checkout" class="@(StockOrder.OrderItems.Count == 0 ? "btn btn-warning disabled" : "btn btn-warning")">
+                Order >
+            </a>
+        </div>
+    </div>
+
+</div>
 @if (ShowingDialog)
 {
     <OrderNewDialog OrderItem="OrderItemsCreate"

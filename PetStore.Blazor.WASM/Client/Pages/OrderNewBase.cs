@@ -18,13 +18,12 @@ namespace PetStore.Blazor.WASM.Client.Pages
         public string SearchText { get; set; }
         public OrderItemsCreate OrderItemsCreate { get; set; }
         public bool ShowingDialog { get; set; } = false;
-        public StockOrderCreate StockOrder { get; set; }
+        public StockOrderCreate StockOrder { get; set; } = new StockOrderCreate();
 
         protected override async Task OnInitializedAsync()
         {
             StockItems = await Http.GetJsonAsync<List<StockItemDisplay>>("api/Stock");
             SelectedStockItems = StockItems;
-            StockOrder = new StockOrderCreate();
         }
 
         protected async Task<IEnumerable<StockItemDisplay>> SearchStock(string searchText)
@@ -59,6 +58,11 @@ namespace PetStore.Blazor.WASM.Client.Pages
             StockOrder.OrderItems.Add(OrderItemsCreate);
             OrderItemsCreate = null;
             ShowingDialog = false;
+        }
+
+        public void OnRemoved(OrderItemsCreate orderItemsCreate)
+        {
+            StockOrder.OrderItems.Remove(orderItemsCreate);
         }
     }
 }
