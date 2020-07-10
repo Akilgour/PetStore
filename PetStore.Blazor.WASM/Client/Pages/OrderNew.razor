@@ -1,0 +1,92 @@
+﻿@page "/OrderNew"
+@inherits OrderNewBase
+@using PetStore.Blazor.WASM.Client.Components;
+
+<h3>OrderNew</h3>
+
+<div class="page-layout">
+
+    <div class="main">
+
+        <div>
+            <BlazoredTypeahead SearchMethod="OrderNewState.SearchStock"
+                               @bind-Value="OrderNewState.SelectedStock">
+                <SelectedTemplate>
+                    @context.Name <i> Quantity: </i> @context.Quantity
+                </SelectedTemplate>
+                <ResultTemplate>
+                    <b>Name </b> @context.Name
+                    <p><i>Quantity</i> @context.Quantity</p>
+                </ResultTemplate>
+            </BlazoredTypeahead>
+
+            <div class="form-inline">
+                <input id="searchText"
+                       class="form-control"
+                       @bind="OrderNewState.SearchText"
+                       placeholder="Search...">
+
+                <button class="btn btn-primary" @onclick="@OrderNewState.Search_Click">
+                    <i class="fas fa-search"></i>
+                </button>
+            </div>
+        </div>
+
+        <div>
+            <ul class="stock-cards">
+                @if (OrderNewState.SelectedStockItems != null)
+                {
+                    @foreach (var item in OrderNewState.SelectedStockItems)
+                    {
+                        <li @onclick="@(() =>  OrderNewState.ShowDialog(item))">
+                            <div class="stock-info">
+                                <span class="title">@item.Name</span>
+                                Some description text can go here
+                                <span class="quantity">£@item.CostInPounds</span>
+                            </div>
+                        </li>
+                    }
+                }
+            </ul>
+        </div>
+    </div>
+
+    <div class="sidebar">
+        @if (OrderNewState.StockOrder.OrderItems.Any())
+        {
+            <div class="order-contents">
+                <h2>Your order</h2>
+
+                @foreach (var item in OrderNewState.StockOrder.OrderItems)
+                {
+                    <div class="cart-item">
+                        <a @onclick="@(() => OrderNewState.OnRemoved(item))" class="delete-item">x</a>
+                        <div class="title">@item.Name</div>
+                        <div class="title">Quantity : @item.Quantity</div>
+                        <div class="item-price">£@item.TotalCostInPounds</div>
+                    </div>
+
+                }
+            </div>
+        }
+        else
+        {
+            <div class="empty-cart">Choose item<br>to get started</div>
+        }
+
+        <div class="order-total @(OrderNewState.StockOrder.OrderItems.Any() ? "" : "hidden")">
+            Total:
+            <span class="total-price">@OrderNewState.StockOrder.TotalPrice</span>
+            <a href="checkout" class="@(OrderNewState.StockOrder.OrderItems.Count == 0 ? "btn btn-warning disabled" : "btn btn-warning")">
+                Order >
+            </a>
+        </div>
+    </div>
+
+</div>
+@if (OrderNewState.ShowingDialog)
+{
+    <OrderNewDialog OrderItem="OrderNewState.OrderItemsCreate"
+                    OnCancel="OrderNewState.CancelOrderItemDialog"
+                    OnConfirm="OrderNewState.ConfirmOrderItemDialog" />
+}
