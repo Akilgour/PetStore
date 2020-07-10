@@ -9,8 +9,8 @@
     <div class="main">
 
         <div>
-            <BlazoredTypeahead SearchMethod="SearchStock"
-                               @bind-Value="SelectedStock">
+            <BlazoredTypeahead SearchMethod="OrderNewState.SearchStock"
+                               @bind-Value="OrderNewState.SelectedStock">
                 <SelectedTemplate>
                     @context.Name <i> Quantity: </i> @context.Quantity
                 </SelectedTemplate>
@@ -23,10 +23,10 @@
             <div class="form-inline">
                 <input id="searchText"
                        class="form-control"
-                       @bind="SearchText"
+                       @bind="OrderNewState.SearchText"
                        placeholder="Search...">
 
-                <button class="btn btn-primary" @onclick="@Search_Click">
+                <button class="btn btn-primary" @onclick="@OrderNewState.Search_Click">
                     <i class="fas fa-search"></i>
                 </button>
             </div>
@@ -34,11 +34,11 @@
 
         <div>
             <ul class="stock-cards">
-                @if (SelectedStockItems != null)
+                @if (OrderNewState.SelectedStockItems != null)
                 {
-                    @foreach (var item in SelectedStockItems)
+                    @foreach (var item in OrderNewState.SelectedStockItems)
                     {
-                        <li @onclick="@(() =>  ShowDialog(item))">
+                        <li @onclick="@(() =>  OrderNewState.ShowDialog(item))">
                             <div class="stock-info">
                                 <span class="title">@item.Name</span>
                                 Some description text can go here
@@ -52,15 +52,15 @@
     </div>
 
     <div class="sidebar">
-        @if (StockOrder.OrderItems.Any())
+        @if (OrderNewState.StockOrder.OrderItems.Any())
         {
             <div class="order-contents">
                 <h2>Your order</h2>
 
-                @foreach (var item in StockOrder.OrderItems)
+                @foreach (var item in OrderNewState.StockOrder.OrderItems)
                 {
                     <div class="cart-item">
-                        <a @onclick="@(() => OnRemoved(item))" class="delete-item">x</a>
+                        <a @onclick="@(() => OrderNewState.OnRemoved(item))" class="delete-item">x</a>
                         <div class="title">@item.Name</div>
                         <div class="title">Quantity : @item.Quantity</div>
                         <div class="item-price">
@@ -76,19 +76,19 @@
             <div class="empty-cart">Choose item<br>to get started</div>
         }
 
-        <div class="order-total @(StockOrder.OrderItems.Any() ? "" : "hidden")">
+        <div class="order-total @(OrderNewState.StockOrder.OrderItems.Any() ? "" : "hidden")">
             Total:
-            <span class="total-price">@StockOrder.TotalPrice</span>
-            <a href="checkout" class="@(StockOrder.OrderItems.Count == 0 ? "btn btn-warning disabled" : "btn btn-warning")">
+            <span class="total-price">@OrderNewState.StockOrder.TotalPrice</span>
+            <a href="checkout" class="@(OrderNewState.StockOrder.OrderItems.Count == 0 ? "btn btn-warning disabled" : "btn btn-warning")">
                 Order >
             </a>
         </div>
     </div>
 
 </div>
-@if (ShowingDialog)
+@if (OrderNewState.ShowingDialog)
 {
-    <OrderNewDialog OrderItem="OrderItemsCreate"
-                    OnCancel="CancelOrderItemDialog"
-                    OnConfirm="ConfirmOrderItemDialog" />
+    <OrderNewDialog OrderItem="OrderNewState.OrderItemsCreate"
+                    OnCancel="OrderNewState.CancelOrderItemDialog"
+                    OnConfirm="OrderNewState.ConfirmOrderItemDialog" />
 }
