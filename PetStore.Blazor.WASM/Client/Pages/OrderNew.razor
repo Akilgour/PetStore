@@ -42,7 +42,7 @@
                             <div class="stock-info">
                                 <span class="title">@item.Name</span>
                                 Some description text can go here
-                                <span class="quantity">@item.CostInPounds</span>
+                                <span class="quantity">£@item.CostInPounds</span>
                             </div>
                         </li>
                     }
@@ -63,9 +63,7 @@
                         <a @onclick="@(() => OrderNewState.OnRemoved(item))" class="delete-item">x</a>
                         <div class="title">@item.Name</div>
                         <div class="title">Quantity : @item.Quantity</div>
-                        <div class="item-price">
-                            @item.TotalCostInPounds
-                        </div>
+                        <div class="item-price">£@item.TotalCostInPounds</div>
                     </div>
 
                 }
