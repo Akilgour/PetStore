@@ -59,6 +59,7 @@ namespace PetStore.Blazor.WASM.Client.Pages
         {
             CalculateTotalCostInPounds.Resolve(OrderItemsCreate);
             StockOrder.OrderItems.Add(OrderItemsCreate);
+            StockOrderCreateCalculateTotalCostInPounds.Resolve(StockOrder);
             OrderItemsCreate = null;
             ShowingDialog = false;
         }
@@ -66,6 +67,7 @@ namespace PetStore.Blazor.WASM.Client.Pages
         public void OnRemoved(OrderItemsCreate orderItemsCreate)
         {
             StockOrder.OrderItems.Remove(orderItemsCreate);
+            StockOrderCreateCalculateTotalCostInPounds.Resolve(StockOrder);
         }
     }
 }
