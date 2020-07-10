@@ -78,7 +78,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PetStore.Blazor.WASM.Shared
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PetStore.OrderMonkey", "PetStore.OrderMonkey\PetStore.OrderMonkey.csproj", "{AFDAA589-5635-40E4-9FD4-ADCBBD83F4F7}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PetStore.Blazor.WASM.Client.Test", "PetStore.Blazor.WASM.Client.Test\PetStore.Blazor.WASM.Client.Test.csproj", "{883EEDB3-07BB-4786-A2CC-2DD5B0568A9B}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PetStore.Blazor.WASM.Client.Test", "PetStore.Blazor.WASM.Client.Test\PetStore.Blazor.WASM.Client.Test.csproj", "{883EEDB3-07BB-4786-A2CC-2DD5B0568A9B}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
