@@ -1,0 +1,31 @@
+﻿@inherits OrderBasketBase
+
+@if (StockOrder.OrderItems.Any())
+{
+    <div class="order-contents">
+        <h2>Your order</h2>
+
+        @foreach (var item in StockOrder.OrderItems)
+        {
+            <div class="cart-item">
+                <a @onclick="@(() =>  OnRemovedClick(item))" class="delete-item">x</a>
+                <div class="title">@item.Name</div>
+                <div class="title">Quantity : @item.Quantity</div>
+                <div class="item-price">£@item.TotalCostInPounds</div>
+            </div>
+
+        }
+    </div>
+}
+else
+{
+    <div class="empty-cart">Choose item<br>to get started</div>
+}
+
+<div class="order-total @(StockOrder.OrderItems.Any() ? "" : "hidden")">
+    Total:
+    <span class="total-price">@StockOrder.TotalPrice</span>
+    <a href="checkout" class="@(StockOrder.OrderItems.Count == 0 ? "btn btn-warning disabled" : "btn btn-warning")">
+        Order>
+    </a>
+</div>

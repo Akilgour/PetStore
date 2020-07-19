@@ -20,5 +20,10 @@ namespace PetStore.Blazor.WASM.Client.Pages
             OrderNewState.StockItems = await Http.GetJsonAsync<List<StockItemDisplay>>("api/Stock");
             OrderNewState.SelectedStockItems = OrderNewState.StockItems;
         }
+
+        public void RemovedOrderItem(OrderItemsCreate orderItemsCreate)
+        {
+            OrderNewState.OnRemoved(orderItemsCreate);
+        }
     }
 }
