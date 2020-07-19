@@ -30,7 +30,7 @@ namespace PetStore.Blazor.WASM.Client.Pages
             _pollingCancellationToken = new CancellationTokenSource();
             while (!_pollingCancellationToken.IsCancellationRequested)
             {
-                StockItems = await Http.GetJsonAsync<List<StockItemDisplay>>("api/Stock");
+                StockItems = await Http.GetJsonAsync<List<StockItemDisplay>>("api/StockItem");
                 StateHasChanged();
                 await Task.Delay(4000);
             }
