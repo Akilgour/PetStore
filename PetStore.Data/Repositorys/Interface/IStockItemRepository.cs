@@ -1,4 +1,5 @@
 ﻿using PetStore.Domain.Models;
+using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 
@@ -12,5 +13,6 @@ namespace PetStore.Data.Repositorys.Interface
         Task SaveChangesAsync();
         Task Update(StockItem stockItem);
         Task<List<StockItem>> GetAll();
+        Task<StockItem> GetById(Guid id);
     }
 }

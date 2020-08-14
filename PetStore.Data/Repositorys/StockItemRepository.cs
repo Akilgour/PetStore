@@ -3,6 +3,7 @@ using PetStore.Data.Context;
 using PetStore.Data.Repositorys.Interface;
 using PetStore.Domain.Models;
 using Polly;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -63,6 +64,16 @@ namespace PetStore.Data.Repositorys
             await _retryPolicy.ExecuteAsync(async () =>
             {
                 result = await _context.StockItems.OrderBy(x => x.Name).ToListAsync();
+            });
+            return result;
+        }
+
+        public async Task<StockItem> GetById(Guid id)
+        {
+            var result = new StockItem();
+            await _retryPolicy.ExecuteAsync(async () =>
+            {
+                result = await _context.StockItems.FirstOrDefaultAsync(x => x.Id == id);
             });
             return result;
         }

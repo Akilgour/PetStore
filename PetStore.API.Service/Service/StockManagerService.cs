@@ -1,6 +1,8 @@
 ﻿using PetStore.API.Service.Service.Interface;
+using PetStore.Blazor.WASM.Shared.Models;
 using PetStore.Data.Repositorys.Interface;
 using PetStore.Domain.Models;
+using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 
@@ -18,6 +20,11 @@ namespace PetStore.API.Service.Service
         public async Task<List<StockItem>> GetAll()
         {
             return await _stockItemRepository.GetAll();
+        }
+
+        public async Task<StockItem> GetById(Guid id)
+        {
+            return await _stockItemRepository.GetById(id);
         }
     }
 }

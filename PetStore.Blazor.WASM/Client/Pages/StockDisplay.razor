@@ -24,7 +24,11 @@ else
                 <tr>
                     <td>@item.Name</td>
                     <td>@item.Quantity</td>
-                    <td> </td>
+                    <td>
+                            <a href="@($"StockItemEdit/{item.Id}")">
+                                Edit
+                            </a>
+                    </td>
                 </tr>
             }
         </tbody>
