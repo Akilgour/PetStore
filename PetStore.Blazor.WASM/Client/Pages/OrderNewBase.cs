@@ -17,7 +17,7 @@ namespace PetStore.Blazor.WASM.Client.Pages
 
         protected override async Task OnInitializedAsync()
         {
-            OrderNewState.StockItems = await Http.GetJsonAsync<List<StockItemDisplay>>("api/Stock");
+            OrderNewState.StockItems = await Http.GetJsonAsync<List<StockItemDisplay>>("api/StockItem");
             OrderNewState.SelectedStockItems = OrderNewState.StockItems;
         }
 
