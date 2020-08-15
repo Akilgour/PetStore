@@ -10,46 +10,48 @@
 }
 else
 {
-    <div class="alert @StatusClass">@Message</div>
+ 
 
-    <EditForm Model="@StockItem" OnValidSubmit="@HandleValidSubmit" OnInvalidSubmit="@HandleInvalidSubmit">
-
+<EditForm Model="@StockItem" OnValidSubmit="@HandleValidSubmit" OnInvalidSubmit="@HandleInvalidSubmit">
+    <div class="alert @StatusClass">
+        @Message
         <DataAnnotationsValidator />
         <ValidationSummary />
+    </div>
 
-        <div class="form-group row">
-            <label for="Name" class="col-sm-3">Name: </label>
-            <InputText id="comment" class="form-control col-sm-8" @bind-Value="@StockItem.Name" placeholder="Enter Name" />
-            <ValidationMessage class="offset-sm-3 col-sm-8" For="@(() => StockItem.Name)" />
-        </div>
+    <div class="form-group row">
+        <label for="Name" class="col-sm-3">Name: </label>
+        <InputText id="comment" class="form-control col-sm-8" @bind-Value="@StockItem.Name" placeholder="Enter Name" />
+        <ValidationMessage class="offset-sm-3 col-sm-8" For="@(() => StockItem.Name)" />
+    </div>
 
-        <div class="form-group row">
-            <label for="Weight" class="col-sm-3">Name: </label>
-            <InputNumber id="comment" class="form-control col-sm-8" @bind-Value="@StockItem.WeightInKg" placeholder="Enter Weight" />
-            <ValidationMessage class="offset-sm-3 col-sm-8" For="@(() => StockItem.WeightInKg)" />
-        </div>
-
-
-        <div class="form-group row">
-            <label for="Quantity" class="col-sm-3">Name: </label>
-            <InputNumber id="comment" class="form-control col-sm-8" @bind-Value="@StockItem.Quantity" placeholder="Enter Quantity" />
-            <ValidationMessage class="offset-sm-3 col-sm-8" For="@(() => StockItem.Quantity)" />
-        </div>
+    <div class="form-group row">
+        <label for="Weight" class="col-sm-3">Weight: </label>
+        <InputNumber id="comment" class="form-control col-sm-8" @bind-Value="@StockItem.WeightInKg" placeholder="Enter Weight" />
+        <ValidationMessage class="offset-sm-3 col-sm-8" For="@(() => StockItem.WeightInKg)" />
+    </div>
 
 
-        <div class="form-group row">
-            <label for="Cost" class="col-sm-3">Name: </label>
-            <InputNumber id="comment" class="form-control col-sm-8" @bind-Value="@StockItem.CostInPounds" placeholder="Enter Cost" />
-            <ValidationMessage class="offset-sm-3 col-sm-8" For="@(() => StockItem.CostInPounds)" />
-        </div>
+    <div class="form-group row">
+        <label for="Quantity" class="col-sm-3">Quantity: </label>
+        <InputNumber id="comment" class="form-control col-sm-8" @bind-Value="@StockItem.Quantity" placeholder="Enter Quantity" />
+        <ValidationMessage class="offset-sm-3 col-sm-8" For="@(() => StockItem.Quantity)" />
+    </div>
 
 
-        <div class="float-right">
-            <button type="submit" class="btn btn-primary edit-btn">
-                Save
-                <i class="fas fa-save"></i>
-            </button>
-            @*<a class="btn btn-outline-primary" @onclick="@NavigateBack">Cancel</a>*@
-        </div>
-    </EditForm>
+    <div class="form-group row">
+        <label for="Cost" class="col-sm-3">Cost: </label>
+        <InputNumber id="comment" class="form-control col-sm-8" @bind-Value="@StockItem.CostInPounds" placeholder="Enter Cost" />
+        <ValidationMessage class="offset-sm-3 col-sm-8" For="@(() => StockItem.CostInPounds)" />
+    </div>
+
+
+    <div class="float-right">
+        <button type="submit" class="btn btn-primary edit-btn">
+            Save
+            <i class="fas fa-save"></i>
+        </button>
+        @*<a class="btn btn-outline-primary" @onclick="@NavigateBack">Cancel</a>*@
+    </div>
+</EditForm>
 }
