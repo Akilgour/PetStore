@@ -27,5 +27,18 @@ namespace PetStore.Blazor.WASM.Server.Manager
         {
             return _mapper.Map<StockItemUpdate>(await _stockManagerService.GetById(id));
         }
+
+        public async Task<StockItemUpdate> Update(StockItemUpdate request)
+        {
+            var stockItem = await _stockManagerService.GetById(request.Id);
+            if (stockItem == null)
+            {
+                return null;
+            }
+            _mapper.Map(request, stockItem);
+            await _stockManagerService.Update(stockItem);
+            var result = _mapper.Map<StockItemUpdate>(stockItem);
+            return result;
+        }
     }
 }

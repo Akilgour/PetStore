@@ -23,13 +23,11 @@ namespace PetStore.Blazor.WASM.Client.Pages
         protected string Message = string.Empty;
         protected string StatusClass = string.Empty;
 
-       // protected async Task HandleValidSubmit()
-        protected void HandleValidSubmit()
+        protected async Task HandleValidSubmit()
         {
-           // await DetailLogCommentService.Update(Mapper.Map<DetailLogCommentUpdate>(DetailLogComment), DetailLogId);
+            await Http.PutAsJsonAsync($"api/StockItem", StockItem);
             StatusClass = "alert-success";
             Message = "Comment successfully.";
-          //  Saved = true;
         }
 
         protected void HandleInvalidSubmit()

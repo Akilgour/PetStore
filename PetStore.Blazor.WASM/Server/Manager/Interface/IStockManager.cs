@@ -9,5 +9,6 @@ namespace PetStore.Blazor.WASM.Server.Manager.Interface
     {
         Task<List<StockItemDisplay>> GetAll();
         Task<StockItemUpdate> GetById(Guid id);
+        Task<StockItemUpdate> Update(StockItemUpdate request);
     }
 }

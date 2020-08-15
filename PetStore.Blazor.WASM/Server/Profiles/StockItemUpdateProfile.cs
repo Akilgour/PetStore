@@ -9,6 +9,8 @@ namespace PetStore.Blazor.WASM.Server.Profiles
         public StockItemUpdateProfile()
         {
             CreateMap<StockItem, StockItemUpdate>();
+
+            CreateMap<StockItemUpdate, StockItem>();
         }
     }
 }
