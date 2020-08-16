@@ -18,6 +18,11 @@ namespace PetStore.Blazor.WASM.Server.Manager
             _stockManagerService = stockManagerService ?? throw new System.ArgumentNullException(nameof(stockManagerService));
         }
 
+        public async Task Delete(Guid id)
+        {
+            await _stockManagerService.Delete(id);
+        }
+
         public async Task<List<StockItemDisplay>> GetAll()
         {
             return _mapper.Map<List<StockItemDisplay>>(await _stockManagerService.GetAll());

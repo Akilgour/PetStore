@@ -77,5 +77,15 @@ namespace PetStore.Data.Repositorys
             });
             return result;
         }
+
+        public async Task Delete(Guid id)
+        {
+            await _retryPolicy.ExecuteAsync(async () =>
+            {
+                var item = await _context.StockItems.FirstAsync(x => x.Id == id);
+                _context.StockItems.Remove(item);
+                await _context.SaveChangesAsync();
+            });
+        }
     }
 }

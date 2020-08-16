@@ -16,6 +16,11 @@ namespace PetStore.API.Service.Service
             _stockItemRepository = stockItemRepository;
         }
 
+        public async Task Delete(Guid id)
+        {
+            await _stockItemRepository.Delete(id);
+        }
+
         public async Task<List<StockItem>> GetAll()
         {
             return await _stockItemRepository.GetAll();

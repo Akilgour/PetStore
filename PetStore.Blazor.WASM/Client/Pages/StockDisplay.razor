@@ -25,9 +25,13 @@ else
                     <td>@item.Name</td>
                     <td>@item.Quantity</td>
                     <td>
-                            <a href="@($"StockItemEdit/{item.Id}")">
-                                Edit
-                            </a>
+                        <a href="@($"StockItemEdit/{item.Id}")">
+                            Edit
+                        </a>
+                        <button class="btn btn-outline-primary" @onclick="@(() => DeleteItem(item))">
+                            Delete
+                        </button>
+
                     </td>
                 </tr>
             }

@@ -11,5 +11,6 @@ namespace PetStore.API.Service.Service.Interface
         Task<List<StockItem>> GetAll();
         Task<StockItem> GetById(Guid id);
         Task Update(StockItem stockItem);
+        Task Delete(Guid id);
     }
 }
