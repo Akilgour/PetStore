@@ -6,23 +6,20 @@ using System.Threading.Tasks;
 
 namespace PetStore.Blazor.WASM.Server.Endpoints.StockItemEndponts
 {
-    public class List : BaseAsyncEndpoint 
+    public class Create : BaseAsyncEndpoint<StockItemCreateCommand, StockItemCreateResult>
     {
         private readonly IStockManager _stockManager;
 
-        public List(IStockManager stockManager)
+        public Create(IStockManager stockManager)
         {
             _stockManager = stockManager ?? throw new System.ArgumentNullException(nameof(stockManager));
         }
 
-        [HttpGet("api/StockItem")]
-        public async Task<ActionResult<StockItemDisplay>> HandleAsync()
+        [HttpPost("/api/StockItem")]
+        public override async Task<ActionResult<StockItemCreateResult>> HandleAsync(StockItemCreateCommand request)
         {
-            var result = await _stockManager.GetAll();
+            var result = await _stockManager.Add(request);
             return Ok(result);
         }
-
-       
-
     }
 }

@@ -3,6 +3,7 @@ using PetStore.Data.Context;
 using PetStore.Data.Repositorys.Interface;
 using PetStore.Domain.Models;
 using Polly;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -65,6 +66,36 @@ namespace PetStore.Data.Repositorys
                 result = await _context.StockItems.OrderBy(x => x.Name).ToListAsync();
             });
             return result;
+        }
+
+        public async Task<StockItem> GetById(Guid id)
+        {
+            var result = new StockItem();
+            await _retryPolicy.ExecuteAsync(async () =>
+            {
+                result = await _context.StockItems.FirstOrDefaultAsync(x => x.Id == id);
+            });
+            return result;
+        }
+
+        public async Task Delete(Guid id)
+        {
+            await _retryPolicy.ExecuteAsync(async () =>
+            {
+                var item = await _context.StockItems.FirstAsync(x => x.Id == id);
+                _context.StockItems.Remove(item);
+                await _context.SaveChangesAsync();
+            });
+        }
+
+        public async Task<StockItem> Add(StockItem stockItem)
+        {
+            await _retryPolicy.ExecuteAsync(async () =>
+            {
+                await _context.AddAsync(stockItem);
+                await _context.SaveChangesAsync();
+            });
+            return stockItem;
         }
     }
 }

@@ -9,6 +9,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\PetStore.Blazor.WASM\Shared\PetStore.Blazor.WASM.Shared.csproj" />
     <ProjectReference Include="..\PetStore.Data\PetStore.Data.csproj" />
     <ProjectReference Include="..\PetStore.Domain\PetStore.Domain.csproj" />
     <ProjectReference Include="..\PetStore.OrderItem.Client\PetStore.OrderItem.Client.csproj" />

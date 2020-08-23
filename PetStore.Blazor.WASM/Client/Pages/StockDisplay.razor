@@ -1,6 +1,5 @@
 ﻿@page "/stockdisplay"
 @inherits StockDisplayBase
-@using PetStore.Blazor.WASM.Client.Components;
 
 <h3>StockDisplay</h3>
 
@@ -24,7 +23,15 @@ else
                 <tr>
                     <td>@item.Name</td>
                     <td>@item.Quantity</td>
-                    <td> </td>
+                    <td>
+                        <a href="@($"StockItemEdit/{item.Id}")">
+                            Edit
+                        </a>
+                        <button class="btn btn-outline-primary" @onclick="@(() => DeleteItem(item))">
+                            Delete
+                        </button>
+
+                    </td>
                 </tr>
             }
         </tbody>

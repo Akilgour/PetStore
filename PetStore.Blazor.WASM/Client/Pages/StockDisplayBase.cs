@@ -40,5 +40,10 @@ namespace PetStore.Blazor.WASM.Client.Pages
         {
             _pollingCancellationToken?.Cancel();
         }
+
+        public async void DeleteItem(StockItemDisplay item)
+        {
+            await Http.DeleteAsync($"api/StockItem/{item.Id}");
+        }
     }
 }
