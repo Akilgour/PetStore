@@ -2,6 +2,7 @@
 using PetStore.API.Service.Service.Interface;
 using PetStore.Blazor.WASM.Server.Manager.Interface;
 using PetStore.Blazor.WASM.Shared.Models;
+using PetStore.Domain.Models;
 using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
@@ -16,6 +17,11 @@ namespace PetStore.Blazor.WASM.Server.Manager
             : base(mapper)
         {
             _stockManagerService = stockManagerService ?? throw new System.ArgumentNullException(nameof(stockManagerService));
+        }
+
+        public async Task<StockItemCreateResult> Add(StockItemCreateCommand request)
+        {
+            return _mapper.Map<StockItemCreateResult>( await _stockManagerService.Add(_mapper.Map<StockItem>(request)));
         }
 
         public async Task Delete(Guid id)

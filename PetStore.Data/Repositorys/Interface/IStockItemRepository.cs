@@ -15,5 +15,6 @@ namespace PetStore.Data.Repositorys.Interface
         Task<List<StockItem>> GetAll();
         Task<StockItem> GetById(Guid id);
         Task Delete(Guid id);
+        Task<StockItem> Add(StockItem stockItem);
     }
 }

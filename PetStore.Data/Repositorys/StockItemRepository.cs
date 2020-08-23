@@ -87,5 +87,15 @@ namespace PetStore.Data.Repositorys
                 await _context.SaveChangesAsync();
             });
         }
+
+        public async Task<StockItem> Add(StockItem stockItem)
+        {
+            await _retryPolicy.ExecuteAsync(async () =>
+            {
+                await _context.AddAsync(stockItem);
+                await _context.SaveChangesAsync();
+            });
+            return stockItem;
+        }
     }
 }

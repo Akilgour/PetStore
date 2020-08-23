@@ -8,8 +8,13 @@ namespace PetStore.Blazor.WASM.Server.Manager.Interface
     public interface IStockManager
     {
         Task<List<StockItemDisplay>> GetAll();
+
         Task<StockItemUpdate> GetById(Guid id);
+
         Task<StockItemUpdate> Update(StockItemUpdate request);
+
         Task Delete(Guid id);
+
+        Task<StockItemCreateResult> Add(StockItemCreateCommand request);
     }
 }
