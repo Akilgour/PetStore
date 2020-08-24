@@ -1,4 +1,6 @@
 ﻿using PetStore.API.Service.Service.Interface;
+using PetStore.Data.Context;
+using PetStore.Data.Repositorys;
 using PetStore.Data.Repositorys.Interface;
 using PetStore.Domain.Models;
 using System;
@@ -18,7 +20,7 @@ namespace PetStore.API.Service.Service
 
         public async Task<StockItem> Add(StockItem stockItem)
         {
-            return await _stockItemRepository.Add(stockItem);
+            return await _stockItemRepository.Insert(stockItem);
         }
 
         public async Task Delete(Guid id)

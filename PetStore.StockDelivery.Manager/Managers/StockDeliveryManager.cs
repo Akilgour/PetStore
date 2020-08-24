@@ -9,7 +9,6 @@ namespace PetStore.StockDelivery.Manager.Managers
     {
         private readonly IStockItemRepository _stockItemRepository;
 
-  
         public StockDeliveryManager(IStockItemRepository stockItemRepository)
         {
             _stockItemRepository = stockItemRepository;
@@ -21,7 +20,7 @@ namespace PetStore.StockDelivery.Manager.Managers
 
             if (stockItemFromRepository == null)
             {
-                await _stockItemRepository.Create(stockItem);
+                await _stockItemRepository.Insert(stockItem);
             }
             else
             {

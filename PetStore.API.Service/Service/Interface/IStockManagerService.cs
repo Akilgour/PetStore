@@ -1,5 +1,4 @@
-﻿using PetStore.Blazor.WASM.Shared.Models;
-using PetStore.Domain.Models;
+﻿using PetStore.Domain.Models;
 using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
