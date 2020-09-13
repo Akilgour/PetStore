@@ -1,20 +1,17 @@
 ﻿using PetStore.Domain.Models;
-using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 
 namespace PetStore.Data.Repositorys.Interface
 {
-    public interface IStockItemRepository
+    public interface IStockItemRepository : IRepository<StockItem>
     {
-        Task Create(StockItem stockItem);
         void UpdateDontSave(StockItem stockItem);
+
         Task<StockItem> GetByName(string name);
+
         Task SaveChangesAsync();
-        Task Update(StockItem stockItem);
+
         Task<List<StockItem>> GetAll();
-        Task<StockItem> GetById(Guid id);
-        Task Delete(Guid id);
-        Task<StockItem> Add(StockItem stockItem);
     }
 }

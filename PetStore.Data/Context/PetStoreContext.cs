@@ -1,18 +1,13 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.ChangeTracking;
 using PetStore.Domain.Models;
 
 namespace PetStore.Data.Context
 {
-    public class PetStoreContext : BaseContext
+    public class PetStoreContext : DbContext
     {
-        public PetStoreContext(DbContextOptions<PetStoreContext> options)
-            : base(options)
-        {
-            ChangeTracker.QueryTrackingBehavior = QueryTrackingBehavior.NoTracking;
-        }
 
         public PetStoreContext()
-            :base()
         {
             ChangeTracker.QueryTrackingBehavior = QueryTrackingBehavior.NoTracking;
         }
